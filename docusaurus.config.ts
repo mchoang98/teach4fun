@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config: Config = {
   title: 'Dạy cho vui',
   tagline: 'Trang web học tập vui nhộn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.jpg',
   url: 'https://your-docusaurus-site.example.com',
   baseUrl: '/',
   organizationName: 'mchoang98', // Your GitHub username/organization
