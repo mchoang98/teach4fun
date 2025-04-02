@@ -1,41 +1,43 @@
-# Website
+https://teach4fun.web.app/
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+# Dạy cho vui
 
-### Installation
+**Fun Learning Website**
 
-```
-$ yarn
-```
+## Introduction
+Dạy cho vui is an educational website that helps users learn programming in an engaging way. The platform offers interactive lessons, an in-browser coding environment, and a progress tracking system.
 
-### Local Development
+## Features
+- **Interactive Lessons**: Learn programming by practicing immediately.
+- **Code Garden**: Run code directly in the browser without setup.
+- **Progress Tracking**: Manage and track learning progress from beginner to advanced levels.
 
-```
-$ yarn start
-```
+## Installation
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/daychoivui.git
+   cd daychoivui
+   ```
 
-### Build
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-```
-$ yarn build
-```
+3. Run the project:
+   ```sh
+   npm start
+   ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Technologies Used
+- **Frontend**: React + Docusaurus
+- **Backend**: Firebase
+- **Python Code Execution**: Pyodide.js
+- **Hosting**: Vercel
 
-### Deployment
+## Contributions
+We welcome all contributions! Feel free to submit a pull request or open an issue on GitHub.
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+## License
+Copyright © 2025 Michael. Released under the MIT License.
