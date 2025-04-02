@@ -16,8 +16,8 @@ Dạy cho vui is an educational website that helps users learn programming in an
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/daychoivui.git
-   cd daychoivui
+   git clone https://github.com/yourusername/teach4fun.git
+   cd teach4fun
    ```
 
 2. Install dependencies:
@@ -27,7 +27,7 @@ Dạy cho vui is an educational website that helps users learn programming in an
 
 3. Run the project:
    ```sh
-   npm start
+   npm run start
    ```
 
 ## Technologies Used
