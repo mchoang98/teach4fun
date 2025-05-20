@@ -118,6 +118,3 @@ Gâu gâu!
 
 👉 Truy cập: [Let's Code Python - OOP Bài tập](https://letscode-python.web.app)
 
----
-
-Bạn có muốn mình đóng gói file này dưới dạng `.md` kèm hình ảnh minh họa không? Hoặc muốn chèn thêm phần câu hỏi trắc nghiệm/tự luận để luyện tập?

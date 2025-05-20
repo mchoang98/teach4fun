@@ -1,123 +1,156 @@
-# Bài 10-1: Đọc Ghi File Trong Python 
-
-### 1. Giới Thiệu  
-
-Trong thế giới của Doraemon, có một bảo bối đặc biệt có thể ghi nhớ tất cả những gì Nobita viết vào và đọc lại khi cần. Đó chính là **Cuốn Sổ Ghi Nhớ Vạn Năng**. Trong Python, chúng ta có thể tạo ra một công cụ tương tự bằng cách sử dụng tính năng **đọc và ghi file**.  
-
-Hãy cùng khám phá cách Doraemon giúp Nobita lưu trữ những ghi chú quan trọng của mình bằng lập trình Python!  
+# BÀI 10-1: ĐỌC VÀ GHI FILE TRONG PYTHON (CHI TIẾT)
 
 ---
 
-### 2. Cách Đọc Và Ghi File Trong Python  
+## 1. Giới thiệu về file trong Python
 
-Trong Python, chúng ta có thể thao tác với file bằng các chế độ sau:  
-
-- **"r"** (read) – Chỉ đọc file.  
-- **"w"** (write) – Ghi đè file (nếu file đã tồn tại, nội dung cũ sẽ bị xóa).  
-- **"a"** (append) – Ghi tiếp vào cuối file.  
-- **"r+"** (read and write) – Vừa đọc vừa ghi file.  
-
-Doraemon sẽ tạo một chương trình giúp Nobita ghi lại những gì cần nhớ vào **Cuốn Sổ Ghi Nhớ Vạn Năng** và đọc lại khi cần.  
+File là nơi lưu trữ dữ liệu trên ổ đĩa cứng hoặc bộ nhớ ngoài. Python cung cấp các phương thức để **đọc** (lấy dữ liệu từ file) và **ghi** (lưu dữ liệu vào file) rất thuận tiện.
 
 ---
 
-### 3. Ví Dụ: **Cuốn Sổ Ghi Nhớ Vạn Năng**  
+## 2. Mở file bằng hàm `open()`
 
-Doraemon giúp Nobita ghi lại danh sách bài tập về nhà vào file `"so_ghi_nho.txt"` và đọc lại khi cần.  
-
-#### **Ghi File (Nobita viết vào sổ)**  
+* Cú pháp:
 
 ```python
-# Mở file ở chế độ ghi ('w') để viết nội dung mới
-with open("so_ghi_nho.txt", "w", encoding="utf-8") as so:
-    so.write("1. Làm bài tập Toán trang 15\n")
-    so.write("2. Học thuộc bảng cửu chương\n")
-    so.write("3. Viết đoạn văn về Doraemon\n")
-
-print("Doraemon: Nobita, tớ đã ghi lại bài tập vào sổ cho cậu rồi!")
+file = open("ten_file.txt", "mode")
 ```
 
-👉 **Khi chạy chương trình trên, một file `"so_ghi_nho.txt"` sẽ được tạo và lưu lại các bài tập.**  
+* `mode` (chế độ) có các dạng phổ biến:
+
+| Mode  | Ý nghĩa                                                                      |
+| ----- | ---------------------------------------------------------------------------- |
+| `"r"` | Mở file để đọc (read)                                                        |
+| `"w"` | Mở file để ghi, nếu file tồn tại sẽ xóa dữ liệu cũ (write)                   |
+| `"a"` | Mở file để ghi thêm (append), dữ liệu cũ được giữ lại                        |
+| `"b"` | Mở file ở chế độ nhị phân (binary), kết hợp với các mode trên (ví dụ `"rb"`) |
 
 ---
 
-#### **Đọc File (Nobita mở sổ ra xem lại)**  
+## 3. Cách đọc file trong Python
+
+### 3.1. Đọc toàn bộ nội dung file
 
 ```python
-# Mở file ở chế độ đọc ('r') và hiển thị nội dung
-with open("so_ghi_nho.txt", "r", encoding="utf-8") as so:
-    noi_dung = so.read()
-
-print("📖 Nobita mở sổ ra xem lại:")
-print(noi_dung)
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
 ```
 
-👉 **Sau khi chạy, Nobita sẽ thấy danh sách bài tập xuất hiện trên màn hình!**  
+* Hàm `read()` đọc toàn bộ dữ liệu trong file thành một chuỗi (string).
+* Câu lệnh `with` đảm bảo sau khi đọc xong file sẽ được tự động đóng, tránh lỗi không đóng file.
 
----
-
-### 4. Ghi Tiếp Vào File (Nobita bổ sung thêm bài tập)  
-
-Bây giờ, Nobita nhớ ra còn bài tập tiếng Anh nữa, cậu ấy muốn bổ sung vào sổ mà không làm mất nội dung cũ. Doraemon sẽ giúp cậu ấy sử dụng chế độ `"a"` (append).  
+### 3.2. Đọc từng dòng một với `readline()`
 
 ```python
-# Mở file ở chế độ ghi tiếp ('a') để thêm nội dung mà không xóa nội dung cũ
-with open("so_ghi_nho.txt", "a", encoding="utf-8") as so:
-    so.write("4. Dịch 5 câu tiếng Anh sang tiếng Nhật\n")
-
-print("Doraemon: Tớ đã thêm bài tập tiếng Anh vào sổ của cậu rồi!")
+with open("example.txt", "r") as file:
+    line1 = file.readline()
+    print(line1)
+    line2 = file.readline()
+    print(line2)
 ```
 
-👉 **Khi mở lại file, nội dung sẽ có thêm bài tập tiếng Anh.**  
+* Mỗi lần gọi `readline()` đọc một dòng trong file.
 
----
-
-### 5. Đọc File Theo Dòng (Nobita đọc từng dòng một)  
-
-Nobita muốn đọc từng bài tập một cách chậm rãi. Doraemon sẽ giúp cậu ấy sử dụng phương thức `readlines()` để đọc từng dòng một.  
+### 3.3. Đọc tất cả dòng và trả về danh sách bằng `readlines()`
 
 ```python
-# Mở file và đọc từng dòng
-with open("so_ghi_nho.txt", "r", encoding="utf-8") as so:
-    for dong in so.readlines():
-        print(f"Nobita đọc: {dong.strip()}")
-```
-
-👉 **Chương trình sẽ hiển thị từng bài tập một cách tuần tự.**  
-
----
-
-### 6. Xóa Nội Dung File (Doraemon giúp Nobita làm lại từ đầu)  
-
-Nếu Nobita muốn viết lại từ đầu, Doraemon sẽ sử dụng chế độ `"w"` để xóa toàn bộ nội dung cũ và ghi mới.  
-
-```python
-with open("so_ghi_nho.txt", "w", encoding="utf-8") as so:
-    so.write("Sổ mới, không còn bài tập cũ!\n")
-
-print("Doraemon: Tớ đã giúp cậu tạo một cuốn sổ mới!")
+with open("example.txt", "r") as file:
+    lines = file.readlines()
+    for line in lines:
+        print(line.strip())  # strip() để bỏ ký tự xuống dòng
 ```
 
 ---
 
-### 7. Bài Tập Vận Dụng  
+## 4. Cách ghi file trong Python
 
-#### **Bài Tập 1:**  
-Doraemon giúp Nobita ghi danh sách bạn bè vào một file `"ban_be.txt"`. Viết chương trình ghi tên 5 người bạn vào file và đọc lại danh sách này.  
+### 4.1. Ghi đè file (viết mới)
 
-#### **Bài Tập 2:**  
-Doraemon có bảo bối **Máy Nhớ Lại**. Hãy viết chương trình lưu lại những điều vui vẻ mà Nobita đã trải qua trong ngày, sau đó hiển thị chúng mỗi khi Nobita buồn.  
+```python
+with open("output.txt", "w") as file:
+    file.write("Dòng đầu tiên.\n")
+    file.write("Dòng thứ hai.\n")
+```
 
-#### **Bài Tập 3:**  
-Shizuka muốn lưu danh sách các quyển sách cô ấy đã đọc. Viết chương trình giúp cô ấy thêm sách mới vào file `"sach.txt"` mà không làm mất sách cũ.  
+* `"w"` sẽ tạo file mới nếu chưa có hoặc xóa hết nội dung cũ nếu file đã tồn tại.
+* `\n` dùng để xuống dòng.
+
+### 4.2. Ghi thêm vào file (không xóa dữ liệu cũ)
+
+```python
+with open("output.txt", "a") as file:
+    file.write("Dòng mới được thêm vào.\n")
+```
 
 ---
 
-### 8. Tổng Kết  
+## 5. Một số lưu ý khi làm việc với file
 
-- **Doraemon đã giúp Nobita hiểu cách đọc và ghi file trong Python!**  
-- **Ghi file bằng `"w"`**, ghi tiếp bằng `"a"`, và đọc file bằng `"r"`.  
-- **Có thể đọc file theo từng dòng để xem nội dung tuần tự.**  
-- **Có thể xóa nội dung file bằng cách mở file ở chế độ `"w"` và ghi lại.**  
+* Luôn sử dụng cú pháp `with open(...) as file:` để tự động đóng file sau khi thao tác.
+* Nếu mở file với `"r"` mà file không tồn tại sẽ báo lỗi `FileNotFoundError`.
+* Khi đọc file, dữ liệu trả về là kiểu chuỗi (string).
+* Khi ghi file, dữ liệu phải là chuỗi. Nếu muốn ghi các kiểu dữ liệu khác (số, list...), cần chuyển thành chuỗi bằng hàm `str()`.
 
-🔹 **Bây giờ, Nobita đã có một cuốn sổ ghi nhớ vạn năng do Doraemon tạo ra, giúp cậu ấy ghi lại mọi thứ quan trọng mà không sợ quên mất!** 🎉
+---
+
+## 6. Ví dụ tổng hợp
+
+```python
+# Viết dữ liệu vào file
+with open("data.txt", "w") as f:
+    f.write("Hello Python!\n")
+    f.write("Học cách đọc ghi file.\n")
+
+# Đọc dữ liệu từ file
+with open("data.txt", "r") as f:
+    content = f.read()
+    print("Nội dung file:")
+    print(content)
+```
+
+---
+
+## 7. Bài tập thực hành
+
+### Bài tập 1: Ghi câu hỏi do người dùng nhập vào file
+
+Viết chương trình cho phép người dùng nhập 3 câu hỏi, lưu chúng vào file `questions.txt`.
+
+### Bài tập 2: Đọc và in ra câu hỏi
+
+Viết chương trình đọc file `questions.txt` và in từng câu hỏi ra màn hình, mỗi câu trên một dòng.
+
+---
+
+**Gợi ý cách làm bài tập:**
+
+```python
+# Bài tập 1: Ghi 3 câu hỏi vào file
+with open("questions.txt", "w") as f:
+    for i in range(3):
+        q = input(f"Nhập câu hỏi thứ {i+1}: ")
+        f.write(q + "\n")
+
+# Bài tập 2: Đọc và in câu hỏi
+with open("questions.txt", "r") as f:
+    lines = f.readlines()
+    for line in lines:
+        print(line.strip())
+```
+
+---
+
+## 8. Tóm tắt
+
+| Công việc           | Cú pháp                   | Mô tả                                   |
+| ------------------- | ------------------------- | --------------------------------------- |
+| Mở file để đọc      | `open("file.txt", "r")`   | Mở file để đọc dữ liệu                  |
+| Mở file để ghi      | `open("file.txt", "w")`   | Ghi đè nội dung file                    |
+| Mở file để ghi thêm | `open("file.txt", "a")`   | Thêm dữ liệu vào cuối file              |
+| Đọc toàn bộ file    | `file.read()`             | Đọc hết nội dung file                   |
+| Đọc một dòng        | `file.readline()`         | Đọc từng dòng một                       |
+| Đọc tất cả dòng     | `file.readlines()`        | Trả về list các dòng                    |
+| Ghi nội dung        | `file.write("chuỗi")`     | Ghi chuỗi vào file                      |
+| Đóng file tự động   | `with open(...) as file:` | Quản lý file an toàn, tự động đóng file |
+
