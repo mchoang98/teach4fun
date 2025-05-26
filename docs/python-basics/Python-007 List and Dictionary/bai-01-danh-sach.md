@@ -1,116 +1,151 @@
-# Bài 7-1: Danh sách (List) 
+# BÀI 7-1: Danh sách (List)
 
-Chào các bạn! Hôm nay, chúng ta sẽ cùng nhau khám phá thế giới lập trình Python qua một câu chuyện hấp dẫn về **Doraemon**, **Nobita** và các món đồ thần kỳ từ **Túi thần kỳ** của Doraemon! Hãy xem cách họ sử dụng **Danh sách (List)** trong Python để lưu trữ những món đồ thần kỳ và làm cho cuộc sống trở nên thú vị hơn nhé!
+## I. Danh sách (List) là gì?
 
-## Danh sách (List)?
+Danh sách là một kiểu dữ liệu trong Python có thể chứa nhiều giá trị, có thứ tự và có thể thay đổi sau khi tạo ra. Danh sách dùng để lưu trữ tập hợp dữ liệu như danh sách học sinh, danh sách điểm số,...
 
-Trong Python, **Danh sách (List)** là một công cụ rất hữu ích để **lưu trữ các món đồ** trong cùng một biến, giống như **Túi thần kỳ** của Doraemon! Bạn có thể lưu trữ **nhiều phần tử** (số, chữ, thậm chí là các danh sách khác) trong một danh sách mà không cần phải lo lắng về việc xếp chúng vào đâu.
-
-## Tạo Danh sách
-
-Để tạo một danh sách trong Python, bạn sử dụng **dấu ngoặc vuông** `[]` và phân tách các phần tử bằng dấu **phẩy** `,`. Hãy tưởng tượng Doraemon đang bỏ các món đồ thần kỳ vào túi thần kỳ của mình vậy!
-
-## Ví dụ 1: Danh sách các món đồ trong túi thần kỳ của Doraemon
+### Cú pháp tạo danh sách:
 
 ```python
-doraemon_items = ["Bánh bao thời gian", "Cánh cửa thần kỳ", "Kính vạn hoa", "Mũi tên thời gian"]
-print(doraemon_items)
+ten_danh_sach = [giá_trị_1, giá_trị_2, ..., giá_trị_n]
 ```
 
-**Giải thích**: Trong danh sách `doraemon_items`, chúng ta lưu trữ 4 món đồ thần kỳ mà Doraemon luôn mang theo bên mình: **Bánh bao thời gian**, **Cánh cửa thần kỳ**, **Kính vạn hoa**, và **Mũi tên thời gian**.
-
-## Truy cập vào các phần tử trong danh sách
-
-Giống như Doraemon lấy món đồ trong túi thần kỳ, bạn có thể lấy món đồ trong danh sách bằng cách sử dụng **chỉ số (index)**. Lưu ý rằng chỉ số trong Python bắt đầu từ **0**, vì vậy món đồ đầu tiên sẽ có chỉ số là 0.
-
-## Ví dụ 2: Truy cập món đồ đầu tiên trong danh sách
+### Ví dụ:
 
 ```python
-print(doraemon_items[0])  # Kết quả: Bánh bao thời gian
+ds_so = [1, 2, 3, 4, 5]
+ds_hoa_qua = ["táo", "cam", "xoài"]
+ds_pha_tron = [1, "hai", 3.0, True]
 ```
 
-**Giải thích**: `doraemon_items[0]` sẽ lấy món đồ đầu tiên trong danh sách, đó là **Bánh bao thời gian**.
-
-## Thêm món đồ mới vào danh sách
-
-Khi Doraemon tìm thấy món đồ mới trong thế giới kỳ diệu, cậu ấy sẽ thêm nó vào túi thần kỳ của mình. Chúng ta cũng có thể làm điều đó trong Python bằng phương thức `.append()`!
-
-## Ví dụ 3: Thêm món đồ mới vào túi thần kỳ
-
-```python
-doraemon_items.append("Cỗ máy thời gian")
-print(doraemon_items)  # Kết quả: ['Bánh bao thời gian', 'Cánh cửa thần kỳ', 'Kính vạn hoa', 'Mũi tên thời gian', 'Cỗ máy thời gian']
-```
-
-**Giải thích**: Chúng ta vừa thêm món đồ **Cỗ máy thời gian** vào cuối danh sách của Doraemon.
-
-## Sửa đổi món đồ trong danh sách
-
-Doraemon có thể thay đổi món đồ trong túi thần kỳ của mình nếu muốn, giống như khi cậu ấy đổi món đồ này thành món đồ khác. Chúng ta cũng có thể làm điều đó trong Python! Bạn chỉ cần chỉ ra món đồ muốn thay đổi và gán giá trị mới cho nó.
-
-## Ví dụ 4: Thay đổi món đồ thứ 2 trong danh sách
-
-```python
-doraemon_items[1] = "Cánh cửa bay"
-print(doraemon_items)  # Kết quả: ['Bánh bao thời gian', 'Cánh cửa bay', 'Kính vạn hoa', 'Mũi tên thời gian', 'Cỗ máy thời gian']
-```
-
-**Giải thích**: Món đồ thứ 2, **Cánh cửa thần kỳ**, đã được thay đổi thành **Cánh cửa bay**.
-
-## Xóa món đồ khỏi danh sách
-
-Nếu Doraemon không còn cần đến món đồ nào trong túi thần kỳ, cậu ấy có thể lấy nó ra ngoài. Để làm điều này trong Python, bạn có thể dùng phương thức `.remove()` hoặc `del`.
-
-## Ví dụ 5: Xóa món đồ "Kính vạn hoa"
-
-```python
-doraemon_items.remove("Kính vạn hoa")
-print(doraemon_items)  # Kết quả: ['Bánh bao thời gian', 'Cánh cửa bay', 'Mũi tên thời gian', 'Cỗ máy thời gian']
-```
-
-**Giải thích**: Chúng ta đã loại bỏ món đồ **Kính vạn hoa** khỏi danh sách của Doraemon.
-
-## Lặp qua danh sách của Doraemon
-
-Doraemon có rất nhiều món đồ thú vị trong túi thần kỳ, và nếu cậu ấy muốn xem tất cả, chúng ta có thể sử dụng vòng lặp `for` để duyệt qua từng món đồ!
-
-## Ví dụ 6: Lặp qua danh sách và in ra từng món đồ
-
-```python
-for item in doraemon_items:
-    print(item)
-```
-
-**Kết quả**:
-```
-Bánh bao thời gian
-Cánh cửa bay
-Mũi tên thời gian
-Cỗ máy thời gian
-```
-
-**Giải thích**: Chúng ta sử dụng vòng lặp `for` để đi qua từng món đồ trong danh sách và in ra cho Doraemon xem.
-
-## Lấy ngẫu nhiên từ danh sách
-
-Bây giờ, chúng ta sẽ học cách chọn một món đồ ngẫu nhiên từ danh sách của Doraemon. Cũng giống như khi Doraemon không biết mình sẽ lấy món đồ nào, chúng ta có thể sử dụng thư viện **`random`** của Python để lấy ngẫu nhiên một món đồ từ danh sách.
-
-## Ví dụ 7: Lấy ngẫu nhiên một món đồ từ danh sách
-
-```python
-import random
-
-# Chọn ngẫu nhiên một món đồ từ danh sách
-random_item = random.choice(doraemon_items)
-print(f"Món đồ ngẫu nhiên hôm nay là: {random_item}")
-```
-
-**Giải thích**: Chúng ta đã sử dụng `random.choice()` để chọn ngẫu nhiên một món đồ từ danh sách `doraemon_items`. Mỗi lần chạy lại, kết quả có thể khác nhau, giống như Doraemon lấy một món đồ bất kỳ từ túi thần kỳ!
+Video hướng dẫn: [https://www.youtube.com/watch?v=W8KRzm-HUcc](https://www.youtube.com/watch?v=W8KRzm-HUcc)
 
 ---
 
-## Kết luận
+## II. Truy cập phần tử trong danh sách
 
-Vậy là chúng ta đã học về **Danh sách (List)** trong Python cùng với Doraemon và những món đồ thần kỳ trong túi thần kỳ của cậu ấy! Bạn có thể tạo danh sách, thêm, sửa, xóa các món đồ trong danh sách và thậm chí lặp qua chúng. Và đặc biệt, chúng ta còn có thể **lấy ngẫu nhiên** một món đồ trong danh sách, giống như khi Doraemon chọn món đồ bất kỳ từ túi thần kỳ.
+### Truy cập theo chỉ số:
 
-Chúc các bạn học lập trình vui vẻ cùng Doraemon và những món đồ thần kỳ nhé!
+```python
+fruits = ["táo", "cam", "xoài"]
+print(fruits[0])  # táo
+print(fruits[2])  # xoài
+```
+
+### Truy cập từ cuối danh sách (dùng chỉ số âm):
+
+```python
+print(fruits[-1])  # xoài
+```
+
+Video hướng dẫn: [https://www.youtube.com/watch?v=ohCDWZgNIU0](https://www.youtube.com/watch?v=ohCDWZgNIU0)
+
+---
+
+## III. Một số thao tác thường dùng với danh sách
+
+| Thao tác        | Cú pháp / Hàm  | Mô tả                               |
+| --------------- | -------------- | ----------------------------------- |
+| Thêm phần tử    | `append(x)`    | Thêm x vào cuối danh sách           |
+| Chèn phần tử    | `insert(i, x)` | Chèn x vào vị trí i                 |
+| Xóa phần tử     | `remove(x)`    | Xóa phần tử đầu tiên có giá trị x   |
+| Xóa theo chỉ số | `pop(i)`       | Xóa phần tử tại vị trí i            |
+| Đếm phần tử     | `count(x)`     | Đếm số lần xuất hiện của x          |
+| Tìm vị trí      | `index(x)`     | Trả về chỉ số đầu tiên có giá trị x |
+| Sắp xếp         | `sort()`       | Sắp xếp danh sách tăng dần          |
+| Đảo ngược       | `reverse()`    | Đảo ngược thứ tự                    |
+| Sao chép        | `copy()`       | Tạo bản sao                         |
+| Xóa toàn bộ     | `clear()`      | Xóa hết phần tử                     |
+
+### Ví dụ:
+
+```python
+numbers = [4, 2, 7, 1]
+numbers.append(5)      # [4, 2, 7, 1, 5]
+numbers.sort()         # [1, 2, 4, 5, 7]
+numbers.remove(2)      # [1, 4, 5, 7]
+```
+
+Video hướng dẫn: [https://www.youtube.com/watch?v=8vX4jd3yrsI](https://www.youtube.com/watch?v=8vX4jd3yrsI)
+
+---
+
+## IV. Duyệt danh sách
+
+### Duyệt bằng vòng lặp `for`:
+
+```python
+fruits = ["cam", "xoài", "ổi"]
+for fruit in fruits:
+    print(fruit)
+```
+
+### Duyệt bằng chỉ số:
+
+```python
+for i in range(len(fruits)):
+    print(f"Phần tử thứ {i}: {fruits[i]}")
+```
+
+Video hướng dẫn: [https://www.youtube.com/watch?v=lxew5wYAYVw](https://www.youtube.com/watch?v=lxew5wYAYVw)
+
+---
+
+## V. Toán tử với danh sách
+
+| Toán tử | Ý nghĩa                             | Ví dụ                              |
+| ------- | ----------------------------------- | ---------------------------------- |
+| `+`     | Nối hai danh sách                   | `[1, 2] + [3, 4] => [1, 2, 3, 4]`  |
+| `*`     | Lặp lại danh sách                   | `[1, 2] * 3 => [1, 2, 1, 2, 1, 2]` |
+| `in`    | Kiểm tra phần tử có trong danh sách | `3 in [1, 2, 3] => True`           |
+
+---
+
+## VI. Một số hàm tích hợp với danh sách
+
+| Hàm          | Chức năng                           | Ví dụ                            |
+| ------------ | ----------------------------------- | -------------------------------- |
+| `len(ds)`    | Trả về số phần tử trong danh sách   | `len([1, 2, 3]) => 3`            |
+| `max(ds)`    | Trả về phần tử lớn nhất             | `max([1, 5, 3]) => 5`            |
+| `min(ds)`    | Trả về phần tử nhỏ nhất             | `min([1, 5, 3]) => 1`            |
+| `sum(ds)`    | Tổng các phần tử trong danh sách số | `sum([1, 2, 3]) => 6`            |
+| `sorted(ds)` | Trả về bản sao danh sách đã sắp xếp | `sorted([3, 1, 2]) => [1, 2, 3]` |
+
+---
+
+## VII. Ví dụ thực hành
+
+### Ví dụ 1: Tính tổng các số chẵn trong danh sách
+
+```python
+numbers = [1, 4, 5, 8, 10, 3]
+tong_chan = 0
+for num in numbers:
+    if num % 2 == 0:
+        tong_chan += num
+print("Tổng số chẵn là:", tong_chan)
+```
+
+Video giải thích: [https://www.youtube.com/watch?v=lZQfNaVCGak](https://www.youtube.com/watch?v=lZQfNaVCGak)
+
+---
+
+### Ví dụ 2: Tìm phần tử lớn nhất
+
+```python
+numbers = [5, 8, 2, 10, 3]
+print("Số lớn nhất là:", max(numbers))
+```
+
+Video tham khảo: [https://www.youtube.com/watch?v=xl0N7tHiwlw](https://www.youtube.com/watch?v=xl0N7tHiwlw)
+
+---
+
+## VIII. Bài tập luyện tập
+
+1. Nhập vào danh sách gồm 5 số nguyên. Tính tổng các phần tử trong danh sách.
+2. Nhập danh sách họ tên học sinh. In ra danh sách theo thứ tự bảng chữ cái.
+3. Tạo một danh sách gồm các số từ 1 đến 100. In ra các số chia hết cho 3 và 5.
+4. Viết chương trình kiểm tra xem một phần tử có tồn tại trong danh sách hay không.
+5. Viết chương trình loại bỏ các phần tử trùng lặp trong danh sách.
+
