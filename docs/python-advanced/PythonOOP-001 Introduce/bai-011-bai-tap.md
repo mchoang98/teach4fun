@@ -1,75 +1,74 @@
-# Bài 001 - Bài tập tự luyện
+# Bài tập tự luyện
 
-###  **Bài tập 1: So sánh hai cách lập trình**
+## Bài 1: Quản lý điểm sinh viên và các trường hợp thực tế
 
-**Yêu cầu**:
-Viết lại đoạn chương trình đơn giản sau bằng hai cách:
+**Yêu cầu:**
 
-1. **Lập trình thủ tục**
-2. **Lập trình hướng đối tượng**
+1. Tạo lớp `SinhVien` với các thuộc tính:
 
-**Đề bài**: Viết chương trình quản lý thông tin của một học sinh gồm: họ tên, lớp, điểm trung bình. Chương trình in ra thông tin học sinh.
+   * `ho_ten`
+   * `ma_sv`
+   * `lop`
+   * `diem_tb` (điểm trung bình, từ 0 đến 10)
 
-**Gợi ý**:
+2. Viết các phương thức:
 
-* Thủ tục: dùng biến và hàm riêng.
-* OOP: tạo class `HocSinh` với các thuộc tính và phương thức `in_thong_tin()`.
+   * `in_thong_tin()`: in đầy đủ thông tin sinh viên.
+   * `xep_loai()`: xếp loại theo điểm:
 
----
+     * `>= 8`: Giỏi
+     * `>= 6.5`: Khá
+     * `>= 5`: Trung bình
+     * `< 5`: Yếu
+   * `cap_nhat_diem(moi)`: cập nhật điểm trung bình mới (có kiểm tra hợp lệ, điểm phải từ 0 đến 10)
 
-###  **Bài tập 2: Tạo lớp SinhVien**
+3. Tạo 3 sinh viên với điểm khác nhau, in thông tin và xếp loại.
 
-**Yêu cầu**:
+4. Mô phỏng các trường hợp:
 
-1. Tạo lớp `SinhVien` có các thuộc tính:
-
-   * `ho_ten`, `ma_sv`, `lop`, `diem_tb`
-2. Viết phương thức:
-
-   * `in_thong_tin()`: in ra thông tin sinh viên
-`xep_loai()`: xếp loại sinh viên theo điểm (`>=8`: Giỏi, `>=6.5`: Khá, `>=5`: Trung bình, `<5`: Yếu)
-
-**Yêu cầu thêm**: Tạo 3 sinh viên và in thông tin cùng xếp loại của họ.
+   * Cập nhật điểm của một sinh viên (có thể điểm giảm hoặc tăng).
+   * In lại thông tin và xếp loại sau khi cập nhật điểm.
 
 ---
 
-###  **Bài tập 3: Đăng ký môn học**
+## Bài 2: Quản lý xe Car với các tình huống thực tế
 
-**Yêu cầu**:
+**Yêu cầu:**
 
-1. Tạo lớp `SinhVien` với thuộc tính `danh_sach_mon_hoc` (kiểu danh sách).
-2. Viết phương thức:
+1. Tạo lớp `Car` với các thuộc tính:
 
-   * `dang_ky_mon(mon_hoc)`: thêm môn học vào danh sách
-   * `hien_thi_mon_hoc()`: in ra các môn đã đăng ký
+   * `color`
+   * `brand`
+   * `year`
+   * `mileage` (số km đã đi, mặc định 0)
+   * `engine_on` (trạng thái máy, True/False, mặc định False)
+   * `car_type` (`"electric"` hoặc `"gasoline"`)
+   * `battery_level` (chỉ xe điện, 0-100%, mặc định 100)
+   * `fuel_level` (chỉ xe xăng, lít, mặc định 50)
 
-**Gợi ý**: Dùng `append()` để thêm vào danh sách.
+2. Viết các phương thức:
 
----
+   * `start_engine()`, `stop_engine()`
+   * `drive(km)`:
 
-###  **Bài tập 4: Quản lý nhiều sinh viên**
+     * Nếu xe điện: giảm pin 1% cho mỗi km, không chạy nếu pin < 10%.
+     * Nếu xe xăng: giảm xăng 1 lít cho mỗi 15 km, không chạy nếu xăng < 5 lít.
+     * Nếu máy tắt thì báo lỗi không thể lái.
+   * `paint(new_color)` đổi màu xe.
+   * `charge()` (xe điện): sạc pin về 100%.
+   * `refuel(amount)` (xe xăng): đổ thêm xăng.
 
-**Yêu cầu**:
+3. Tạo 2 xe:
 
-1. Tạo lớp `SinhVien` như các bài trước.
-2. Tạo một danh sách chứa nhiều đối tượng `SinhVien`.
-3. Viết chương trình:
+   * Xe điện màu trắng hãng Tesla năm 2022.
+   * Xe xăng màu đỏ hãng Toyota năm 2020.
 
-   * In thông tin của tất cả sinh viên.
-   * Tính điểm trung bình của cả lớp.
+4. Mô phỏng các trường hợp thực tế:
 
----
+   * Bật máy, chạy xe, in mức pin/xăng còn lại.
+   * Thử chạy xe khi máy tắt (báo lỗi).
+   * Đổi màu xe.
+   * Sạc pin hoặc đổ xăng khi cần.
 
-###  **Bài tập 5: Tư duy mô hình đối tượng**
 
-**Câu hỏi lý thuyết**:
-
-1. Với bài toán quản lý thư viện, em sẽ mô hình hóa thành những lớp nào?
-2. Với mỗi lớp, em sẽ chọn những **thuộc tính** và **phương thức** gì?
-
-**Gợi ý**:
-
-* Lớp: `Sach`, `DocGia`, `ThuThu`, `MuonTra`
-* Thuộc tính: tên sách, mã sách, họ tên độc giả...
-* Phương thức: mượn sách, trả sách, kiểm tra sách quá hạn...
 
