@@ -27,7 +27,7 @@ Viết lại đoạn chương trình đơn giản sau bằng hai cách:
 2. Viết phương thức:
 
    * `in_thong_tin()`: in ra thông tin sinh viên
-   * `xep_loai()`: xếp loại sinh viên theo điểm (>=8: Giỏi, >=6.5: Khá, >=5: Trung bình, <5: Yếu)
+`xep_loai()`: xếp loại sinh viên theo điểm (`>=8`: Giỏi, `>=6.5`: Khá, `>=5`: Trung bình, `<5`: Yếu)
 
 **Yêu cầu thêm**: Tạo 3 sinh viên và in thông tin cùng xếp loại của họ.
 
