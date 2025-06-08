@@ -1,6 +1,6 @@
 # Bài 001 - Bài tập tự luyện
 
-### 🔸 **Bài tập 1: So sánh hai cách lập trình**
+###  **Bài tập 1: So sánh hai cách lập trình**
 
 **Yêu cầu**:
 Viết lại đoạn chương trình đơn giản sau bằng hai cách:
@@ -17,7 +17,7 @@ Viết lại đoạn chương trình đơn giản sau bằng hai cách:
 
 ---
 
-### 🔸 **Bài tập 2: Tạo lớp SinhVien**
+###  **Bài tập 2: Tạo lớp SinhVien**
 
 **Yêu cầu**:
 
@@ -33,7 +33,7 @@ Viết lại đoạn chương trình đơn giản sau bằng hai cách:
 
 ---
 
-### 🔸 **Bài tập 3: Đăng ký môn học**
+###  **Bài tập 3: Đăng ký môn học**
 
 **Yêu cầu**:
 
@@ -47,7 +47,7 @@ Viết lại đoạn chương trình đơn giản sau bằng hai cách:
 
 ---
 
-### 🔸 **Bài tập 4: Quản lý nhiều sinh viên**
+###  **Bài tập 4: Quản lý nhiều sinh viên**
 
 **Yêu cầu**:
 
@@ -60,7 +60,7 @@ Viết lại đoạn chương trình đơn giản sau bằng hai cách:
 
 ---
 
-### 🔸 **Bài tập 5: Tư duy mô hình đối tượng**
+###  **Bài tập 5: Tư duy mô hình đối tượng**
 
 **Câu hỏi lý thuyết**:
 
