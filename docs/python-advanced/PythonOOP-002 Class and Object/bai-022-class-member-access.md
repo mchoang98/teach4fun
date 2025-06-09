@@ -167,6 +167,3 @@ t.__fun__()         # Truy cập được
 
 Encapsulation giúp bạn kiểm soát tốt hơn quyền truy cập đến các thành phần bên trong lớp, từ đó đảm bảo tính an toàn và rõ ràng trong thiết kế phần mềm. Python không ép buộc quá chặt, nhưng tuân theo quy ước truy cập vẫn là điều nên làm để mã nguồn dễ đọc và dễ bảo trì.
 
----
-
-Nếu bạn muốn tiếp tục với **kế thừa (inheritance)** hoặc **đa hình (polymorphism)** trong Python, mình có thể soạn tiếp phần sau cho bạn.
