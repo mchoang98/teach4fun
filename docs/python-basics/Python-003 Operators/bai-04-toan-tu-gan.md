@@ -152,3 +152,53 @@ Ví dụ: nếu người dùng nhập `35` thì chương trình in ra:
 
 **Gợi ý**: Dùng toán tử `//` và `%` kết hợp với toán tử gán.
 
+
+### **Bài 6: Kiểm tra chia hết cho 3 và 5**
+
+Viết chương trình nhập vào một số nguyên `n`. Kiểm tra xem `n` có chia hết cho **3 và 5** hay không, nếu có thì cộng thêm 10 cho `n`, ngược lại trừ đi 7.
+
+**In ra kết quả cuối cùng.**
+
+---
+
+### **Bài 7: Kiểm tra số âm hay dương, rồi bình phương**
+
+Viết chương trình nhập vào một số nguyên `x`.
+
+* Nếu `x` là **số âm**, gán `x` = `x * x`
+* Nếu `x` là **số dương hoặc bằng 0**, gán `x` = `x + 10`
+
+**In ra giá trị mới của `x`.**
+
+---
+
+### **Bài 8: Tính tổng các chữ số nếu là số chẵn**
+
+Viết chương trình nhập vào một số nguyên dương có 2 chữ số.
+
+* Nếu số đó **chia hết cho 2**, tính tổng 2 chữ số của nó.
+* Nếu không chia hết, trừ đi 1 và in ra kết quả mới.
+
+---
+
+### **Bài 9: Kiểm tra tổng lớn hơn 100**
+
+Viết chương trình nhập vào hai số nguyên `a` và `b`.
+
+* Tính `tong = a + b`
+* Nếu `tong > 100`, nhân đôi `tong`
+* Ngược lại, cộng thêm 20 vào `tong`
+
+**In ra kết quả cuối cùng.**
+
+---
+
+### **Bài 10: Kiểm tra bội số của 4 và biến đổi giá trị**
+
+Viết chương trình nhập vào một số nguyên `n`.
+
+* Nếu `n` là **bội số của 4**, gán `n = n // 2 + 3`
+* Ngược lại, gán `n = n * 3 - 1`
+
+**In ra kết quả.**
+
