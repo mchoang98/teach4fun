@@ -1,18 +1,12 @@
 
-# **Bài 4-2: Lưu đồ thuật toán với if else**
+# Bài 4-2: Lưu đồ thuật toán với if else
 
 ## 1. **Lưu đồ thuật toán là gì?**
 
 Lưu đồ thuật toán (flowchart) là **biểu đồ trực quan** mô tả trình tự thực hiện các bước trong một thuật toán. Trong lập trình, lưu đồ giúp học sinh dễ hiểu logic của chương trình trước khi viết mã nguồn.
 
 ## 2. **Biểu tượng trong lưu đồ**
-
-| **Biểu tượng**           | **Ý nghĩa**                                | **Hình ảnh minh hoạ**                        |
-| ------------------------ | ------------------------------------------ | -------------------------------------------- |
-| **Terminal (Start/End)** | Bắt đầu hoặc kết thúc chương trình         | ![Terminal](https://i.imgur.com/9RIhZDf.png) |
-| **Process (Thao tác)**   | Thực hiện một hành động như tính toán, gán | ![Process](https://i.imgur.com/ykqkHf3.png)  |
-| **Decision (Điều kiện)** | Kiểm tra điều kiện (rẽ nhánh if/else)      | ![Decision](https://i.imgur.com/2MrEayh.png) |
-| **Arrow (Mũi tên)**      | Chỉ hướng đi của luồng xử lý               | ![Arrow](https://i.imgur.com/c93fA4R.png)    |
+![Process](https://testerpro.vn/wp-content/uploads/2023/08/ky-hieu-so-do-khoi-thuat-toan-.webp)
 
 ---
 
@@ -33,21 +27,11 @@ else:
 
 ### Lưu đồ minh họa:
 
-🖼️ **Cách chèn ảnh lưu đồ** vào bài giảng:
 
-Trong Markdown (hoặc bất kỳ trình soạn thảo HTML nào), bạn có thể thêm ảnh bằng cú pháp:
 
-```markdown
-![Lưu đồ chẵn lẻ](duong-dan-anh.png)
-```
+![Lưu đồ chẵn lẻ](https://i.imgur.com/73Gqi0w.png)
 
-> 📝 **Gợi ý**: Bạn có thể tải lên ảnh từ máy tính, hoặc dùng ảnh vừa tạo như sau:
 
-```markdown
-![Flowchart - Kiểm tra số chẵn lẻ](A_flowchart_titled_"Bài_4-1:_Câu_lệnh_điều_kiện_tr.png)
-```
-
----
 
 ## 4. **Lưu đồ nhiều điều kiện với `if - elif - else`**
 
@@ -91,32 +75,62 @@ else:
 
 ### Lưu đồ:
 
-* Một hình thoi kiểm tra `n >= 0`
-
-  * Nếu đúng, đi tiếp vào nhánh `n % 2 == 0`
-  * Nếu sai, kết luận là số âm
-
----
+![Process](chanduong.png)
 
 ## 6. **Tóm tắt cách vẽ lưu đồ điều kiện**
 
-| Thành phần       | Biểu diễn                   |
-| ---------------- | --------------------------- |
-| Điều kiện        | 🔷 Hình thoi                |
-| Hành động        | ⬛ Hình chữ nhật             |
-| Bắt đầu/Kết thúc | 🔽 Hình oval                |
-| Chuyển bước      | ➡ Mũi tên nối giữa các bước |
+![Process](https://venngage-wordpress.s3.amazonaws.com/uploads/2024/02/flowchart-symbols-meaning-1.png)
 
 ---
 
 ## 7. **Tự luyện**
 
-👉 Hãy chọn một trong các bài sau và **vẽ lưu đồ bằng tay hoặc phần mềm**:
+Hãy chọn một trong các bài sau và **vẽ lưu đồ bằng tay hoặc phần mềm**:
 
-1. Kiểm tra số âm/dương/0
-2. Tìm số lớn nhất trong 3 số
-3. Phân loại học lực
 
 ---
 
-Nếu bạn cần hỗ trợ tạo ảnh lưu đồ cho từng bài cụ thể, hãy nói rõ đề bài. Mình có thể **tạo hình ảnh lưu đồ tự động** cho bạn.
+### **Bài tập 1 (mới): Máy bán nước tự động**
+
+**Mô tả:**
+Giả sử bạn đang lập trình cho một **máy bán nước tự động**. Khi người dùng chọn một mã đồ uống và nhập số tiền, máy sẽ xử lý:
+
+* Nếu tiền đủ → in ra loại nước đã chọn và tiền thừa (nếu có)
+* Nếu tiền thiếu → in thông báo "Bạn chưa đủ tiền, vui lòng thêm"
+* Nếu mã không hợp lệ → in "Mã không hợp lệ"
+
+**Danh sách đồ uống ví dụ:**
+
+* `1`: Nước suối – 10.000
+* `2`: Sữa tươi – 15.000
+* `3`: Trà chanh – 12.000
+
+**Yêu cầu nhóm:**
+
+* Bạn 1: Thiết kế sơ đồ khối cho quá trình chọn đồ → nhập tiền → xử lý → xuất kết quả.
+* Bạn 2: Viết chương trình Python xử lý theo logic trên.
+* Bạn 3: Kiểm thử với nhiều trường hợp: tiền đủ, tiền thiếu, mã sai – rồi ghi lại kết quả.
+
+**Gợi ý mở rộng:**
+Cho phép người dùng tiếp tục chọn đồ uống khác sau mỗi lần mua.
+
+---
+
+### **Bài tập 2 (giữ nguyên): Trợ lý tư vấn thời tiết và trang phục**
+
+**Mô tả:**
+Viết chương trình nhập nhiệt độ ngoài trời, từ đó đưa ra lời khuyên về thời tiết và trang phục:
+
+* Dưới 18 độ → "Trời lạnh. Hãy mặc áo ấm."
+* Từ 18 đến dưới 30 độ → "Trời mát. Mặc đồ bình thường."
+* Từ 30 trở lên → "Trời nóng. Uống nhiều nước và mặc đồ mát."
+
+**Yêu cầu nhóm:**
+
+* Bạn 1: Thiết kế sơ đồ khối từng bước.
+* Bạn 2: Viết mã Python tương ứng.
+* Bạn 3: Kiểm thử và trình bày báo cáo kết quả.
+
+
+---
+
