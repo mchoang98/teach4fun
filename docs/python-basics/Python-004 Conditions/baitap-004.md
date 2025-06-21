@@ -41,19 +41,22 @@ Viết chương trình yêu cầu người dùng **nhập 3 số nguyên**, sau 
 
 ---
 
-###  **Bài 4: Xếp loại học lực học sinh**
+### **Bài 4: Xếp loại học lực học sinh**
 
-**Yêu cầu:**
+**Yêu cầu:**  
 Viết chương trình nhập vào 3 loại điểm:
 
-* **Điểm kiểm tra (hệ số 1)**
-* **Điểm giữa kỳ (hệ số 2)**
-* **Điểm cuối kỳ (hệ số 3)**
-  Tính **điểm trung bình có trọng số**, sau đó xếp loại theo quy tắc:
-* Giỏi: >= 8
-* Khá: từ 6.5 đến <8
-* Trung bình: từ 5 đến <6.5
-* Yếu: < 5
+- **Điểm kiểm tra** (hệ số 1)  
+- **Điểm giữa kỳ** (hệ số 2)  
+- **Điểm cuối kỳ** (hệ số 3)  
+
+Tính **điểm trung bình có trọng số**, sau đó xếp loại theo quy tắc:
+
+- **Giỏi**: >= 8  
+- **Khá**: từ 6.5 đến < 8  
+- **Trung bình**: từ 5 đến < 6.5  
+- **Yếu**: < 5
+
 
 **Hướng dẫn:**
 
