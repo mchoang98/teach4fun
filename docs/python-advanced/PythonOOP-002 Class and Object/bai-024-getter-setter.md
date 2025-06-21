@@ -1,4 +1,4 @@
-# BÀI 024: THUỘC TÍNH TRONG PYTHON – INSTANCE, CLASS, GETTER/SETTER, @PROPERTY
+# BÀI 024: Getter và setter trong python
 
 ## Mục tiêu
 
