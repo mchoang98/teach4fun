@@ -2,6 +2,7 @@
 # Bài tập 04: Câu lệnh điều kiện 
 
 
+### **Bài 1: Kiểm tra điều kiện vào lớp 10**
 
 **Yêu cầu:**
 Viết chương trình yêu cầu người dùng **nhập vào tuổi của học sinh**.
