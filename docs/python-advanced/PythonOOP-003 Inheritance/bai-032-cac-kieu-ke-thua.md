@@ -1,4 +1,4 @@
-# Bài 042 – Các Kiểu Kế Thừa Trong Python
+# Bài 032 – Các Kiểu Kế Thừa Trong Python
 
 ## Mục tiêu bài học
 
