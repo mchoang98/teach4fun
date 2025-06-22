@@ -34,6 +34,7 @@ d = Dog()
 d.speak()
 d.bark()
 ```
+![Logo](https://media.geeksforgeeks.org/wp-content/uploads/20200108135809/inheritance11.png)
 
 ---
 
@@ -59,6 +60,7 @@ m.show()
 m.work()
 m.manage()
 ```
+![Logo](https://media.geeksforgeeks.org/wp-content/uploads/20200108144705/Multilevel-inheritance1.png)
 
 ---
 
@@ -82,6 +84,8 @@ c = Child()
 c.skills()
 c.hobbies()
 ```
+![Logo](https://media.geeksforgeeks.org/wp-content/uploads/20200108144424/multiple-inheritance1.png)
+
 
 Python hỗ trợ kế thừa đa hình và xử lý vấn đề Diamond Problem bằng cơ chế MRO (Method Resolution Order).
 
@@ -109,6 +113,7 @@ t = Teacher()
 s.greet()
 t.greet()
 ```
+![Logo](https://media.geeksforgeeks.org/wp-content/uploads/20200108144949/Hierarchical-inheritance1.png)
 
 ---
 
@@ -140,6 +145,9 @@ d.methodC()
 d.methodD()
 ```
 
+![Logo](https://media.geeksforgeeks.org/wp-content/uploads/Hybrid-Inheritance.png)
+
+
 ---
 
 ## 3. Ghi đè phương thức (Method Overriding)
@@ -160,6 +168,8 @@ d = Dog()
 a.speak()
 d.speak()
 ```
+
+
 
 ---
 
