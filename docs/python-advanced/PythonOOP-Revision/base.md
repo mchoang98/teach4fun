@@ -98,7 +98,7 @@ Tạo class `Rectangle` gồm:
 
 * `Character`: `name`, `hp`, `attack()`
 * `Player`, `Monster`: kế thừa từ `Character`
-* Viết vòng lặp chiến đấu → tới khi 1 bên hp <= 0
+* Viết vòng lặp chiến đấu → tới khi 1 bên `hp <= 0`
 
 ---
 
