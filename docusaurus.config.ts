@@ -53,6 +53,12 @@ const config: Config = {
           position: 'left',
           label: 'Python',
         },
+           {
+          type: 'docSidebar',
+          sidebarId: 'webSidebar', // Changed to a specific sidebar for Python
+          position: 'left',
+          label: 'Web',
+        },
         {
           to: '/blog',
           label: 'Blog',
