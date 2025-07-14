@@ -1,8 +1,4 @@
-﻿Dưới đây là nội dung bài giảng hoàn chỉnh **Bài 05 – Object (Đối tượng) trong JavaScript**, viết sẵn để anh dùng hoặc lưu thành file `.md` nếu cần:
-
----
-
-# Bai05\_Object
+﻿# Bai05\_Object
 
 ## Mục tiêu bài học
 
