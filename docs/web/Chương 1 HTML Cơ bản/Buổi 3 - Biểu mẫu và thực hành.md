@@ -1,7 +1,3 @@
-Dưới đây là **Buổi 3: Tạo trang cá nhân – Tổng hợp kiến thức HTML** được viết chi tiết, dành cho học sinh đã học xong HTML cơ bản, nhằm ôn lại và vận dụng tất cả kiến thức đã học qua một dự án thực tế đầu tiên.
-
----
-
 # BUỔI 3 – TẠO TRANG CÁ NHÂN
 
 **Tổng hợp kiến thức HTML cơ bản**
