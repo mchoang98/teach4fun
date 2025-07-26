@@ -1,115 +1,139 @@
 
-# 📘 Bài 9-1: Ngoại Lệ và Xử Lý Ngoại Lệ trong Python
+# Bài 9-1: Ngoại Lệ và Xử Lý Ngoại Lệ trong Python
 
-> **Mục tiêu:** Hiểu và sử dụng `try`, `except`, `else`, và `finally` để xử lý lỗi một cách an toàn trong chương trình Python.
+## Mục tiêu bài học:
+
+* Hiểu được **ngoại lệ** (exception) là gì và vì sao chúng xảy ra.
+* Biết cách sử dụng **try - except** để xử lý lỗi.
+* Biết sử dụng thêm các mệnh đề **else**, **finally** trong xử lý ngoại lệ.
 
 ---
 
-## ✅ 1. Ngoại lệ là gì?
+## 1. Ngoại lệ là gì?
 
-**Ngoại lệ (Exception)** là lỗi xảy ra trong khi chương trình đang chạy, khiến chương trình bị **dừng đột ngột** nếu không được xử lý.
+**Ngoại lệ (Exception)** là lỗi xảy ra trong khi chương trình đang chạy. Nếu không xử lý, chương trình sẽ **bị dừng**.
 
-Ví dụ:
+### Ví dụ:
+
 ```python
 print(10 / 0)  # Lỗi chia cho 0
 ```
 
-Kết quả:
+Chạy dòng này sẽ ra lỗi:
+
 ```
 ZeroDivisionError: division by zero
 ```
 
 ---
 
-## 🧯 2. Cách xử lý ngoại lệ với `try - except`
+## 2. Xử lý ngoại lệ với `try - except`
 
-Cú pháp cơ bản:
+### Cú pháp cơ bản:
+
 ```python
 try:
-    # mã có thể gây lỗi
-except ErrorType:
-    # mã xử lý khi có lỗi
+    # đoạn code có thể gây lỗi
+except TenLoaiLoi:
+    # xử lý khi lỗi xảy ra
 ```
 
-Ví dụ:
+### Ví dụ:
+
 ```python
 try:
-    num = int(input("Nhập số: "))
-    print("Bình phương:", num ** 2)
+    a = int(input("Nhập số nguyên: "))
+    print(10 / a)
+except ZeroDivisionError:
+    print("Không được chia cho 0!")
 except ValueError:
-    print("❌ Bạn phải nhập số nguyên!")
+    print("Phải nhập số nguyên!")
 ```
 
 ---
 
-## 🔍 3. Sử dụng `else` và `finally`
+## 3. `else` và `finally`
 
-### `else`: Chạy khi **không có lỗi**
+* `else`: chạy khi **không có lỗi**
+* `finally`: chạy **luôn luôn**, dù có lỗi hay không
+
+### Ví dụ:
+
 ```python
 try:
-    age = int(input("Nhập tuổi: "))
-except ValueError:
-    print("Sai định dạng!")
+    x = int(input("Nhập số: "))
+    y = 10 / x
+except ZeroDivisionError:
+    print("Lỗi chia 0!")
 else:
-    print("Tuổi của bạn là:", age)
-```
-
-### `finally`: Luôn chạy **dù có lỗi hay không**
-```python
-try:
-    f = open("data.txt")
-except FileNotFoundError:
-    print("Không tìm thấy file!")
+    print("Kết quả:", y)
 finally:
-    print("Kết thúc xử lý file.")
+    print("Kết thúc chương trình.")
 ```
 
 ---
 
-## 📦 4. Một số lỗi thường gặp
+## 4. Tự tạo ngoại lệ (`raise`)
 
-| Lỗi | Mô tả |
-|-----|------|
-| `ZeroDivisionError` | Chia cho 0 |
-| `ValueError` | Sai kiểu giá trị |
-| `TypeError` | Sai kiểu dữ liệu |
-| `FileNotFoundError` | Không tìm thấy file |
-| `IndexError` | Truy cập sai chỉ mục danh sách |
-
----
-
-## 🧑‍🏫 5. Bài tập đơn giản
-
-### Đề bài: Tính điểm trung bình 3 môn
+Dùng để **chủ động báo lỗi** khi gặp điều kiện không hợp lệ.
 
 ```python
-try:
-    math = float(input("Điểm Toán: "))
-    lit = float(input("Điểm Văn: "))
-    eng = float(input("Điểm Anh: "))
-    avg = round((math + lit + eng) / 3, 2)
-except ValueError:
-    print("❌ Điểm phải là số!")
-else:
-    print("✅ Điểm trung bình:", avg)
+def set_age(age):
+    if age < 0:
+        raise ValueError("Tuổi không được âm")
+    print(f"Tuổi: {age}")
+
+set_age(-5)  # Báo lỗi ngay lập tức
 ```
 
 ---
 
-## 🖼️ 6. Hình minh họa
+## 5. Tóm tắt
 
-![Xử lý ngoại lệ Python](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Python_exception_handling.svg/800px-Python_exception_handling.svg.png)
-> _Sơ đồ xử lý ngoại lệ trong Python_
+| Thành phần | Mục đích                         |
+| ---------- | -------------------------------- |
+| `try`      | Gồm đoạn code có thể gây lỗi     |
+| `except`   | Bắt và xử lý lỗi                 |
+| `else`     | Chạy nếu **không có lỗi** xảy ra |
+| `finally`  | Luôn chạy, dù có lỗi hay không   |
+| `raise`    | Tự tạo ngoại lệ                  |
+
+---
+
+## Bài tập thực hành
+
+### Bài 1: Chia số an toàn
+
+**Yêu cầu:** Viết chương trình yêu cầu người dùng nhập 2 số, chia số thứ nhất cho số thứ hai. Bắt lỗi chia cho 0 và lỗi nhập sai kiểu số.
+
+*Gợi ý:* Dùng `try`, `except ZeroDivisionError`, `except ValueError`.
 
 ---
 
-## ✨ Ghi nhớ nhanh
+### Bài 2: Tính căn bậc hai
 
-| Thành phần | Ý nghĩa |
-|------------|--------|
-| `try`      | Nơi đặt đoạn code có thể gây lỗi |
-| `except`   | Xử lý khi lỗi xảy ra |
-| `else`     | Chạy nếu không có lỗi |
-| `finally`  | Luôn chạy dù có lỗi hay không |
+**Yêu cầu:** Viết chương trình yêu cầu nhập số, in ra căn bậc hai. Nếu số âm thì báo lỗi "Không thể tính căn bậc hai của số âm".
 
 ---
+
+### Bài 3: Tạo hàm kiểm tra tuổi
+
+**Yêu cầu:** Viết hàm `kiem_tra_tuoi(age)`:
+
+* Nếu tuổi < 0 → raise `ValueError("Tuổi không hợp lệ")`
+* Nếu hợp lệ → in "Tuổi: x"
+
+Gọi thử hàm với `-3` và xử lý lỗi bằng `try`.
+
+---
+
+### Bài 4: Danh sách chia số
+
+**Yêu cầu:** Cho danh sách số `[10, 5, 0, 'a', 2]`, duyệt qua từng phần tử, chia 10 cho phần tử đó và xử lý ngoại lệ nếu có.
+
+---
+
+### Bài 5: Trò chơi đoán số nâng cao
+
+Viết trò chơi cho người dùng đoán số từ 1–10. Nếu người dùng nhập không phải số nguyên, hoặc nằm ngoài khoảng → báo lỗi và yêu cầu nhập lại (tối đa 3 lần, nếu sai quá thì kết thúc).
+
