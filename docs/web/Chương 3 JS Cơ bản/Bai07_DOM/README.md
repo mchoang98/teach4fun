@@ -1,4 +1,4 @@
-﻿# Bai07\_ArrayMethodNangCao
+﻿# Bài 07 - Array method nâng cao
 
 ## Mục tiêu bài học
 

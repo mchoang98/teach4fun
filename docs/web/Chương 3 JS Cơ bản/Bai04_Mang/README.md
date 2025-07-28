@@ -1,4 +1,4 @@
-﻿# Bai04\_Mang
+﻿# Bài 04 - Mảng
 
 ## Mục tiêu bài học
 

@@ -1,5 +1,5 @@
 
-# Bai06a\_ArrayMethodNangCao
+# Bài 06a - Array Method 
 
 ## Mục tiêu bài học
 

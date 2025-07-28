@@ -1,4 +1,4 @@
-# Bai02_CauDieuKien_VongLap
+# Bài 02 - Câu lệnh điều kiện, vòng lặp
 
 ## Mục tiêu bài học
 - Hiểu được cấu trúc điều kiện `if`, `else if`, `else` trong JavaScript

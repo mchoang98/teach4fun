@@ -1,4 +1,4 @@
-# Bai03_Ham
+# Bài 03 - Hàm
 
 ## Mục tiêu bài học
 - Hiểu khái niệm và lợi ích của việc sử dụng hàm

@@ -1,8 +1,4 @@
-﻿Dưới đây là nội dung bài giảng hoàn chỉnh cho **Bài 09 – Làm việc với bất đồng bộ (async) và Fetch API trong JavaScript**, sẵn sàng để anh dùng giảng dạy hoặc xuất ra file `.md`:
-
----
-
-# Bai09\_Async\_Fetch
+﻿# Bài 09 Async/Fetch
 
 ## Mục tiêu bài học
 

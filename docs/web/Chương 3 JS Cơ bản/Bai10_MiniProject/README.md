@@ -1,4 +1,4 @@
-﻿# Bai10\_MiniProject
+﻿# Bài 10 - Mini Project
 
 ## Mục tiêu bài học
 

@@ -1,8 +1,4 @@
-﻿Dưới đây là nội dung bài giảng chi tiết cho **Bài 08 – Làm việc với Form và DOM trong JavaScript**:
-
----
-
-# Bai08\_Form\_DOM
+﻿# Bài 08 - Dom
 
 ## Mục tiêu bài học
 

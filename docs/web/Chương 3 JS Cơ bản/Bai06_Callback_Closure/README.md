@@ -1,4 +1,4 @@
-﻿# Bai06\_FunctionCallback
+﻿# Bài 06 - Callback
 
 ## Mục tiêu bài học
 

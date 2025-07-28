@@ -1,4 +1,4 @@
-﻿# Bai01_Bien_KieuDuLieu
+﻿# Bài 01: Biến và Kiểu dữ liệu 
 
 ## Mục tiêu bài học
 - Hiểu được các cách khai báo biến trong JavaScript (`var`, `let`, `const`)
