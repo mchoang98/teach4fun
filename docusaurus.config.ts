@@ -68,6 +68,12 @@ const config: Config = {
           label: "Web",
         },
         {
+          type: "docSidebar",
+          sidebarId: "sqlSidebar",
+          position: "left",
+          label: "SQL"
+        },
+        {
           to: "/blog",
           label: "Blog",
           position: "left",
