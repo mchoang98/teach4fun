@@ -1,4 +1,4 @@
-# TƯƠNG TÁC GIỮA CÁC ĐỐI TƯỢNG TRONG PYTHON (OBJECT INTERACTION)
+# Tương tác giữa các Object (Object Interaction)
 
 ## 1. Định nghĩa
 
