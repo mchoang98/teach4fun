@@ -1,7 +1,3 @@
-Dưới đây là phiên bản **viết lại** bài giảng về **Tương tác giữa các đối tượng trong Python**, với phần **bổ sung các loại mối quan hệ (association, aggregation, composition, dependency)** theo đúng **thuật ngữ kỹ thuật** trong thiết kế hướng đối tượng:
-
----
-
 # TƯƠNG TÁC GIỮA CÁC ĐỐI TƯỢNG TRONG PYTHON (OBJECT INTERACTION)
 
 ## 1. Định nghĩa
