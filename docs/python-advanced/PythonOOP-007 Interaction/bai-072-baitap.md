@@ -81,45 +81,80 @@ Cảm ơn quý khách!
 
 
 ---
+# BÀI TẬP 2: Quản lý nhân viên và phân ca làm việc
 
-## **BÀI TẬP 2: Quản lý nhân viên và phân ca làm việc**
-
-### **Mục tiêu**
-
-* Tập trung vào quan hệ **1-n** giữa `Store` và `Employee`
-* Tương tác giữa `Manager`, `Employee`, `Shift`
-* Áp dụng `composition` và `method delegation`
-
----
-
-### **Yêu cầu chức năng**
-
-Thiết kế các class:
-
-#### **1. `Employee`**
-
-* `name`: tên nhân viên
-* `role`: vị trí (thu ngân, kho, bảo vệ...)
-* `assign_shift(shift)`: gán ca làm cho nhân viên
-
-#### **2. `Shift`**
-
-* `day`: thứ/ngày làm việc
-* `time`: ca sáng/chiều/tối
-
-#### **3. `Store`**
-
-* `name`: tên cửa hàng
-* `employees`: danh sách nhân viên
-* `assign_employee(employee, shift)`: gán ca cho nhân viên
-
-#### **4. (Tùy chọn)** `Manager` có thể là subclass của `Employee` và có quyền gán ca cho nhân viên khác
+## Mục tiêu
+- Rèn luyện kỹ năng thiết kế hệ thống hướng đối tượng có quan hệ một-nhiều.
+- Áp dụng composition để thể hiện quan hệ giữa các class.
+- Biết cách ủy quyền hành vi giữa các class (method delegation).
+- Hiểu và áp dụng kế thừa để tạo ra subclass có quyền nâng cao.
 
 ---
 
-### **Output console mong muốn**
+## Yêu cầu lập trình
 
-```plaintext
+### 1. Thiết kế các class sau:
+
+#### Class `Shift`
+- Thuộc tính:
+  - `day` (kiểu chuỗi): Thứ hoặc ngày làm việc. Ví dụ: `"Thứ 2"`, `"Thứ 3"`.
+  - `time` (kiểu chuỗi): Ca làm. Ví dụ: `"Sáng"`, `"Chiều"`, `"Tối"`.
+- Phương thức:
+  - `__init__(self, day, time)`: Khởi tạo đối tượng `Shift`.
+
+#### Class `Employee`
+- Thuộc tính:
+  - `name` (kiểu chuỗi): Tên nhân viên.
+  - `role` (kiểu chuỗi): Vị trí công việc. Ví dụ: `"Thu ngân"`, `"Kho"`, `"Bảo vệ"`.
+  - `shifts` (danh sách các đối tượng `Shift`): Danh sách ca làm đã được gán.
+- Phương thức:
+  - `__init__(self, name, role)`: Khởi tạo đối tượng nhân viên.
+  - `assign_shift(self, shift)`: Gán một ca làm cho nhân viên.
+
+#### Class `Store`
+- Thuộc tính:
+  - `name` (kiểu chuỗi): Tên cửa hàng.
+  - `employees` (danh sách các đối tượng `Employee`): Danh sách nhân viên.
+- Phương thức:
+  - `__init__(self, name)`: Khởi tạo cửa hàng.
+  - `add_employee(self, employee)`: Thêm một nhân viên vào cửa hàng.
+  - `assign_employee(self, employee, shift)`: Gán ca làm cho nhân viên.
+
+---
+
+### 2. (Tuỳ chọn nâng cao) Class `Manager`
+- Kế thừa từ `Employee`.
+- Thêm phương thức:
+  - `assign_shift_to(self, employee, shift)`: Gán ca làm cho nhân viên khác.
+
+---
+
+## Yêu cầu sử dụng
+
+Sau khi hoàn thành các class, thực hiện các bước sau:
+
+1. Tạo một cửa hàng tên `"Cửa hàng ABC"`.
+2. Tạo 3 nhân viên:
+   - Huy, vị trí `"Thu ngân"`
+   - Lan, vị trí `"Kho"`
+   - Minh, vị trí `"Bảo vệ"`
+3. Thêm 3 nhân viên này vào cửa hàng.
+4. Tạo các ca làm:
+   - `shift1`: `"Thứ 2"` - `"Sáng"`
+   - `shift2`: `"Thứ 3"` - `"Chiều"`
+   - `shift3`: `"Thứ 2"` - `"Tối"`
+5. Gán ca làm:
+   - Gán Huy vào `shift1`
+   - Gán Lan vào `shift2`
+   - Gán Minh vào `shift3`
+
+---
+
+## Yêu cầu in ra kết quả
+
+In ra thông tin theo đúng định dạng sau:
+
+```
 === CỬA HÀNG ABC ===
 
 Danh sách nhân viên:
@@ -137,4 +172,8 @@ Huy: Thứ 2 - Sáng
 Lan: Thứ 3 - Chiều
 Minh: Thứ 2 - Tối
 ```
+
+Gợi ý:
+- Có thể viết thêm phương thức `get_schedule()` hoặc `__str__()` trong class `Employee` để dễ in lịch làm việc.
+- Nên nhóm phần in này thành một hàm riêng như `print_schedule(store)` để rõ ràng và dễ kiểm thử.
 
