@@ -27,6 +27,15 @@ const config: Config = {
     },
   },
 
+  headTags: [
+    {
+      tagName: "meta",
+      attributes: {
+        name: "google-adsense-account",
+        content: "ca-pub-5515746941686673",
+      },
+    },
+  ],
   scripts: [
     {
       src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5515746941686673",
@@ -79,7 +88,7 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "sqlSidebar",
           position: "left",
-          label: "SQL"
+          label: "SQL",
         },
         {
           to: "/blog",
@@ -91,7 +100,6 @@ const config: Config = {
           label: "GitHub",
           position: "right",
         },
-       
       ],
     },
     footer: {
