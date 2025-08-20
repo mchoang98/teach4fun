@@ -236,9 +236,10 @@ Nhập vào một danh sách có 3 phần tử.
 **Bài 7. Mapping Pattern (dict)**
 Cho dict lưu thông tin sinh viên: `{"name": "An", "age": 20}`.
 
-* Nếu có cả name và age → in “Sinh viên <name>, <age> tuổi”.
-* Nếu chỉ có name → in “Sinh viên <name>”.
-* Ngược lại → in “Không rõ thông tin”.
+* Nếu có cả name và age → in `Sinh viên {name}, {age} tuổi`.
+* Nếu chỉ có name → in `Sinh viên {name}`.
+* Ngược lại → in `Không rõ thông tin`.
+
 
 ---
 
