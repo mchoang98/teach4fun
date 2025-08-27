@@ -74,7 +74,3 @@
 
 ---
 
-👉 Các bài này đủ nhẹ cho học sinh:
-
-* Có bài dùng **built-in modules** (`random`, `math`, `statistics`, `string`).
-* Có bài rèn luyện **tự tạo module** (`student.py`, `library.py`, `converter.py`, `password.py`).
