@@ -1,117 +1,168 @@
-## Bài tập: Thiết kế lớp `MatHang` để quản lý sản phẩm trong chợ
+# Bài tập: Thiết kế lớp `MatHang` & Giao diện Quản Lý Bằng `guizero`
 
-### Mô tả:
-
-Bạn cần viết một lớp Python tên là `MatHang` để quản lý thông tin của một mặt hàng trong chợ hoặc siêu thị. Lớp này cần đảm bảo việc **đóng gói dữ liệu** đúng cách, bảo vệ thông tin nội bộ khỏi việc truy cập sai mục đích, đồng thời cung cấp các phương thức dễ sử dụng để quản lý.
-
-### Yêu cầu:
-
-Viết lớp `MatHang` với các thuộc tính và phương thức sau:
-
-* Các thuộc tính:
-
-  * `ten`: tên mặt hàng (public)
-  * `_so_luong`: số lượng hàng trong kho (protected)
-  * `__gia`: giá bán mỗi đơn vị hàng (private)
-  * `__ma_vach`: mã vạch sản phẩm (private)
-
-* Viết phương thức `hien_thi_thong_tin()` để in ra tên mặt hàng.
-
-* Viết phương thức `hien_thi_so_luong()` để in ra số lượng hiện có (sử dụng `_so_luong`).
-
-* Viết các phương thức:
-
-  * `lay_gia()` để lấy giá bán
-  * `cap_nhat_gia(gia_moi)` để cập nhật giá nếu giá mới lớn hơn 0. Nếu không hợp lệ, in ra "Giá không hợp lệ!"
-
-* Viết phương thức `kiem_tra_kho()` trả về chuỗi:
-
-  * `>= 100`: "Hàng nhiều"
-  * `30 - 99`: "Hàng ổn định"
-  * `< 30`: "Sắp hết hàng"
-
-* Tạo một đối tượng và thử in `hang.__gia` từ bên ngoài lớp (dự đoán lỗi).
-  Sau đó in `hang._MatHang__gia` để truy cập bằng name mangling.
-
-* Viết phương thức `cap_nhat_ma_vach(ma_moi)` để cập nhật mã vạch nếu độ dài chuỗi là 8 hoặc 12 ký tự.
-
-* Viết phương thức `lay_ma_vach()` để trả về mã vạch.
-
-* Ghi đè phương thức `__str__()` để trả về thông tin như sau:
-  `"Mặt hàng: Tên = ..., Số lượng = ..., Giá = ..."`
-
-* Viết phương thức `ban(so_luong_ban)`:
-
-  * Nếu `so_luong_ban <= _so_luong`: trừ số lượng và in ra "Đã bán thành công!"
-  * Nếu không đủ hàng: in "Không đủ hàng để bán!"
-
-
-## Bài tập 2: Tạo Giao Diện Quản Lý Mặt Hàng Bằng `guizero`
-
-### Mô tả:
-
-Sử dụng lớp `MatHang` đã viết ở Bài 1, hãy thiết kế một **ứng dụng giao diện đơn giản** bằng thư viện `guizero` cho phép người dùng xem thông tin mặt hàng, cập nhật giá, bán hàng, và kiểm tra kho.
+## 🎯 Mục tiêu
+- Ôn lại kiến thức **Encapsulation** (đóng gói dữ liệu).  
+- Thực hành viết **class trong Python** với public / protected / private.  
+- Ứng dụng lớp vào GUI bằng thư viện **guizero**.  
 
 ---
 
-### Yêu cầu cụ thể:
+## 1️⃣ Thiết kế lớp `MatHang`
 
-* Tạo lớp `MatHang` giống như trong Bài tập 1 (tên, số lượng, giá, mã vạch, v.v...).
+### Thuộc tính
 
-* Dùng thư viện `guizero` để tạo một cửa sổ chính (`App`) có các phần sau:
+| Tên thuộc tính | Kiểu truy cập | Ý nghĩa |
+| -------------- | ------------- | ------- |
+| `ten`          | Public        | Tên mặt hàng |
+| `_so_luong`    | Protected     | Số lượng trong kho |
+| `__gia`        | Private       | Giá bán mỗi đơn vị |
+| `__ma_vach`    | Private       | Mã vạch sản phẩm |
 
----
-
-#### 1. **Hiển thị thông tin ban đầu**
-
-* Ô hiển thị tên mặt hàng (Label).
-* Ô hiển thị số lượng hàng còn (Label).
-* Ô hiển thị giá hiện tại (Label).
-* Ô hiển thị trạng thái kho (`Hàng nhiều`, `Hàng ổn định`, `Sắp hết hàng`).
-
-#### 2. **Chức năng bán hàng**
-
-* Ô nhập số lượng cần bán (`TextBox`).
-* Nút "Bán hàng".
-* Khi nhấn, cập nhật lại số lượng và hiển thị thông báo kết quả bán (Label).
-
-#### 3. **Chức năng cập nhật giá**
-
-* Ô nhập giá mới (`TextBox`).
-* Nút "Cập nhật giá".
-* Hiển thị thông báo nếu cập nhật thành công hoặc lỗi.
-
-#### 4. **Chức năng cập nhật mã vạch**
-
-* Ô nhập mã vạch mới.
-* Nút "Cập nhật mã vạch".
-* Hiển thị thông báo nếu cập nhật thành công.
-
-#### 5. **Nút kiểm tra kho**
-
-* Nút “Kiểm tra kho”.
-* Hiển thị trạng thái kho hiện tại (dựa trên số lượng hàng).
+```mermaid
+classDiagram
+    class MatHang {
+        +ten
+        #_so_luong
+        -__gia
+        -__ma_vach
+        +hien_thi_thong_tin()
+        +hien_thi_so_luong()
+        +lay_gia()
+        +cap_nhat_gia(gia_moi)
+        +kiem_tra_kho()
+        +cap_nhat_ma_vach(ma_moi)
+        +lay_ma_vach()
+        +ban(so_luong_ban)
+        +__str__()
+    }
+````
 
 ---
 
-### Gợi ý về giao diện:
+### Phương thức chính
+
+* `hien_thi_thong_tin()` → in tên mặt hàng.
+* `hien_thi_so_luong()` → in số lượng.
+* `lay_gia()` → lấy giá bán.
+* `cap_nhat_gia(gia_moi)` → cập nhật giá (nếu hợp lệ).
+* `kiem_tra_kho()` → trả về `"Hàng nhiều"`, `"Hàng ổn định"`, `"Sắp hết hàng"`.
+* `ban(so_luong_ban)` → xử lý bán hàng.
+* `cap_nhat_ma_vach(ma_moi)` → cập nhật mã vạch (chỉ 8 hoặc 12 ký tự).
+* `__str__()` → hiển thị thông tin mặt hàng.
+
+---
+
+### Luồng xử lý: Cập nhật giá
+
+```mermaid
+flowchart TD
+    A["Nhập giá mới"] --> B{"Giá > 0?"}
+    B -- Không --> C["In: 'Giá không hợp lệ!'"]
+    B -- Có --> D["Cập nhật __gia"]
+    D --> E["Thông báo thành công"]
+```
+
+---
+
+### Luồng xử lý: Bán hàng
+
+```mermaid
+flowchart TD
+    A["Người dùng nhập số lượng bán"] --> B{"Số lượng bán <= _so_luong?"}
+    B -- Không --> C["In: 'Không đủ hàng để bán!'"]
+    B -- Có --> D["_so_luong giảm đi"]
+    D --> E["In: 'Đã bán thành công!'"]
+```
+
+---
+
+### Minh họa Encapsulation trong lớp
+
+```mermaid
+flowchart LR
+    subgraph Class[MatHang]
+        P["Public: ten"]
+        R["_Protected: _so_luong"]
+        V["__Private: __gia, __ma_vach"]
+    end
+
+    subgraph Outside[Bên ngoài lớp]
+        O["Code người dùng"]
+    end
+
+    O --> P
+    O --> R["Có thể truy cập nhưng không khuyến khích"]
+    O -.-> V["Không trực tiếp (Name Mangling cần thiết)"]
+```
+
+---
+
+## 2️⃣ Bài tập GUI với `guizero`
+
+Ứng dụng GUI sẽ cho phép:
+
+* Xem thông tin mặt hàng.
+* Bán hàng.
+* Cập nhật giá.
+* Cập nhật mã vạch.
+* Kiểm tra kho.
+
+---
+
+### Sơ đồ tổng quan giao diện
+
+```mermaid
+flowchart TB
+    A["Cửa sổ chính (App)"]
+    A --> B["Hiển thị thông tin (Tên, Số lượng, Giá, Trạng thái)"]
+    A --> C["Bán hàng: Nhập số lượng + Nút 'Bán hàng'"]
+    A --> D["Cập nhật giá: Nhập giá mới + Nút 'Cập nhật giá'"]
+    A --> E["Cập nhật mã vạch: Nhập mã mới + Nút 'Cập nhật mã vạch'"]
+    A --> F["Nút 'Kiểm tra kho' → Hiển thị trạng thái"]
+```
+
+---
+
+### Gợi ý code khung GUI
 
 ```python
 from guizero import App, Text, TextBox, PushButton
 
-# Tạo app
+# Khởi tạo app
 app = App("Quản Lý Mặt Hàng", width=400, height=400)
 
-# Các widget ở đây...
+# Các widget hiển thị thông tin
+Text(app, "Tên mặt hàng: Gạo thơm")
+Text(app, "Số lượng: 120")
+Text(app, "Giá: 15000")
+Text(app, "Trạng thái kho: Hàng nhiều")
+
+# TextBox nhập liệu + nút
+Text(app, "Nhập số lượng bán:")
+so_luong_ban = TextBox(app)
+PushButton(app, text="Bán hàng", command=lambda: print("Xử lý bán"))
+
+# Cập nhật giá
+Text(app, "Nhập giá mới:")
+gia_moi = TextBox(app)
+PushButton(app, text="Cập nhật giá", command=lambda: print("Cập nhật giá"))
+
+# Cập nhật mã vạch
+Text(app, "Nhập mã vạch mới:")
+ma_vach = TextBox(app)
+PushButton(app, text="Cập nhật mã vạch", command=lambda: print("Cập nhật mã"))
+
+# Kiểm tra kho
+PushButton(app, text="Kiểm tra kho", command=lambda: print("Kiểm tra kho"))
 
 app.display()
 ```
 
 ---
 
-### Yêu cầu phụ:
+## 📌 Tổng kết
 
-* Không cho phép nhập số âm cho số lượng bán hoặc giá.
-* Sau mỗi thao tác, cập nhật lại thông tin hiển thị (số lượng, giá, trạng thái kho).
-* Tên các nút và nhãn đều viết **bằng tiếng Việt**.
+* Bài tập giúp luyện cả **Encapsulation (public / protected / private)**.
+* Biết cách dùng **name mangling** để truy cập private khi cần.
+* Thực hành xây dựng **ứng dụng GUI** để quản lý mặt hàng trong thực tế.
 

@@ -1,13 +1,13 @@
+# Bài 022 – Encapsulation trong Python OOP
 
-# Bài 022 – Quy tắc truy cập thành viên trong lớp (Encapsulation trong Python)
+**Encapsulation** (đóng gói) là nguyên lý quan trọng trong OOP, nhằm **ẩn giấu thông tin bên trong lớp** và chỉ cho phép truy cập những gì cần thiết.  
+👉 Giúp **bảo vệ trạng thái nội bộ** và tránh thay đổi không mong muốn.
 
-**Encapsulation** (đóng gói) là một nguyên lý quan trọng trong lập trình hướng đối tượng (OOP), nhằm **ẩn giấu thông tin bên trong lớp**, chỉ cho phép truy cập những gì cần thiết. Điều này giúp bảo vệ trạng thái nội bộ của đối tượng và tránh các thay đổi không mong muốn từ bên ngoài.
+---
 
 ## 1. Thành viên công khai (Public Members)
 
-Trong Python, tất cả các thuộc tính (biến) và phương thức (hàm) trong một lớp mặc định là **công khai**, nghĩa là có thể truy cập từ mọi nơi.
-
-**Ví dụ:**
+Mặc định, tất cả biến & phương thức trong lớp là **public**, có thể truy cập ở mọi nơi.
 
 ```python
 class Test:
@@ -22,23 +22,33 @@ t = Test(10, 20)
 print(t.x)
 print(t.y)
 t.fun()
+````
+
+✅ Truy cập được trực tiếp.
+
+```mermaid
+flowchart LR
+    subgraph Class[Test Class]
+        A["x (public)"]
+        B["y (public)"]
+        C["fun() (public)"]
+    end
+
+    subgraph Outside[Code bên ngoài]
+        O["t.x, t.y, t.fun()"]
+    end
+
+    O --> A
+    O --> B
+    O --> C
 ```
 
-**Kết quả:**
-
-```
-10
-20
-Hi
-```
-
-`x`, `y` và `fun` là thành viên công khai nên có thể truy cập trực tiếp thông qua đối tượng `t`.
+---
 
 ## 2. Thành viên được bảo vệ (Protected Members)
 
-Nếu tên biến hoặc phương thức được đặt dấu gạch dưới đơn (`_`) ở đầu, nó được coi là **bảo vệ**. Theo quy ước, những thành viên này chỉ nên được sử dụng bên trong lớp hoặc các lớp kế thừa.
-
-**Ví dụ:**
+Dùng dấu gạch dưới đơn `_`.
+👉 Theo quy ước, chỉ nên dùng trong **class** và **subclass**, nhưng vẫn **truy cập được từ bên ngoài**.
 
 ```python
 class Test:
@@ -50,26 +60,26 @@ class Test:
         print("Hi")
 
 t = Test(10, 20)
-print(t._x)
-print(t.y)
-t._fun()
+print(t._x)    # vẫn truy cập được
+t._fun()       # vẫn gọi được
 ```
 
-**Kết quả:**
+```mermaid
+flowchart TD
+    A["_x (protected)"]
+    B["_fun() (protected)"]
+    C["Có thể truy cập từ ngoài, nhưng KHÔNG khuyến khích"]
 
-```
-10
-20
-Hi
+    A --> C
+    B --> C
 ```
 
-Python **không ngăn chặn** việc truy cập thành viên `_x` và `_fun` từ bên ngoài, nhưng quy ước khuyên rằng bạn **không nên làm như vậy**, trừ khi thật sự cần thiết.
+---
 
 ## 3. Thành viên riêng tư (Private Members)
 
-Khi đặt **hai dấu gạch dưới (`__`) ở đầu tên**, Python sẽ coi đó là thành viên riêng tư. Những thành viên này không thể truy cập trực tiếp từ bên ngoài lớp, nhờ cơ chế **name mangling** (biến đổi tên).
-
-**Ví dụ:**
+Dùng **2 dấu gạch dưới `__`**.
+Python sẽ áp dụng **name mangling** → đổi tên thành `_ClassName__attr`.
 
 ```python
 class Test:
@@ -81,25 +91,35 @@ class Test:
         print("Hi")
 
 t = Test(10, 20)
-print(t.__x)     # Lỗi
-print(t.y)
-t.__fun()        # Lỗi
+print(t.__x)   # ❌ Lỗi
+t.__fun()      # ❌ Lỗi
+
+# ✅ Truy cập gián tiếp
+print(t._Test__x)
+t._Test__fun()
 ```
 
-Kết quả sẽ gây lỗi khi truy cập `__x` và `__fun` từ bên ngoài.
+```mermaid
+flowchart TD
+    subgraph Private
+        A["__x (private)"]
+        B["__fun() (private)"]
+    end
 
-Tuy nhiên, Python vẫn **cho phép truy cập gián tiếp** thông qua cú pháp đặc biệt:
+    subgraph Outside
+        X["Truy cập trực tiếp: ❌"]
+        Y["Truy cập qua name mangling: ✅ t._Test__x"]
+    end
 
-```python
-print(t._Test__x)    # Truy cập được
-t._Test__fun()       # Truy cập được
+    A -.-> X
+    B -.-> X
+    A --> Y
+    B --> Y
 ```
 
-## 4. Truy cập thành viên riêng tư bên trong lớp
+---
 
-Các thành viên `__private` có thể được truy cập **bên trong chính lớp đó**, không gặp vấn đề gì.
-
-**Ví dụ:**
+## 4. Truy cập private bên trong lớp
 
 ```python
 class Test:
@@ -112,23 +132,17 @@ class Test:
         print(self.__y)
 
 t = Test(5)
-t.printTest()
+t.printTest()   # ✅ truy cập được __y
 ```
 
-**Kết quả:**
+👉 Private chỉ bị hạn chế **bên ngoài**, còn trong class thì vẫn OK.
 
-```
-5
-10
-```
+---
 
-## 5. Trường hợp đặc biệt: Tên có dấu gạch dưới kép ở đầu và cuối
+## 5. Trường hợp đặc biệt: `__x__`
 
-Tên phương thức hoặc thuộc tính có **hai dấu gạch dưới ở cả đầu và cuối** như `__init__`, `__str__`, `__add__` được gọi là **phương thức đặc biệt** (special methods hoặc dunder methods).
-
-Chúng **không bị biến đổi tên**, và được Python định nghĩa sẵn để thực hiện các chức năng đặc biệt.
-
-**Ví dụ:**
+Tên có 2 dấu gạch dưới ở **đầu và cuối** → **special methods** (dunder methods).
+👉 Không bị đổi tên, Python định nghĩa sẵn.
 
 ```python
 class Test:
@@ -140,30 +154,50 @@ class Test:
         print("Hi")
 
 t = Test(10)
-print(t.__x)        # Lỗi
-print(t.__y__)      # Truy cập được
-t.__fun__()         # Truy cập được
+print(t.__y__)     # ✅ truy cập được
+t.__fun__()        # ✅ gọi được
 ```
 
-Ở đây:
+```mermaid
+flowchart LR
+    A["__x (private) → ❌ ngoài class"]
+    B["__y__ (special) → ✅ ngoài class"]
+    C["__fun__() (special) → ✅ ngoài class"]
 
-* `__x` là thành viên riêng tư → không truy cập được trực tiếp.
-* `__y__` và `__fun__` là thành viên đặc biệt → vẫn truy cập bình thường.
-
----
-
-## Tóm tắt các mức độ truy cập
-
-| Cách đặt tên | Mức truy cập              | Truy cập từ bên ngoài | Có bị đổi tên (mangling)? |
-| ------------ | ------------------------- | --------------------- | ------------------------- |
-| `x`          | Public (công khai)        | Có                    | Không                     |
-| `_x`         | Protected (bảo vệ)        | Có (nên hạn chế)      | Không                     |
-| `__x`        | Private (riêng tư)        | Không trực tiếp       | Có                        |
-| `__x__`      | Special method (đặc biệt) | Có                    | Không                     |
+    A -.->|"Name mangling"| D["_Test__x"]
+    B --> Outside
+    C --> Outside
+```
 
 ---
 
-## Kết luận
+## 📊 Tóm tắt mức độ truy cập
 
-Encapsulation giúp bạn kiểm soát tốt hơn quyền truy cập đến các thành phần bên trong lớp, từ đó đảm bảo tính an toàn và rõ ràng trong thiết kế phần mềm. Python không ép buộc quá chặt, nhưng tuân theo quy ước truy cập vẫn là điều nên làm để mã nguồn dễ đọc và dễ bảo trì.
+| Kiểu đặt tên | Mức truy cập       | Truy cập từ ngoài | Bị đổi tên? |
+| ------------ | ------------------ | ----------------- | ----------- |
+| `x`          | Public (công khai) | ✅                 | ❌           |
+| `_x`         | Protected (bảo vệ) | ✅ (nên hạn chế)   | ❌           |
+| `__x`        | Private (riêng tư) | ❌ trực tiếp       | ✅           |
+| `__x__`      | Special (đặc biệt) | ✅                 | ❌           |
+
+```mermaid
+flowchart TB
+    P["Public: x"] -->|Ai cũng xài được| OUT1["✅"]
+    PR["Protected: _x"] -->|Truy cập được nhưng không khuyến khích| OUT2["⚠️"]
+    PV["Private: __x"] -->|Không trực tiếp| OUT3["❌"]
+    PV -->|Name mangling| OUT4["_Class__x ✅"]
+    SP["Special: __x__"] -->|Luôn truy cập được| OUT5["✅"]
+```
+
+---
+
+## 🎯 Kết luận
+
+Encapsulation giúp:
+
+* Kiểm soát quyền truy cập.
+* Bảo vệ dữ liệu.
+* Làm code rõ ràng, dễ bảo trì.
+
+👉 Python không ép buộc quá chặt, nhưng tuân theo quy ước là best practice.
 

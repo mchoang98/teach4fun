@@ -1,18 +1,22 @@
-#  Bài 021 - Class Attribute vs Instance Attribute
+# Bài 021 - Class Attribute vs Instance Attribute
 
-###  **Class Attribute** (thuộc tính lớp)
+## 1. Class Attribute (thuộc tính lớp)
 
 * Dùng chung cho **mọi đối tượng**.
 * Khai báo **ngoài `__init__`**.
 * Chỉ có **một bản sao duy nhất** trong bộ nhớ.
 
-###  **Instance Attribute** (thuộc tính đối tượng)
+---
+
+## 2. Instance Attribute (thuộc tính đối tượng)
 
 * **Riêng biệt cho từng đối tượng**.
 * Khai báo trong `__init__` hoặc phương thức.
 * Mỗi object giữ một **bản sao riêng**.
 
-###  Ví dụ minh họa:
+---
+
+## 3. Ví dụ minh họa
 
 ```python
 class Employee:
@@ -26,6 +30,19 @@ e2 = Employee(102)
 
 print(e1.company_name)   # 👉 TechCorp
 print(e2.emp_id)         # 👉 102
+````
+
+### 🔹 Sơ đồ minh họa
+
+```mermaid
+classDiagram
+    class Employee {
+        +company_name : string = "TechCorp" <<class>>
+        +emp_id : int <<instance>>
+    }
+
+    Employee <|-- e1 : Instance
+    Employee <|-- e2 : Instance
 ```
 
 ---
@@ -41,9 +58,15 @@ print(e2.company_name)   # 👉 TechGlobal
 
 → Tất cả đối tượng đều thấy thay đổi vì cùng trỏ đến `company_name` trong lớp.
 
+```mermaid
+flowchart TD
+    A["Employee.company_name = 'TechGlobal'"] --> B["e1.company_name = TechGlobal"]
+    A --> C["e2.company_name = TechGlobal"]
+```
+
 ---
 
-##  5. Thêm thuộc tính sau khi tạo
+## 5. Thêm thuộc tính sau khi tạo
 
 ```python
 e1.ten = "An"
@@ -57,9 +80,27 @@ print(e1.tru_so)     # 👉 Hà Nội
 
 → Python cho phép thêm thuộc tính vào **đối tượng hoặc lớp bất kỳ lúc nào**.
 
+```mermaid
+flowchart LR
+    subgraph Employee Class
+        A["company_name"]
+        B["tru_so = 'Hà Nội'"]
+    end
+
+    subgraph e1 Instance
+        C["emp_id=101"]
+        D["ten = 'An'"]
+    end
+
+    subgraph e2 Instance
+        E["emp_id=102"]
+        F["chuc_vu = 'Giám đốc'"]
+    end
+```
+
 ---
 
-##  6. Khi tên thuộc tính trùng nhau
+## 6. Khi tên thuộc tính trùng nhau
 
 ```python
 class Employee:
@@ -74,9 +115,16 @@ print(e.dia_chi)         # 👉 TP.HCM
 
 → Nếu trùng tên, **thuộc tính của đối tượng ưu tiên hơn**.
 
+```mermaid
+flowchart TD
+    A["Class Attribute: dia_chi = 'Hà Nội'"]
+    B["Instance Attribute e.dia_chi = 'TP.HCM'"]
+    B -->|"Ưu tiên khi gọi e.dia_chi"| C["Kết quả: TP.HCM"]
+```
+
 ---
 
-##  Tổng kết nhanh
+## 7. Tổng kết nhanh
 
 | Khái niệm          | Đặc điểm chính                              |
 | ------------------ | ------------------------------------------- |
@@ -89,7 +137,7 @@ print(e.dia_chi)         # 👉 TP.HCM
 
 ---
 
-##  Gợi ý áp dụng
+## 8. Gợi ý áp dụng
 
 * Dùng **class attribute** cho thông tin chung: tên công ty, địa chỉ...
 * Dùng **instance attribute** cho thông tin cá nhân: mã nhân viên, tên, chức vụ...

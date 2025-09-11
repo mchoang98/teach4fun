@@ -10,7 +10,11 @@ const config: Config = {
   baseUrl: "/",
   organizationName: "mchoang98", // Your GitHub username/organization
   projectName: "day-cho-vui", // Your GitHub repo for this project
+  themes: ['@docusaurus/theme-mermaid'],  // 👈 Thêm dòng này
 
+  markdown: {
+    mermaid: true, // 👈 Bật hỗ trợ mermaid trong Markdown/MDX
+  },
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
@@ -89,6 +93,12 @@ const config: Config = {
           sidebarId: "sqlSidebar",
           position: "left",
           label: "SQL",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "gitSidebar",
+          position: "left",
+          label: "Git",
         },
         {
           to: "/blog",
