@@ -6,7 +6,7 @@ const config: Config = {
   title: "Dạy cho vui",
   tagline: "Trang web học tập vui nhộn",
   favicon: "img/logo.jpg",
-  url: "https://your-docusaurus-site.example.com",
+  url: "https://teach4fun.web.app/",
   baseUrl: "/",
   organizationName: "mchoang98", // Your GitHub username/organization
   projectName: "day-cho-vui", // Your GitHub repo for this project
