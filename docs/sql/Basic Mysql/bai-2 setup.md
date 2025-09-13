@@ -190,15 +190,6 @@ sequenceDiagram
 
 ### ✅ **. Thực hành**
 
-
-# 📝 Trắc nghiệm MySQL – Cài đặt, CLI & Workbench
-
-Ok, mình viết lại 10 câu hỏi trắc nghiệm theo **dạng Markdown** chuẩn, có xuống dòng rõ ràng, và **highlight đáp án đúng** ✅. Bạn có thể copy nguyên khối này vào file `.md` để luyện tập.
-
----
-
-# 📝 Trắc nghiệm MySQL – Cài đặt, CLI & Workbench
-
 <Quiz
   questions={[
     {
