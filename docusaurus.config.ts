@@ -80,26 +80,21 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "pythonSidebar", // Changed to a specific sidebar for Python
           position: "left",
-          label: "Python",
+          label: "Python A",
         },
         {
           type: "docSidebar",
-          sidebarId: "webSidebar", // Changed to a specific sidebar for Python
+          sidebarId: "guizeroSidebar", // Changed to a specific sidebar for Guizero
           position: "left",
-          label: "Web",
+          label: "Python B",
         },
         {
           type: "docSidebar",
-          sidebarId: "sqlSidebar",
+          sidebarId: "pythonAdvancedSidebar", // Changed to a specific sidebar for Python Advanced
           position: "left",
-          label: "SQL",
+          label: "Python C",
         },
-        {
-          type: "docSidebar",
-          sidebarId: "gitSidebar",
-          position: "left",
-          label: "Git",
-        },
+
         {
           to: "/blog",
           label: "Blog",
