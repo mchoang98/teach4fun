@@ -157,10 +157,10 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  S[Bắt đầu chương trình] --> C[Tạo App()]
-  C --> W[Thêm widget (Text, Button...)]
+  S[Bắt đầu chương trình] --> C[Tạo App]
+  C --> W[Thêm widget Text, Button...]
   W --> E[Cài đặt callback]
-  E --> D[app.display()]
+  E --> D[app.display]
   D --> U[Người dùng tương tác]
   U -->|đóng| X[Kết thúc chương trình]
 ```
