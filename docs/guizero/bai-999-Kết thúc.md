@@ -1,4 +1,4 @@
-# 📚 20 Ý Tưởng Dự Án Tkinter Cho Học Sinh
+# 20 Ý Tưởng Dự Án GUI Cho Học Sinh
 
 
 
