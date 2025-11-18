@@ -98,7 +98,7 @@ app.display()
 
 Tạo ListBox gồm: `"Red", "Green", "Blue"`.
 Khi bấm nút "Hiển thị", hiện thông báo:
-**"Bạn đã chọn: <màu>"**
+**"Bạn đã chọn: màu"**
 
 ---
 
