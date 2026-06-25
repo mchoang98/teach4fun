@@ -1,113 +1,74 @@
+# Bài 3-5: Toán tử bitwise
 
-# Bài 3-5: Toán Tử Bitwise trong Python
+## Mục tiêu
 
-## Mục tiêu bài học
+- Biết bitwise là phép toán trên từng bit nhị phân.
+- Nhận biết các toán tử `&`, `|`, `^`, `~`, `<<`, `>>`.
+- Hiểu một vài ứng dụng cơ bản.
 
-* Hiểu các toán tử bitwise và cách chúng hoạt động trên các số nguyên.
-* Biết cách ứng dụng toán tử bitwise vào các bài toán thực tế.
-* Thành thạo khi sử dụng các toán tử: `&`, `|`, `^`, `~`, `<<`, `>>`.
+## Bitwise là gì?
 
----
-
-## 1. Bitwise là gì?
-
-Bitwise là thao tác trên từng **bit nhị phân** của số nguyên. Python lưu trữ số nguyên dưới dạng nhị phân trong bộ nhớ, nên các phép toán bitwise cho phép ta thao tác trực tiếp trên các bit này.
+Máy tính lưu số nguyên dưới dạng nhị phân gồm các bit `0` và `1`.
 
 Ví dụ:
 
 ```python
-a = 5     # 0101
-b = 3     # 0011
+a = 5  # 0101
+b = 3  # 0011
 ```
 
----
+Toán tử bitwise thao tác trực tiếp trên các bit này.
 
-## 2. Các toán tử bitwise cơ bản
+## Các toán tử chính
 
-| Toán tử | Tên gọi                 | Mô tả                                        | Ví dụ (a = 5, b = 3)                      |     |                |
-| ------- | ----------------------- | -------------------------------------------- | ----------------------------------------- | --- | -------------- |
-| `&`     | AND                     | Bit kết quả là 1 nếu cả hai bit là 1         | `a & b = 1` (0001)                        |     |                |
-| \`      | \`                      | OR                                           | Bit kết quả là 1 nếu ít nhất một bit là 1 | \`a | b = 7\` (0111) |
-| `^`     | XOR                     | Bit kết quả là 1 nếu hai bit khác nhau       | `a ^ b = 6` (0110)                        |     |                |
-| `~`     | NOT                     | Đảo bit                                      | `~a = -6`                                 |     |                |
-| `<<`    | Dịch trái (left shift)  | Dịch các bit sang trái (nhân 2 mỗi lần dịch) | `a << 1 = 10`                             |     |                |
-| `>>`    | Dịch phải (right shift) | Dịch các bit sang phải (chia 2 mỗi lần dịch) | `a >> 1 = 2`                              |     |                |
+| Toán tử | Tên | Ví dụ với `a = 5`, `b = 3` | Kết quả |
+| --- | --- | --- | --- |
+| `&` | AND | `a & b` | `1` |
+| `|` | OR | `a | b` | `7` |
+| `^` | XOR | `a ^ b` | `6` |
+| `~` | NOT | `~a` | `-6` |
+| `<<` | Dịch trái | `a << 1` | `10` |
+| `>>` | Dịch phải | `a >> 1` | `2` |
 
----
-
-## 3. Giải thích ví dụ cụ thể
+## Ví dụ
 
 ```python
-a = 5        # 0101
-b = 3        # 0011
+a = 5
+b = 3
 
-print(a & b) # 0001 => 1
-print(a | b) # 0111 => 7
-print(a ^ b) # 0110 => 6
-print(~a)    # -(a+1) => -6
-print(a << 1)# 1010 => 10
-print(a >> 1)# 0010 => 2
+print(a & b)   # 1
+print(a | b)   # 7
+print(a ^ b)   # 6
+print(~a)      # -6
+print(a << 1)  # 10
+print(a >> 1)  # 2
 ```
 
-Lưu ý: Phép `~a` thực hiện đảo tất cả các bit của `a`, và theo hệ thống biểu diễn số âm (dạng bù 2), ta có `~a = -a - 1`.
+## Dịch bit
 
----
-
-## 4. Ứng dụng thực tế
-
-### Kiểm tra bit thứ n có bật không
+- `x << 1` thường tương đương `x * 2`.
+- `x >> 1` thường tương đương `x // 2`.
 
 ```python
-def is_nth_bit_set(number, n):
-    return (number & (1 << n)) != 0
-
-print(is_nth_bit_set(5, 0)) # True
-print(is_nth_bit_set(5, 2)) # True
-print(is_nth_bit_set(5, 1)) # False
+print(6 << 1)  # 12
+print(6 >> 1)  # 3
 ```
 
-### Bật hoặc tắt một bit
+## Kiểm tra một bit
 
 ```python
-def set_bit(number, n):
-    return number | (1 << n)
+number = 5  # 0101
+n = 2
 
-def clear_bit(number, n):
-    return number & ~(1 << n)
-
-print(set_bit(5, 1))   # 7 (bật bit 1)
-print(clear_bit(5, 0)) # 4 (tắt bit 0)
+print(number & (1 << n) != 0)  # True
 ```
 
----
+## Lỗi cần tránh
 
-## 5. Bài tập luyện tập
+- `^` trong Python là XOR, không phải lũy thừa.
+- Bitwise thường dùng với số nguyên.
+- Với người mới học, chỉ cần nắm ý nghĩa cơ bản trước.
 
-### Bài tập lý thuyết
+## Ghi nhớ
 
-1. Dự đoán kết quả và giải thích:
-
-   ```python
-   a = 10
-   b = 4
-   print(a & b)
-   print(a | b)
-   print(a ^ b)
-   print(~b)
-   ```
-
-2. Viết công thức Python để:
-
-   * Bật bit thứ `n` của một số `x`
-   * Tắt bit thứ `n` của `x`
-   * Kiểm tra bit thứ `n` của `x` có đang bật không
-
-### Bài tập lập trình
-
-1. Viết hàm `count_set_bits(n)` trả về số lượng bit `1` trong biểu diễn nhị phân của `n`.
-
-2. Viết chương trình chuyển một số nguyên thành chuỗi nhị phân 8-bit (ví dụ: `5` thành `'00000101'`).
-
-3. Viết chương trình kiểm tra xem hai số nguyên có cùng số lượng bit `1` không.
-
----
+Bitwise ít dùng hơn toán tử số học và so sánh, nhưng rất hữu ích khi làm việc với nhị phân, cờ trạng thái hoặc tối ưu xử lý số.

@@ -1,99 +1,88 @@
 # Bài 3-2: Toán tử so sánh
 
-Toán tử so sánh trong Python dùng để so sánh hai giá trị. Kết quả của các phép so sánh này là `True` (đúng) hoặc `False` (sai). Các toán tử so sánh phổ biến bao gồm:
+## Mục tiêu
+
+- Biết toán tử so sánh dùng để kiểm tra quan hệ giữa hai giá trị.
+- Hiểu kết quả so sánh luôn là `True` hoặc `False`.
+- Phân biệt `=` và `==`.
 
 ## Các toán tử so sánh
 
-1. **`==` (Bằng nhau)**  
-   So sánh hai giá trị xem chúng có bằng nhau không.
+| Toán tử | Ý nghĩa | Ví dụ | Kết quả |
+| --- | --- | --- | --- |
+| `==` | Bằng nhau | `5 == 5` | `True` |
+| `!=` | Khác nhau | `5 != 3` | `True` |
+| `>` | Lớn hơn | `8 > 3` | `True` |
+| `<` | Nhỏ hơn | `2 < 7` | `True` |
+| `>=` | Lớn hơn hoặc bằng | `5 >= 5` | `True` |
+| `<=` | Nhỏ hơn hoặc bằng | `4 <= 6` | `True` |
 
-   Ví dụ:
-   ```python
-   a = 5
-   b = 5
-   print(a == b)  # Kết quả: True
-   ```
-
-2. **`!=` (Khác nhau)**  
-   So sánh hai giá trị xem chúng có khác nhau không.
-
-   Ví dụ:
-   ```python
-   a = 5
-   b = 3
-   print(a != b)  # Kết quả: True
-   ```
-
-3. **`>` (Lớn hơn)**  
-   Kiểm tra xem giá trị bên trái có lớn hơn giá trị bên phải không.
-
-   Ví dụ:
-   ```python
-   a = 5
-   b = 3
-   print(a > b)  # Kết quả: True
-   ```
-
-4. **`<` (Nhỏ hơn)**  
-   Kiểm tra xem giá trị bên trái có nhỏ hơn giá trị bên phải không.
-
-   Ví dụ:
-   ```python
-   a = 3
-   b = 5
-   print(a < b)  # Kết quả: True
-   ```
-
-5. **`>=` (Lớn hơn hoặc bằng)**  
-   Kiểm tra xem giá trị bên trái có lớn hơn hoặc bằng giá trị bên phải không.
-
-   Ví dụ:
-   ```python
-   a = 5
-   b = 5
-   print(a >= b)  # Kết quả: True
-   ```
-
-6. **`<=` (Nhỏ hơn hoặc bằng)**  
-   Kiểm tra xem giá trị bên trái có nhỏ hơn hoặc bằng giá trị bên phải không.
-
-   Ví dụ:
-   ```python
-   a = 3
-   b = 5
-   print(a <= b)  # Kết quả: True
-   ```
-
-## Ví dụ về sử dụng toán tử so sánh
+## Ví dụ
 
 ```python
 a = 10
 b = 20
 c = 10
 
-# Kiểm tra nếu a bằng b
-print(a == b)  # False
-
-# Kiểm tra nếu a không bằng b
-print(a != b)  # True
-
-# Kiểm tra nếu a lớn hơn b
-print(a > b)  # False
-
-# Kiểm tra nếu a nhỏ hơn b
-print(a < b)  # True
-
-# Kiểm tra nếu a lớn hơn hoặc bằng c
-print(a >= c)  # True
-
-# Kiểm tra nếu a nhỏ hơn hoặc bằng c
-print(a <= c)  # True
+print(a == b)
+print(a != b)
+print(a > b)
+print(a < b)
+print(a >= c)
+print(a <= c)
 ```
 
-## Kết luận
+Kết quả:
 
-Toán tử so sánh là một phần quan trọng trong lập trình, giúp bạn thực hiện các phép so sánh giữa các giá trị. Bằng cách sử dụng toán tử so sánh, bạn có thể điều khiển luồng chương trình, kiểm tra điều kiện và ra quyết định trong các bài toán phức tạp.
+```text
+False
+True
+False
+True
+True
+True
+```
 
---- 
+## `=` và `==`
 
-Hy vọng bài viết này giúp bạn hiểu rõ hơn về các toán tử so sánh trong Python!
+`=` dùng để gán giá trị cho biến:
+
+```python
+age = 12
+```
+
+`==` dùng để so sánh hai giá trị:
+
+```python
+print(age == 12)  # True
+```
+
+## So sánh chuỗi
+
+Python phân biệt chữ hoa và chữ thường.
+
+```python
+print("Python" == "Python")  # True
+print("Python" == "python")  # False
+print("An" != "Binh")        # True
+```
+
+## Kết hợp với toán tử số học
+
+```python
+number = 8
+
+print(number % 2 == 0)  # True, vì 8 chia hết cho 2
+print(5 + 3 == 8)       # True
+print(2 ** 3 > 10)      # False
+```
+
+## Lỗi cần tránh
+
+- Muốn so sánh bằng nhau phải dùng `==`, không dùng `=`.
+- Viết đúng thứ tự: `>=`, `<=`, không viết `=>`, `=<`.
+- Khi so sánh chuỗi, chú ý chữ hoa và chữ thường.
+
+## Ghi nhớ
+
+Toán tử so sánh trả về `True` hoặc `False`. Đây là nền tảng để học câu lệnh điều kiện `if`.

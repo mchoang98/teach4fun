@@ -1,49 +1,88 @@
-# Bài 3-1: Toán Tử Số Học Trong Python
+# Bài 3-1: Toán tử số học
 
-## Giới thiệu
-Toán tử số học là những ký hiệu đặc biệt giúp thực hiện các phép toán trên số. Python hỗ trợ nhiều toán tử số học để thực hiện các phép tính toán cơ bản.
+## Mục tiêu
 
-## 1. Các toán tử số học
-Python cung cấp các toán tử số học sau:
+- Biết các toán tử số học trong Python.
+- Phân biệt `/`, `//`, `%`.
+- Biết dùng `()` để đổi thứ tự tính toán.
 
-| Toán tử | Mô tả | Ví dụ |
-|---------|-------|-------|
-| `+` | Cộng | `5 + 3 = 8` |
-| `-` | Trừ | `10 - 4 = 6` |
-| `*` | Nhân | `6 * 7 = 42` |
-| `/` | Chia (kết quả float) | `10 / 3 = 3.3333` |
-| `//` | Chia lấy nguyên | `10 // 3 = 3` |
-| `%` | Chia lấy dư | `10 % 3 = 1` |
-| `**` | Lũy thừa | `2 ** 3 = 8` |
+## Các toán tử thường dùng
 
-## 2. Ví dụ minh họa
-Dưới đây là ví dụ sử dụng các toán tử số học trong Python:
+| Toán tử | Ý nghĩa | Ví dụ | Kết quả |
+| --- | --- | --- | --- |
+| `+` | Cộng | `5 + 3` | `8` |
+| `-` | Trừ | `10 - 4` | `6` |
+| `*` | Nhân | `6 * 7` | `42` |
+| `/` | Chia thường | `10 / 3` | `3.333...` |
+| `//` | Chia lấy phần nguyên | `10 // 3` | `3` |
+| `%` | Chia lấy dư | `10 % 3` | `1` |
+| `**` | Lũy thừa | `2 ** 3` | `8` |
+
+## Ví dụ
+
 ```python
 a = 10
 b = 3
 
-print(a + b)  # Kết quả: 13
-print(a - b)  # Kết quả: 7
-print(a * b)  # Kết quả: 30
-print(a / b)  # Kết quả: 3.3333...
-print(a // b) # Kết quả: 3
-print(a % b)  # Kết quả: 1
-print(a ** b) # Kết quả: 1000
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)
+print(a % b)
+print(a ** b)
 ```
 
-## 3. Thứ tự ưu tiên toán tử
-Khi có nhiều toán tử trong cùng một biểu thức, Python tuân theo thứ tự ưu tiên sau:
-1. `**` (Lũy thừa)
-2. `*`, `/`, `//`, `%` (Nhân, chia, chia lấy nguyên, chia lấy dư)
-3. `+`, `-` (Cộng, trừ)
+Kết quả:
 
-Ví dụ:
+```text
+13
+7
+30
+3.3333333333333335
+3
+1
+1000
+```
+
+## Phân biệt `/`, `//`, `%`
+
+Với phép chia `10` cho `3`:
+
+- `10 / 3` cho kết quả chia thường: `3.333...`
+- `10 // 3` lấy phần nguyên: `3`
+- `10 % 3` lấy phần dư: `1`
+
+Ví dụ chia kẹo:
+
 ```python
-x = 2 + 3 * 4  # Kết quả: 14 (nhân trước, cộng sau)
-y = (2 + 3) * 4  # Kết quả: 20 (ngoặc trước)
+candies = 25
+friends = 4
+
+print(candies // friends)  # mỗi bạn nhận 6 cái
+print(candies % friends)   # còn dư 1 cái
 ```
 
-## 4. Tổng kết
-- Python có nhiều toán tử số học để tính toán.
-- Cần chú ý thứ tự ưu tiên khi sử dụng nhiều toán tử.
-- Hãy thực hành để nắm vững cách sử dụng toán tử số học!
+## Thứ tự ưu tiên
+
+Python tính theo thứ tự:
+
+1. `()`
+2. `**`
+3. `*`, `/`, `//`, `%`
+4. `+`, `-`
+
+```python
+print(2 + 3 * 4)    # 14
+print((2 + 3) * 4)  # 20
+```
+
+## Lỗi cần tránh
+
+- Phép nhân dùng `*`, không viết `5 x 3`.
+- Lũy thừa dùng `**`, không dùng `^`.
+- Dùng `()` khi muốn một phép tính được thực hiện trước.
+
+## Ghi nhớ
+
+Toán tử số học giúp Python tính toán như máy tính cầm tay. Ba toán tử hay nhầm nhất là `/`, `//`, `%`.
