@@ -1,4 +1,4 @@
-# Bài giảng Buổi 2: Biến, kiểu dữ liệu và toán tử
+#  Buổi 2: Biến, kiểu dữ liệu và toán tử
 
 ## 1. Mục tiêu
 

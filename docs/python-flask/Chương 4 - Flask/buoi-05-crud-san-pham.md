@@ -1,4 +1,4 @@
-# Bài giảng Buổi 5: CRUD sản phẩm
+#  Buổi 5: CRUD sản phẩm
 
 ## 1. Mục tiêu
 

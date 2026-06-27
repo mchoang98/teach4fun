@@ -1,4 +1,4 @@
-# Bài giảng Buổi 6: DOM cơ bản
+#  Buổi 6: DOM cơ bản
 
 ## 1. Mục tiêu
 

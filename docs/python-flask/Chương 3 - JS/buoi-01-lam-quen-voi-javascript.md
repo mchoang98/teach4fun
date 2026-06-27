@@ -1,4 +1,4 @@
-# Bài giảng Buổi 1: Làm quen với JavaScript
+#  Buổi 1: Làm quen với JavaScript
 
 ## 1. Mục tiêu
 

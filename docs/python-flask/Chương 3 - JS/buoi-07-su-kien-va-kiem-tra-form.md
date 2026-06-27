@@ -1,4 +1,4 @@
-# Bài giảng Buổi 7: Sự kiện và kiểm tra form
+#  Buổi 7: Sự kiện và kiểm tra form
 
 ## 1. Mục tiêu
 

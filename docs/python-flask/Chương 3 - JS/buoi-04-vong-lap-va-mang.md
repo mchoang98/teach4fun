@@ -1,4 +1,4 @@
-# Bài giảng Buổi 4: Vòng lặp và mảng
+#  Buổi 4: Vòng lặp và mảng
 
 ## 1. Mục tiêu
 

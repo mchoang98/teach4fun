@@ -1,4 +1,4 @@
-# GIÁO TRÌNH CHƯƠNG 2: CSS CƠ BẢN
+# CHƯƠNG 2: CSS CƠ BẢN
 
 *Dành cho học viên mới học lập trình web*
 
@@ -59,7 +59,7 @@ CSS cơ bản
 
 ---
 
-# Bài giảng Buổi 1: Làm quen với CSS
+#  Buổi 1: Làm quen với CSS
 
 ## 1. Mục tiêu
 
@@ -372,7 +372,7 @@ css-buoi-1
 
 ---
 
-# Bài giảng Buổi 2: Selector và cách chọn phần tử
+#  Buổi 2: Selector và cách chọn phần tử
 
 ## 1. Mục tiêu
 
@@ -752,7 +752,7 @@ Kết thúc buổi này, website cá nhân của em có nhiều phần được 
 
 ---
 
-# Bài giảng Buổi 3: Màu sắc, font chữ và căn chỉnh văn bản
+#  Buổi 3: Màu sắc, font chữ và căn chỉnh văn bản
 
 ## 1. Mục tiêu
 
@@ -1108,7 +1108,7 @@ Kết thúc buổi này, trang giới thiệu của em cần dễ đọc hơn, c
 
 ---
 
-# Bài giảng Buổi 4: Box Model - margin, padding, border
+#  Buổi 4: Box Model - margin, padding, border
 
 ## 1. Mục tiêu
 
@@ -1405,7 +1405,7 @@ Kết thúc buổi này, em tạo được card giới thiệu bản thân có n
 
 ---
 
-# Bài giảng Buổi 5: Làm đẹp hình ảnh, liên kết và nút bấm
+#  Buổi 5: Làm đẹp hình ảnh, liên kết và nút bấm
 
 ## 1. Mục tiêu
 
@@ -1736,7 +1736,7 @@ Kết thúc buổi này, website cá nhân của em cần có ảnh đại diệ
 
 ---
 
-# Bài giảng Buổi 6: Bố cục với Flexbox
+#  Buổi 6: Bố cục với Flexbox
 
 ## 1. Mục tiêu
 
@@ -2079,7 +2079,7 @@ Kết thúc buổi này, website cá nhân của em có một khu vực nhiều 
 
 ---
 
-# Bài giảng Buổi 7: Responsive cơ bản
+#  Buổi 7: Responsive cơ bản
 
 ## 1. Mục tiêu
 
@@ -2421,7 +2421,7 @@ Kết thúc buổi này, website cá nhân của em cần xem tốt trên cả m
 
 ---
 
-# Bài giảng Buổi 8: Hoàn thiện giao diện Portfolio cá nhân
+#  Buổi 8: Hoàn thiện giao diện Portfolio cá nhân
 
 ## 1. Mục tiêu
 

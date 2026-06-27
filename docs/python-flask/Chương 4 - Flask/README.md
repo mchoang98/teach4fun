@@ -1,4 +1,4 @@
-# GIÁO TRÌNH CHƯƠNG 4: BACKEND VỚI FLASK VÀ POSTGRESQL
+# 4: BACKEND VỚI FLASK VÀ POSTGRESQL
 
 *Dành cho học viên đã học HTML, CSS và JavaScript cơ bản*
 
@@ -78,7 +78,7 @@ Backend với Flask
 
 ---
 
-## 5. Danh sách file bài giảng
+## 5. Danh sách file 
 
 - `buoi-01-lam-quen-backend-va-flask.md`
 - `buoi-02-template-static-layout.md`

@@ -1,4 +1,4 @@
-# Bài giảng Buổi 8: Hoàn thiện website bán hàng
+#  Buổi 8: Hoàn thiện website bán hàng
 
 ## 1. Mục tiêu
 

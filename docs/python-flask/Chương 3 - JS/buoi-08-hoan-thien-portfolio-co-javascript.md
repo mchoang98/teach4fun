@@ -1,4 +1,4 @@
-# Bài giảng Buổi 8: Hoàn thiện Portfolio có JavaScript
+#  Buổi 8: Hoàn thiện Portfolio có JavaScript
 
 ## 1. Mục tiêu
 

@@ -1,4 +1,4 @@
-# Bài giảng Buổi 6: Trang bán hàng và chi tiết sản phẩm
+#  Buổi 6: Trang bán hàng và chi tiết sản phẩm
 
 ## 1. Mục tiêu
 

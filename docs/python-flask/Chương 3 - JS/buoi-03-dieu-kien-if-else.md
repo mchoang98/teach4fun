@@ -1,4 +1,4 @@
-# Bài giảng Buổi 3: Điều kiện if else
+#  Buổi 3: Điều kiện if else
 
 ## 1. Mục tiêu
 

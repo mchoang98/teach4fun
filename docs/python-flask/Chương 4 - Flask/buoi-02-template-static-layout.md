@@ -1,4 +1,4 @@
-# Bài giảng Buổi 2: Template, Static và Layout
+#  Buổi 2: Template, Static và Layout
 
 ## 1. Mục tiêu
 

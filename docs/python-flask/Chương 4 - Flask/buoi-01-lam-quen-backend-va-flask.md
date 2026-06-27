@@ -1,4 +1,4 @@
-# Bài giảng Buổi 1: Làm quen Backend và Flask
+#  Buổi 1: Làm quen Backend và Flask
 
 ## 1. Mục tiêu
 

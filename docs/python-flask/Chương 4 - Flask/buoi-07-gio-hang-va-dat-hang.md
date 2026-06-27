@@ -1,4 +1,4 @@
-# Bài giảng Buổi 7: Giỏ hàng và đặt hàng
+#  Buổi 7: Giỏ hàng và đặt hàng
 
 ## 1. Mục tiêu
 

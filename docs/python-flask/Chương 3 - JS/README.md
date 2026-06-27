@@ -1,4 +1,4 @@
-# GIÁO TRÌNH CHƯƠNG 3: JAVASCRIPT CƠ BẢN
+# CHƯƠNG 3: JAVASCRIPT CƠ BẢN
 
 *Dành cho học viên mới học lập trình web*
 
