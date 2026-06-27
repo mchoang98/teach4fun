@@ -96,6 +96,13 @@ const config: Config = {
         },
 
         {
+          type: "docSidebar",
+          sidebarId: "pythonWebSidebar", // Changed to a specific sidebar for Python Advanced
+          position: "left",
+          label: "Python Web",
+        },
+
+        {
           to: "/blog",
           label: "Blog",
           position: "left",
