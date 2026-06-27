@@ -1,4 +1,4 @@
-# Bài giảng Buổi 2: Văn bản, danh sách và liên kết
+#  Buổi 2: Văn bản, danh sách và liên kết
 
 ## 1. Mục tiêu
 

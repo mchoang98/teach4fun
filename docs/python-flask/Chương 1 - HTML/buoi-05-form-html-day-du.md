@@ -1,4 +1,4 @@
-# Bài giảng Buổi 5: Form HTML đầy đủ
+#  Buổi 5: Form HTML đầy đủ
 
 ## 1. Mục tiêu
 

@@ -5,7 +5,7 @@ https://teach4fun.web.app/
 **Fun Learning Website**
 
 ## Introduction
-Dạy cho vui is an educational website that helps users learn programming in an engaging way. The platform offers interactive lessons, an in-browser coding environment, and a progress tracking system.
+Code for fun is an educational website that helps users learn programming in an engaging way. The platform offers interactive lessons, an in-browser coding environment, and a progress tracking system.
 
 ## Features
 - **Interactive Lessons**: Learn programming by practicing immediately.

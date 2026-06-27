@@ -1,4 +1,4 @@
-# Bài giảng Buổi 3: Hình ảnh, đường dẫn và tổ chức thư mục
+#  Buổi 3: Hình ảnh, đường dẫn và tổ chức thư mục
 
 ## 1. Mục tiêu
 

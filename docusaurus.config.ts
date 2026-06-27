@@ -3,7 +3,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
-  title: "Dạy cho vui",
+  title: "Code for fun",
   tagline: "Trang web học tập vui nhộn",
   favicon: "img/logo.jpg",
   url: "https://teach4fun.web.app/",
@@ -70,7 +70,7 @@ const config: Config = {
   themeConfig: {
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "Dạy cho vui",
+      title: "Code for fun",
       logo: {
         alt: "Logo của trang web",
         src: "img/logo.jpg",

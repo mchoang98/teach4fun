@@ -1,4 +1,4 @@
-# Bài giảng Buổi 6: Bảng, iframe và hoàn thiện Portfolio HTML
+#  Buổi 6: Bảng, iframe và hoàn thiện Portfolio HTML
 
 ## 1. Mục tiêu
 

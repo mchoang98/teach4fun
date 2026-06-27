@@ -1,4 +1,4 @@
-# GIÁO TRÌNH CHƯƠNG 1: HTML CƠ BẢN
+# CHƯƠNG 1: HTML CƠ BẢN
 
 *Dành cho học viên mới bắt đầu học lập trình web*
 

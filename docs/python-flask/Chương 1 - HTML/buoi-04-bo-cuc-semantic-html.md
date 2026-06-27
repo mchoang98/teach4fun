@@ -1,4 +1,4 @@
-# Bài giảng Buổi 4: Bố cục Semantic HTML
+#  Buổi 4: Bố cục Semantic HTML
 
 ## 1. Mục tiêu
 

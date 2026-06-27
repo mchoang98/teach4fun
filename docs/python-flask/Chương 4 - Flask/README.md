@@ -1,4 +1,4 @@
-# 4: BACKEND VỚI FLASK VÀ POSTGRESQL
+# CHƯƠNG 4: BACKEND VỚI FLASK VÀ POSTGRESQL
 
 *Dành cho học viên đã học HTML, CSS và JavaScript cơ bản*
 

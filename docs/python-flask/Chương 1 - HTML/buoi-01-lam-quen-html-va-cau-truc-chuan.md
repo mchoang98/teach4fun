@@ -1,4 +1,4 @@
-# Bài giảng Buổi 1: Làm quen HTML và cấu trúc chuẩn
+#  Buổi 1: Làm quen HTML và cấu trúc chuẩn
 
 ## 1. Mục tiêu
 
