@@ -4,16 +4,28 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
   title: "Code for fun",
-  tagline: "Trang web học tập vui nhộn",
+  tagline: "Trang web học lập trình vui nhộn",
   favicon: "img/logo.jpg",
   url: "https://teach4fun.web.app/",
   baseUrl: "/",
-  organizationName: "mchoang98", // Your GitHub username/organization
-  projectName: "day-cho-vui", // Your GitHub repo for this project
-  themes: ['@docusaurus/theme-mermaid'],  // 👈 Thêm dòng này
+  organizationName: "mchoang98",
+  projectName: "day-cho-vui",
+  themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["vi", "en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+      },
+    ],
+  ],
 
   markdown: {
-    mermaid: true, // 👈 Bật hỗ trợ mermaid trong Markdown/MDX
+    mermaid: true,
   },
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
@@ -77,31 +89,22 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "pythonSidebar", // Changed to a specific sidebar for Python
+          to: "/python",
           position: "left",
-          label: "Python A",
+          label: "Python",
         },
         {
           type: "docSidebar",
-          sidebarId: "guizeroSidebar", // Changed to a specific sidebar for Guizero
+          sidebarId: "gitSidebar",
           position: "left",
-          label: "Python B",
+          label: "Git",
         },
         {
           type: "docSidebar",
-          sidebarId: "pythonAdvancedSidebar", // Changed to a specific sidebar for Python Advanced
+          sidebarId: "cloudSidebar",
           position: "left",
-          label: "Python C",
+          label: "Cloud",
         },
-
-        {
-          type: "docSidebar",
-          sidebarId: "pythonWebSidebar", // Changed to a specific sidebar for Python Advanced
-          position: "left",
-          label: "Python Web",
-        },
-
         {
           to: "/blog",
           label: "Blog",

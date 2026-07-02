@@ -18,9 +18,7 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/python-basics">
+          <Link className="button button--secondary button--lg" to="/python">
             Học ngay
           </Link>
         </div>
