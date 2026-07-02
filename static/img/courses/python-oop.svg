@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Python OOP</title>
+  <desc id="desc">Cac lop va doi tuong ket noi voi nhau</desc>
+  <rect width="960" height="540" rx="36" fill="#eef2ff"/>
+  <circle cx="164" cy="124" r="82" fill="#6366f1" opacity=".18"/>
+  <circle cx="814" cy="420" r="120" fill="#14b8a6" opacity=".18"/>
+  <g fill="#fff" stroke="#334155" stroke-width="6">
+    <rect x="120" y="116" width="240" height="150" rx="20"/>
+    <rect x="360" y="294" width="240" height="150" rx="20"/>
+    <rect x="600" y="116" width="240" height="150" rx="20"/>
+  </g>
+  <g stroke="#475569" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M360 190h240"/>
+    <path d="M300 266l120 62"/>
+    <path d="M660 266l-120 62"/>
+  </g>
+  <text x="165" y="174" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700">Class</text>
+  <text x="153" y="222" fill="#475569" font-family="Consolas, monospace" font-size="24">Student</text>
+  <text x="407" y="352" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700">Object</text>
+  <text x="406" y="400" fill="#475569" font-family="Consolas, monospace" font-size="24">student_01</text>
+  <text x="662" y="174" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700">Method</text>
+  <text x="652" y="222" fill="#475569" font-family="Consolas, monospace" font-size="24">learn()</text>
+</svg>

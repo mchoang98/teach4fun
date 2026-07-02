@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Python Flask Web</title>
+  <desc id="desc">Website Flask ket noi frontend backend database</desc>
+  <rect width="960" height="540" rx="36" fill="#f8fafc"/>
+  <rect x="86" y="96" width="788" height="348" rx="26" fill="#111827"/>
+  <rect x="118" y="132" width="352" height="244" rx="18" fill="#ffffff"/>
+  <rect x="148" y="166" width="190" height="24" rx="12" fill="#0ea5e9"/>
+  <rect x="148" y="216" width="268" height="18" rx="9" fill="#cbd5e1"/>
+  <rect x="148" y="254" width="222" height="18" rx="9" fill="#cbd5e1"/>
+  <rect x="148" y="304" width="132" height="44" rx="12" fill="#22c55e"/>
+  <g fill="none" stroke="#e5e7eb" stroke-width="8" stroke-linecap="round">
+    <path d="M512 196h120"/>
+    <path d="M512 270h120"/>
+    <path d="M512 344h120"/>
+  </g>
+  <g fill="#f97316">
+    <circle cx="690" cy="196" r="36"/>
+    <circle cx="690" cy="270" r="36"/>
+    <circle cx="690" cy="344" r="36"/>
+  </g>
+  <text x="656" y="204" fill="#fff" font-family="Consolas, monospace" font-size="26">API</text>
+  <text x="652" y="278" fill="#fff" font-family="Consolas, monospace" font-size="26">DB</text>
+  <text x="648" y="352" fill="#fff" font-family="Consolas, monospace" font-size="26">APP</text>
+</svg>

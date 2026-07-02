@@ -105,7 +105,7 @@ const sidebars: SidebarsConfig = {
     },
   ],
 
-  awsSidebar: [
+  cloudSidebar: [
     {
       type: 'category',
       label: 'AWS cho Developer',
@@ -122,7 +122,6 @@ const sidebars: SidebarsConfig = {
         sidebarCategory('8. Deployment, CI/CD và IaC', 'cloud/aws/chuong8'),
         sidebarCategory('9. Monitoring và Troubleshooting', 'cloud/aws/chuong9'),
         sidebarCategory('10. Ôn và luyện DVA C02', 'cloud/aws/chuong10'),
-
       ],
     },
   ],

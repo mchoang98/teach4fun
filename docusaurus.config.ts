@@ -11,6 +11,18 @@ const config: Config = {
   organizationName: "mchoang98",
   projectName: "day-cho-vui",
   themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["vi", "en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+      },
+    ],
+  ],
 
   markdown: {
     mermaid: true,
@@ -77,28 +89,9 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "pythonSidebar",
+          to: "/python",
           position: "left",
-          label: "Python cơ bản",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "pythonAdvancedSidebar",
-          position: "left",
-          label: "Python OOP",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "pythonGUISidebar",
-          position: "left",
-          label: "Python GUI",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "pythonWebSidebar",
-          position: "left",
-          label: "Web Flask",
+          label: "Python",
         },
         {
           type: "docSidebar",
@@ -108,9 +101,9 @@ const config: Config = {
         },
         {
           type: "docSidebar",
-          sidebarId: "awsSidebar",
+          sidebarId: "cloudSidebar",
           position: "left",
-          label: "AWS",
+          label: "Cloud",
         },
         {
           to: "/blog",
