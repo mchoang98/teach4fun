@@ -26,9 +26,11 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
 
   i18n: {
     defaultLocale: "vi",
@@ -89,6 +91,7 @@ const config: Config = {
       },
       items: [
         {
+          type: "custom-pythonCourses",
           to: "/python",
           position: "left",
           label: "Python",
