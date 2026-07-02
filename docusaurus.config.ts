@@ -4,16 +4,16 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
   title: "Code for fun",
-  tagline: "Trang web học tập vui nhộn",
+  tagline: "Trang web học lập trình vui nhộn",
   favicon: "img/logo.jpg",
   url: "https://teach4fun.web.app/",
   baseUrl: "/",
-  organizationName: "mchoang98", // Your GitHub username/organization
-  projectName: "day-cho-vui", // Your GitHub repo for this project
-  themes: ['@docusaurus/theme-mermaid'],  // 👈 Thêm dòng này
+  organizationName: "mchoang98",
+  projectName: "day-cho-vui",
+  themes: ['@docusaurus/theme-mermaid'],
 
   markdown: {
-    mermaid: true, // 👈 Bật hỗ trợ mermaid trong Markdown/MDX
+    mermaid: true,
   },
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
@@ -78,30 +78,40 @@ const config: Config = {
       items: [
         {
           type: "docSidebar",
-          sidebarId: "pythonSidebar", // Changed to a specific sidebar for Python
+          sidebarId: "pythonSidebar",
           position: "left",
-          label: "Python A",
+          label: "Python cơ bản",
         },
         {
           type: "docSidebar",
-          sidebarId: "guizeroSidebar", // Changed to a specific sidebar for Guizero
+          sidebarId: "pythonAdvancedSidebar",
           position: "left",
-          label: "Python B",
+          label: "Python OOP",
         },
         {
           type: "docSidebar",
-          sidebarId: "pythonAdvancedSidebar", // Changed to a specific sidebar for Python Advanced
+          sidebarId: "pythonGUISidebar",
           position: "left",
-          label: "Python C",
+          label: "Python GUI",
         },
-
         {
           type: "docSidebar",
-          sidebarId: "pythonWebSidebar", // Changed to a specific sidebar for Python Advanced
+          sidebarId: "pythonWebSidebar",
           position: "left",
-          label: "Python Web",
+          label: "Web Flask",
         },
-
+        {
+          type: "docSidebar",
+          sidebarId: "gitSidebar",
+          position: "left",
+          label: "Git",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "awsSidebar",
+          position: "left",
+          label: "AWS",
+        },
         {
           to: "/blog",
           label: "Blog",
