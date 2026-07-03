@@ -103,8 +103,7 @@ const config: Config = {
           label: "Git",
         },
         {
-          type: "docSidebar",
-          sidebarId: "cloudSidebar",
+          to: "/cloud",
           position: "left",
           label: "Cloud",
         },

@@ -225,12 +225,6 @@
   padding-top: 0.85rem;
 }
 
-.level {
-  color: #64748b;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
 .cardButton {
   background: #0f172a;
   color: #ffffff;
@@ -248,52 +242,95 @@
 
 [data-theme='dark'] .page {
   background:
-    radial-gradient(circle at 8% 0%, rgba(56, 189, 248, 0.1), transparent 22rem),
-    linear-gradient(180deg, #0b1120 0%, #111827 36%);
+    radial-gradient(circle at 8% 0%, rgba(59, 130, 246, 0.18), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #0f172a 38%, #111827 100%);
 }
 
 [data-theme='dark'] .hero {
-  border-color: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .eyebrow {
+  color: #93c5fd;
 }
 
 [data-theme='dark'] .title,
 [data-theme='dark'] .sectionHeader h2,
 [data-theme='dark'] .courseTitle {
-  color: #f8fafc;
+  color: #f9fafb;
 }
 
 [data-theme='dark'] .subtitle,
 [data-theme='dark'] .sectionHeader p,
-[data-theme='dark'] .courseDescription,
-[data-theme='dark'] .level {
+[data-theme='dark'] .courseDescription {
   color: #cbd5e1;
 }
 
+[data-theme='dark'] .statLabel {
+  color: #aebed0;
+}
+
 [data-theme='dark'] .courseCard {
-  background: #111827;
-  border-color: #334155;
+  background: #182235;
+  border-color: #475569;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme='dark'] .courseCard:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.45);
 }
 
 [data-theme='dark'] .stat {
-  background: #111827;
-  border-color: #334155;
+  background: #182235;
+  border-color: #475569;
 }
 
 [data-theme='dark'] .statValue {
-  color: #f8fafc;
+  color: #ffffff;
 }
 
 [data-theme='dark'] .courseImage {
-  border-color: #334155;
+  background: #0f172a;
+  border-color: #475569;
+}
+
+[data-theme='dark'] .badge {
+  background: rgba(37, 99, 235, 0.22);
+  border-color: rgba(147, 197, 253, 0.42);
+  color: #bfdbfe;
+}
+
+[data-theme='dark'] .primaryButton {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .primaryButton:hover {
+  background: #60a5fa;
+  color: #07111f;
 }
 
 [data-theme='dark'] .secondaryButton {
-  border-color: #475569;
+  background: rgba(15, 23, 42, 0.38);
+  border-color: #64748b;
   color: #f8fafc;
 }
 
 [data-theme='dark'] .secondaryButton:hover {
+  background: #1e293b;
+  border-color: #93c5fd;
   color: #f8fafc;
+}
+
+[data-theme='dark'] .cardButton {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+[data-theme='dark'] .cardButton:hover {
+  background: #ffffff;
+  color: #0f172a;
 }
 
 @media screen and (max-width: 996px) {
