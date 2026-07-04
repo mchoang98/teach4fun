@@ -1,117 +1,80 @@
-# Tổng quan
+# Python cơ bản: học bằng nhiệm vụ nhỏ
 
-# Học Python xong làm được gì? 
-Bây giờ là năm 2025, nhà nhà học lập trình, người người học lập trình. Phấn đấu đến năm 2050 mỗi gia đình đều có 1 lập trình viên nghe thì vui vui, nhưng thật ra… hoàn toàn khả thi.
+Khóa này dành cho học sinh mới bắt đầu lập trình. Mục tiêu không phải học thuộc thật nhiều cú pháp, mà là biết dùng Python để giải quyết những việc nhỏ: tính tiền căn tin, tạo hồ sơ nhân vật, lọc tin nhắn, làm game đoán số, lưu nhật ký học tập và tổ chức một dự án console đơn giản.
 
-Vì sao? Vì công nghệ giờ len lỏi khắp đời sống. Gia đình nào không có lập trình viên thì kiểu gì cũng rơi vào cảnh:
+Điểm mới của phần bài học:
 
-* Wi-Fi chập chờn → gọi hàng xóm.
-* Máy tính dính virus → gọi hàng xóm.
-* In một cái CV PDF cũng không biết → gọi hàng xóm.
-
-Mà hàng xóm cũng mệt, đâu phải cứ rảnh để fix hộ. Vậy nên, học Python đi – để bạn từ “người hay đi gọi” trở thành **người cả xóm phải gọi**.
+* Mỗi bài có **bối cảnh** để học sinh biết mình đang code cho việc gì.
+* Mỗi bài có **thử ngay trong 5 phút** để học sinh chạy code sớm.
+* Mỗi bài có **hoạt động cặp đôi** để các em nói ra input, output và luật xử lý.
+* Mỗi bài có **nâng cấp sau giờ học** và **bài tập thêm** để biến ví dụ thành sản phẩm nhỏ.
 
 ---
 
-## 1. Tự động hóa – đỡ cực, sống chill hơn
+## Cách học một bài
 
-Bạn đã bao giờ phải ngồi rename 200 file ảnh “IMG001, IMG002…” thành “ảnh\_cưới\_1, ảnh\_cưới\_2…” chưa? Bình thường làm tay thì mỏi nhừ. Nhưng với Python, chỉ cần 10 dòng code, chạy cái vèo là xong.
+1. Đọc mục tiêu và bối cảnh.
+2. Chạy ví dụ đầu tiên, dù chưa hiểu hết.
+3. Đổi dữ liệu trong ví dụ ít nhất 3 lần.
+4. Làm bài tập nhanh trong 5 phút.
+5. Viết lại chương trình bằng dữ liệu của chính mình.
+6. Giải thích chương trình bằng lời nói: đầu vào là gì, xử lý ra sao, kết quả là gì.
 
-Vậy nên thay vì mất cả buổi chiều cho việc vặt, bạn có thêm thời gian đi uống trà sữa, đọc manga hay học thêm kỹ năng mới.
-
-**Hình minh họa:**
-
-![Python automation example](https://zapier.com/blog/wp-content/uploads/2023/06/python-automation-hero.jpg)
-
-**Video minh họa:**
-
-[Python Automation Tutorial](https://www.youtube.com/watch?v=aXiiPf-8V7g)
+Nếu gặp lỗi, đừng xóa code ngay. Hãy đọc thông báo lỗi, khoanh vùng dòng lỗi, sửa từng thay đổi nhỏ rồi chạy lại. Người mới học tiến bộ rất nhanh khi được phản hồi ngay từ chương trình.
 
 ---
 
-## 2. Web – từ “người dùng” thành “người tạo”
+## Lộ trình học
 
-Ai cũng có tài khoản Facebook, TikTok, nhưng mấy ai tự dựng được **một trang web của riêng mình**? Python với Django hay Flask cho phép bạn làm điều đó.
-
-Bạn thích blog chia sẻ thú cưng? Làm hẳn *Meowbook*. Bạn thích bán hàng? Tự build shop online. Một cú “up skill” từ người tiêu dùng thành **người kiến tạo**.
-
-**Hình minh họa:**
-
-![Django framework illustration](https://www.djangoproject.com/m/img/logos/django-logo-negative.png)
-
-**Video hướng dẫn:**
-
-[Introduction to Django](https://www.youtube.com/watch?v=F5mRW0jo-U4)
-
----
-
-## 3. Data & AI – nghề của tương lai (và hiện tại)
-
-Người ta gọi **dữ liệu là dầu mỏ của thời đại số**. Doanh nghiệp nào cũng cần người phân tích và khai thác. Python chính là giàn khoan dữ liệu: từ xử lý Excel nâng cao, đến dự đoán hành vi khách hàng.
-
-Chỉ cần có kỹ năng Python + tư duy phân tích, bạn có thể bước chân vào **ngành hot nhất hiện nay** – Data Science & AI.
-
-**Video hướng dẫn:**
-
-[Python for Data Science](https://www.youtube.com/watch?v=yGN28LY5VuA)
+| Chặng | Chủ đề | Làm được gì sau chặng này? |
+| --- | --- | --- |
+| 1 | Làm quen Python | Chạy file Python, dùng `print()`, hiểu chương trình là tập hướng dẫn cho máy tính |
+| 2 | Biến và kiểu dữ liệu | Lưu thông tin người dùng, tính điểm, ép kiểu dữ liệu nhập từ bàn phím |
+| 3 | Toán tử | Tính tiền, giảm giá, so sánh điều kiện, kiểm tra logic đúng sai |
+| 4 | Rẽ nhánh | Viết chương trình biết ra quyết định bằng `if`, `elif`, `else`, `match case` |
+| 5 | Vòng lặp | Lặp việc tự động: điểm danh, bảng cửu chương, đoán số, lọc dữ liệu |
+| 6 | Chuỗi | Xử lý tên, tin nhắn, username, từ khóa và dữ liệu dạng văn bản |
+| 7 | Hàm | Chia chương trình thành các khối dễ dùng lại, dễ đọc và dễ kiểm tra |
+| 8 | Cấu trúc dữ liệu | Quản lý danh sách, hồ sơ, bảng điểm, dữ liệu không trùng |
+| 9 | Module | Tách dự án thành nhiều file và dùng thư viện có sẵn |
+| 10 | Ngoại lệ | Xử lý lỗi nhập liệu để chương trình không dừng đột ngột |
+| 11 | File | Lưu và đọc dữ liệu bằng text, JSON và thư mục |
+| 12 | Clean Code | Viết code dễ đọc, dễ sửa, đúng tinh thần PEP 8 |
 
 ---
 
-## 4. AI & Deep Learning – đừng chỉ dùng, hãy tạo ra
+## Dự án xuyên suốt gợi ý
 
-AI đang làm thay đổi mọi ngành nghề. Nhưng thay vì chỉ xài ChatGPT hay Midjourney, bạn hoàn toàn có thể **tạo ra công cụ AI của riêng mình** với Python.
+Trong khi học, giáo viên có thể cho học sinh nâng cấp dần một dự án duy nhất:
 
-Từ chatbot phục vụ khách hàng, đến mô hình nhận diện hình ảnh, hay đơn giản là một ứng dụng “AI tutor” giúp em trai học toán. Python biến bạn từ người “xài AI” thành người “dẫn dắt AI”.
+**Sổ tay học tập bằng Python**
 
-**Video hướng dẫn:**
-
-[Building an AI Chatbot with Python](https://www.youtube.com/watch?v=8hly31xKli0)
-
----
-
-## 5. Game – code cũng có thể vui
-
-Ai bảo lập trình là khô khan? Với Pygame, bạn có thể tạo ra Flappy Bird, Snake, hoặc một mini game “Chiếc Nón Kỳ Diệu phiên bản IT” để chơi với bạn bè.
-
-Tưởng tượng lúc đi phỏng vấn, thay vì chỉ show CV, bạn mở laptop ra: “Đây là game em code”. Nhà tuyển dụng sẽ nhớ bạn ngay.
-
-**Video hướng dẫn:**
-
-[Creating a Flappy Bird Clone in Python](https://www.youtube.com/watch?v=VUFvY349ess)
+* Buổi biến: nhập tên học sinh, môn học, mục tiêu tuần.
+* Buổi toán tử: tính điểm trung bình và phần trăm hoàn thành.
+* Buổi điều kiện: xếp loại tiến độ học.
+* Buổi vòng lặp: nhập nhiều nhiệm vụ trong tuần.
+* Buổi chuỗi: chuẩn hóa tên môn học và tìm từ khóa.
+* Buổi hàm: tách các phần nhập, tính toán, hiển thị thành hàm.
+* Buổi list/dict: lưu danh sách nhiệm vụ và điểm từng môn.
+* Buổi module: tách code thành nhiều file.
+* Buổi ngoại lệ: xử lý nhập sai.
+* Buổi file: lưu dữ liệu ra JSON.
+* Buổi clean code: đặt tên biến rõ và viết README ngắn.
 
 ---
 
-## 6. IoT & Robotics – biến ý tưởng thành hiện thực
+## Nguyên tắc làm bài tập
 
-Python chạy cực tốt trên Raspberry Pi, Arduino… giúp bạn tự tay làm “nhà thông minh”. Đèn tự bật khi bạn bước vào phòng, rèm tự kéo khi trời sáng.
+Một bài được tính là hoàn thành khi:
 
-Đó không chỉ là dự án vui, mà còn là **portfolio chất lượng** để khoe với nhà tuyển dụng hoặc khách hàng.
-
-**Video hướng dẫn:**
-
-[Building an IoT Application with Raspberry Pi and Python](https://www.youtube.com/watch?v=XXeQB1HQX8w)
-
----
-
-## 7. Nghiên cứu, tài chính, và hơn thế nữa
-
-NASA dùng Python để mô phỏng vũ trụ. Trader dùng Python viết bot chứng khoán. Công ty tài chính dùng Python để dự báo rủi ro.
-
-Còn bạn? Bạn có thể bắt đầu nhỏ thôi: phân tích chi tiêu cá nhân, tối ưu hóa ngân sách, rồi nâng cấp dần lên những dự án “tiền tươi thóc thật”.
-
-**Video hướng dẫn:**
-
-[Python for Data Analytics](https://www.youtube.com/watch?v=wUSDVGivd-8)
+* Chương trình chạy được từ đầu đến cuối.
+* Có ít nhất 3 bộ dữ liệu thử nghiệm.
+* Tên biến hoặc tên hàm đọc lên là hiểu ý nghĩa.
+* Học sinh giải thích được vì sao chọn `if`, `for`, `list`, `dict` hoặc `try/except`.
+* Có một nâng cấp nhỏ do học sinh tự nghĩ ra.
 
 ---
 
-## Kết lại – vì sao nên học Python NGAY?
+## Vì sao học theo dự án nhỏ?
 
-* **Dễ học**: Cú pháp đơn giản, học nhanh, ai cũng bắt đầu được.
-* **Đa năng**: Từ web, data, AI, automation, đến robotics.
-* **Cơ hội việc làm lớn**: Ngành nào cũng cần người biết code, đặc biệt là Python.
-
-👉 Học Python không chỉ để code, mà để **mở khóa cơ hội nghề nghiệp**, tăng năng suất, và đơn giản là… trở thành “IT của cả dòng họ”.
-
-Nếu năm nay bạn còn phân vân nên bắt đầu từ đâu, thì câu trả lời rõ ràng: **Python**. Bắt đầu sớm thì đến 2050, bạn chính là người mà cả xóm phải “ngước nhìn”. 🚀
-
+Người mới học thường nản vì lộ trình mơ hồ, lỗi khó hiểu và ví dụ không liên quan đến đời sống. Vì vậy khóa này ưu tiên bài tập nhỏ, phản hồi nhanh, ví dụ gần lớp học, game, căn tin, thời khóa biểu, tin nhắn và dữ liệu cá nhân. Khi học sinh thấy chương trình làm được một việc cụ thể, cú pháp Python bớt khô và dễ nhớ hơn nhiều.
