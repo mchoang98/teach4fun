@@ -8,10 +8,10 @@ const courses: CourseLandingCourse[] = [
   {
     title: 'Python cơ bản',
     image: '/img/courses/python-basics.svg',
-    href: '/docs/python-basics',
+    href: '/python/basics',
     description:
-      'Lộ trình nền tảng để học cú pháp Python, biến, điều kiện, vòng lặp, hàm, dữ liệu, module và xử lý file.',
-    badges: ['Người mới bắt đầu', '11 chủ đề', '40+ bài học'],
+      'Lộ trình nền tảng để học cú pháp Python, biến, toán tử, điều kiện, vòng lặp, hàm, dữ liệu, module và xử lý file.',
+    badges: ['Người mới bắt đầu', '12 chương', '60+ bài học và bài tập'],
   },
   {
     title: 'Python OOP nâng cao',
@@ -41,7 +41,7 @@ const courses: CourseLandingCourse[] = [
 
 const summaryStats: CourseLandingStat[] = [
   {value: '4', label: 'khóa học'},
-  {value: '80+', label: 'bài học'},
+  {value: '100+', label: 'bài học và bài tập'},
   {value: '3', label: 'hướng dự án'},
 ];
 
@@ -54,7 +54,7 @@ export default function PythonCourses(): ReactNode {
       title="Chọn khóa học Python phù hợp"
       subtitle="Tất cả nội dung Python được gom lại tại một nơi: nền tảng, OOP, GUI và Flask."
       primaryAction={{label: 'Xem các khóa học', href: '#courses'}}
-      secondaryAction={{label: 'Bắt đầu từ cơ bản', href: '/docs/python-basics'}}
+      secondaryAction={{label: 'Bắt đầu từ cơ bản', href: '/python/basics'}}
       stats={summaryStats}
       statsAriaLabel="Tóm tắt lộ trình Python"
       sectionTitle="Danh sách khóa học"
