@@ -1,433 +1,488 @@
 # Bài tập 03: Toán tử trong Python
 
-## Mục tiêu của phần bài tập
+## Mục tiêu bài học
 
-Sau phần này, học sinh cần hiểu rằng toán tử không chỉ là các ký hiệu rời rạc. Toán tử giúp chương trình:
+Sau phần bài tập này, học sinh cần hiểu rằng toán tử trong Python được dùng để:
 
 * Tạo ra giá trị mới từ dữ liệu ban đầu.
-* Tính toán kết quả như tổng tiền, điểm số, số phần chia được.
-* Kiểm tra một điều đúng hay sai và nhận kết quả `True` hoặc `False`.
-* Chuẩn bị cho bài sau: dùng kết quả `True/False` để câu lệnh `if` ra quyết định.
+* Tính toán các kết quả như tổng tiền, điểm số, số phần chia được.
+* So sánh dữ liệu để nhận kết quả `True` hoặc `False`.
+* Kết hợp nhiều điều kiện bằng toán tử logic.
+* Bắt đầu sử dụng câu lệnh `if` để đưa ra quyết định trong chương trình.
 
-Trong toàn bộ bài tập này, chưa dùng `if`. Khi cần kiểm tra, chỉ in trực tiếp biểu thức so sánh hoặc biểu thức logic.
+## Lưu ý chung
+
+Trong toàn bộ bài tập này:
+
+* Có thể sử dụng câu lệnh `if` khi cần.
+* Khi kiểm tra điều kiện, có thể:
+
+  * In trực tiếp kết quả `True` hoặc `False`, hoặc
+  * Dùng `if` để in ra thông báo phù hợp.
+* Học sinh cần tự tạo biến, tự viết công thức và tự in kết quả.
 
 ---
 
-## Bài tập 1: Tổng tiền căn tin
+# Bài tập 1: Tổng tiền căn tin
 
-* **Bối cảnh:** Bạn mua nước và bánh ở căn tin.
-* **Yêu cầu:** Tính tổng tiền cần trả.
-* **Code khởi đầu:**
+## Bối cảnh
 
-```python
+Bạn mua nước và bánh ở căn tin. Mỗi chai nước và mỗi cái bánh có giá riêng. Hãy tính tổng số tiền cần trả.
+
+## Input
+
+Cho các giá trị:
+
+```text
 water_price = 12000
 cake_price = 15000
 water_count = 2
 cake_count = 3
-
-total = water_price * water_count + cake_price * cake_count
-print(total)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Toán tử `*` tạo ra giá trị mới nào?
-  * Toán tử `+` đang cộng những phần tiền nào?
-  * Nếu mua thêm 1 chai nước, cần đổi biến nào?
-* **Đáp án mẫu:**
+## Output
+
+In ra tổng số tiền cần trả.
 
 ```text
 69000
 ```
 
+## Ràng buộc
+
+* Không nhập dữ liệu từ bàn phím.
+* Phải sử dụng biến để lưu giá tiền và số lượng.
+* Phải sử dụng toán tử `*` để tính tiền từng món.
+* Phải sử dụng toán tử `+` để tính tổng tiền.
+
+## Gợi ý
+
+* Tiền nước = giá nước × số chai nước.
+* Tiền bánh = giá bánh × số bánh.
+* Tổng tiền = tiền nước + tiền bánh.
+
 ---
 
-## Bài tập 2: Điểm game sau một màn chơi
+# Bài tập 2: Điểm game sau một màn chơi
 
-* **Bối cảnh:** Trong game, mỗi sao được 10 điểm, mỗi lỗi bị trừ 5 điểm.
-* **Yêu cầu:** Tính điểm cuối cùng sau một màn chơi.
-* **Code khởi đầu:**
+## Bối cảnh
 
-```python
+Trong một trò chơi, mỗi ngôi sao nhận được 10 điểm. Mỗi lỗi bị trừ 5 điểm. Hãy tính điểm cuối cùng sau màn chơi.
+
+## Input
+
+Cho các giá trị:
+
+```text
 stars = 8
 mistakes = 3
-
-score = stars * 10 - mistakes * 5
-print(score)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Phép `stars * 10` có ý nghĩa gì trong game?
-  * Phép `mistakes * 5` có ý nghĩa gì?
-  * Vì sao ở đây dùng dấu `-`?
-* **Đáp án mẫu:**
+## Output
+
+In ra điểm cuối cùng.
 
 ```text
 65
 ```
 
+## Ràng buộc
+
+* Không nhập dữ liệu từ bàn phím.
+* Mỗi sao được cộng 10 điểm.
+* Mỗi lỗi bị trừ 5 điểm.
+* Phải sử dụng toán tử `*` và `-`.
+
+## Gợi ý
+
+* Điểm từ sao = số sao × 10.
+* Điểm bị trừ = số lỗi × 5.
+* Điểm cuối cùng = điểm từ sao - điểm bị trừ.
+
 ---
 
-## Bài tập 3: Thứ tự ưu tiên phép toán
+# Bài tập 3: Thứ tự ưu tiên phép toán
 
-* **Bối cảnh:** Một nhóm mua 2 combo. Mỗi combo gồm 1 phần ăn và 1 nước. Sau đó cả nhóm dùng thêm mã giảm giá.
-* **Yêu cầu:** So sánh kết quả khi có và không có dấu ngoặc.
-* **Code khởi đầu:**
+## Bối cảnh
 
-```python
+Một nhóm mua 2 combo. Mỗi combo gồm 1 phần ăn và 1 ly nước. Sau đó nhóm được giảm giá.
+
+Hãy tính và so sánh kết quả khi dùng dấu ngoặc và khi không dùng dấu ngoặc.
+
+## Input
+
+Cho các giá trị:
+
+```text
 food = 30000
 drink = 12000
 combo_count = 2
 discount = 10000
-
-total_right = (food + drink) * combo_count - discount
-total_wrong = food + drink * combo_count - discount
-
-print(total_right)
-print(total_wrong)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Vì sao hai kết quả khác nhau?
-  * Trong Python, `*` được tính trước hay `+` được tính trước?
-  * Khi nào nên dùng dấu ngoặc?
-* **Đáp án mẫu:**
+## Output
+
+In ra 2 dòng:
+
+* Dòng 1: tổng tiền đúng.
+* Dòng 2: tổng tiền sai do thiếu dấu ngoặc.
 
 ```text
 74000
 44000
 ```
 
+## Ràng buộc
+
+* Không nhập dữ liệu từ bàn phím.
+* Dòng 1 phải tính đúng.
+* Dòng 2 phải cố ý sai để so sánh.
+* Phải sử dụng toán tử `+`, `*`, `-`.
+
+## Gợi ý
+
+* Dùng dấu ngoặc để thay đổi thứ tự tính toán.
+* Công thức đúng là: `(food + drink) * combo_count - discount`.
+
 ---
 
-## Bài tập 4: Chia đều sticker
+# Bài tập 4: Chia đều sticker
 
-* **Bối cảnh:** Cô giáo có một số sticker và muốn chia đều cho các nhóm.
-* **Yêu cầu:** Tính mỗi nhóm nhận được bao nhiêu sticker và còn dư bao nhiêu sticker.
-* **Code khởi đầu:**
+## Bối cảnh
 
-```python
+Cô giáo có một số sticker và muốn chia đều cho các nhóm.
+
+## Input
+
+```text
 stickers = 47
 groups = 6
-
-each_group = stickers // groups
-left_over = stickers % groups
-
-print(each_group)
-print(left_over)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `//` trả về phần nào của phép chia?
-  * `%` trả về phần nào của phép chia?
-  * Vì sao không dùng `/` trong bài chia đều này?
-* **Đáp án mẫu:**
+## Output
 
 ```text
 7
 5
 ```
 
+## Ràng buộc
+
+* Phải dùng `//` và `%`.
+
+## Gợi ý
+
+* `//` lấy phần nguyên.
+* `%` lấy phần dư.
+
 ---
 
-## Bài tập 5: Kiểm tra số chẵn lẻ
+# Bài tập 5: Kiểm tra số chẵn lẻ (có dùng if)
 
-* **Bối cảnh:** Một trò chơi cần biết số lượt chơi là chẵn hay lẻ.
-* **Yêu cầu:** Dùng `%` để kiểm tra số lượt chơi có phải số chẵn không.
-* **Code khởi đầu:**
+## Bối cảnh
 
-```python
-turns = 14
+Kiểm tra số lượt chơi là chẵn hay lẻ.
 
-is_even = turns % 2 == 0
-is_odd = turns % 2 != 0
-
-print(is_even)
-print(is_odd)
-```
-
-* **Câu hỏi gợi ý:**
-  * Một số chia cho 2 dư 0 thì là chẵn hay lẻ?
-  * Biểu thức `turns % 2 == 0` trả về kiểu dữ liệu gì?
-  * Nếu đổi `turns = 15`, kết quả thay đổi thế nào?
-* **Đáp án mẫu:**
+## Input
 
 ```text
-True
-False
+turns = 14
 ```
+
+## Output
+
+```text
+Số chẵn
+```
+
+## Ràng buộc
+
+* Phải dùng `%`.
+* Phải dùng `if`.
+
+## Gợi ý
+
+* Nếu chia 2 dư 0 → số chẵn.
 
 ---
 
-## Bài tập 6: Lũy thừa trong điểm thưởng
+# Bài tập 6: Lũy thừa trong điểm thưởng
 
-* **Bối cảnh:** Một nhiệm vụ đặc biệt có điểm thưởng tăng rất nhanh theo cấp độ.
-* **Yêu cầu:** Tính điểm thưởng bằng công thức `level ** 2`.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 level = 5
-
-bonus = level ** 2
-print(bonus)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `level ** 2` nghĩa là gì?
-  * Nếu `level = 10`, điểm thưởng là bao nhiêu?
-  * Toán tử `**` khác gì với `*`?
-* **Đáp án mẫu:**
+## Output
 
 ```text
 25
 ```
 
+## Ràng buộc
+
+* Phải dùng `**`.
+
 ---
 
-## Bài tập 7: Kiểm tra đạt hay chưa đạt
+# Bài tập 7: Kiểm tra đạt hay chưa đạt (dùng if)
 
-* **Bối cảnh:** Một bài kiểm tra cần từ 5 điểm trở lên để đạt.
-* **Yêu cầu:** In ra kết quả của biểu thức kiểm tra điểm có đạt hay không.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 score = 7.5
 pass_score = 5
-
-is_passed = score >= pass_score
-print(is_passed)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Toán tử `>=` có nghĩa là gì?
-  * Kết quả của `score >= pass_score` là số hay `True/False`?
-  * Nếu `score = 4.5`, kết quả là gì?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-True
+Đạt
 ```
+
+## Ràng buộc
+
+* Phải dùng `if`.
 
 ---
 
-## Bài tập 8: Kiểm tra đủ tuổi tham gia
+# Bài tập 8: Kiểm tra đủ tuổi tham gia
 
-* **Bối cảnh:** Một câu lạc bộ yêu cầu học sinh từ 12 tuổi trở lên mới được tham gia.
-* **Yêu cầu:** Dùng biểu thức so sánh để kiểm tra học sinh đã đủ tuổi chưa.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 age = 11
 min_age = 12
-
-can_join = age >= min_age
-print(can_join)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Biểu thức nào trả lời câu hỏi “đủ tuổi chưa”?
-  * Vì sao bài này chưa in “Được tham gia” hoặc “Chưa được tham gia”?
-  * Khi học `if`, ta sẽ dùng kết quả `can_join` để làm gì?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-False
+Chưa đủ tuổi
 ```
+
+## Ràng buộc
+
+* Phải dùng `if`.
 
 ---
 
-## Bài tập 9: Mật khẩu đúng hay sai
+# Bài tập 9: Mật khẩu đúng hay sai
 
-* **Bối cảnh:** Một màn hình đăng nhập cần kiểm tra mật khẩu nhập vào có đúng không.
-* **Yêu cầu:** Dùng `==` để so sánh mật khẩu nhập vào và mật khẩu đúng.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 correct_password = "python123"
 user_password = "python12"
-
-is_correct = user_password == correct_password
-is_wrong = user_password != correct_password
-
-print(is_correct)
-print(is_wrong)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `==` khác gì với `=`?
-  * `!=` có nghĩa là gì?
-  * Nếu `user_password = "python123"`, hai dòng output là gì?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-False
-True
+Sai mật khẩu
 ```
+
+## Ràng buộc
+
+* Phải dùng `if`.
 
 ---
 
-## Bài tập 10: Ghép điều kiện bằng `and`
+# Bài tập 10: Ghép điều kiện bằng `and`
 
-* **Bối cảnh:** Để nhận huy hiệu học tập, học sinh cần đạt từ 8 điểm trở lên và nộp đủ bài.
-* **Yêu cầu:** Dùng `and` để kiểm tra cả hai điều kiện cùng lúc.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 score = 8.5
 submitted_all = True
-
-can_get_badge = score >= 8 and submitted_all
-print(can_get_badge)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `and` chỉ trả về `True` khi nào?
-  * Nếu `submitted_all = False`, kết quả là gì?
-  * Điều kiện `score >= 8` đang kiểm tra điều gì?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-True
+Nhận huy hiệu
 ```
+
+## Ràng buộc
+
+* Phải dùng `and` và `if`.
 
 ---
 
-## Bài tập 11: Ghép điều kiện bằng `or`
+# Bài tập 11: Ghép điều kiện bằng `or`
 
-* **Bối cảnh:** Học sinh được vào phòng thực hành nếu có thẻ học sinh hoặc có giáo viên đi cùng.
-* **Yêu cầu:** Dùng `or` để kiểm tra chỉ cần một trong hai điều kiện đúng.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 has_student_card = False
 with_teacher = True
-
-can_enter_lab = has_student_card or with_teacher
-print(can_enter_lab)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `or` trả về `True` khi nào?
-  * Nếu cả hai biến đều là `False`, kết quả là gì?
-  * Tình huống đời thường nào khác cũng dùng logic “hoặc”?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-True
+Được vào
 ```
+
+## Ràng buộc
+
+* Phải dùng `or` và `if`.
 
 ---
 
-## Bài tập 12: Đảo ngược kết quả bằng `not`
+# Bài tập 12: Đảo ngược bằng `not`
 
-* **Bối cảnh:** Một tài khoản đang bị khóa thì không được đăng nhập.
-* **Yêu cầu:** Dùng `not` để kiểm tra tài khoản có được phép đăng nhập không.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 is_locked = False
-
-can_login = not is_locked
-print(can_login)
 ```
 
-* **Câu hỏi gợi ý:**
-  * `not False` cho kết quả gì?
-  * Nếu `is_locked = True`, `can_login` là gì?
-  * Vì sao `not` hữu ích khi muốn đảo ngược ý nghĩa?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-True
+Được đăng nhập
 ```
+
+## Ràng buộc
+
+* Phải dùng `not` và `if`.
 
 ---
 
-## Bài tập 13: Tổng hợp - Vé vào khu trải nghiệm
+# Bài tập 13: Tổng hợp điều kiện
 
-* **Bối cảnh:** Khu trải nghiệm Python có quy tắc: học sinh cần từ 12 tuổi trở lên, đã đăng ký, và không bị khóa thẻ.
-* **Yêu cầu:** Tạo các biểu thức kiểm tra từng điều kiện và một biểu thức logic tổng hợp. Không dùng `if`.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 age = 13
 registered = True
 card_locked = False
-
-old_enough = age >= 12
-card_ok = not card_locked
-can_join = old_enough and registered and card_ok
-
-print(old_enough)
-print(card_ok)
-print(can_join)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Dòng nào kiểm tra đủ tuổi?
-  * Dòng nào đảo ngược trạng thái khóa thẻ?
-  * Biểu thức `can_join` cần những điều kiện nào cùng đúng?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-True
-True
-True
+Được tham gia
 ```
+
+## Ràng buộc
+
+* Phải dùng `and`, `not`, `if`.
 
 ---
 
-## Bài tập 14: Tổng hợp - Đơn hàng có hợp lệ không?
+# Bài tập 14: Đơn hàng hợp lệ
 
-* **Bối cảnh:** Một đơn hàng online hợp lệ khi số lượng lớn hơn 0, tổng tiền không vượt quá số tiền trong ví, và mã xác nhận đúng.
-* **Yêu cầu:** Dùng toán tử số học, so sánh và logic để in kết quả kiểm tra đơn hàng. Không dùng `if`.
-* **Code khởi đầu:**
+## Input
 
-```python
+```text
 price = 25000
 quantity = 3
 wallet = 100000
 confirm_code = "OK2026"
 user_code = "OK2026"
-
-total = price * quantity
-quantity_ok = quantity > 0
-money_ok = wallet >= total
-code_ok = user_code == confirm_code
-order_ok = quantity_ok and money_ok and code_ok
-
-print(total)
-print(quantity_ok)
-print(money_ok)
-print(code_ok)
-print(order_ok)
 ```
 
-* **Câu hỏi gợi ý:**
-  * Biểu thức nào tạo ra giá trị tổng tiền?
-  * Biểu thức nào kiểm tra đủ tiền?
-  * Vì sao `order_ok` dùng `and`?
-  * Nếu đổi `wallet = 50000`, dòng cuối sẽ là gì?
-* **Đáp án mẫu:**
+## Output
 
 ```text
-75000
-True
-True
-True
-True
+Đơn hàng hợp lệ
 ```
+
+## Ràng buộc
+
+* Phải dùng `and`, `if`.
 
 ---
 
-## Chuyển tiếp sang bài `if`
+# Bài tập 15: Chia hết cho 3
 
-Ở phần toán tử, chúng ta đã tạo ra nhiều biểu thức có kết quả `True` hoặc `False`, ví dụ:
+## Input
 
-```python
-score >= 5
-age >= 12
-user_password == correct_password
-old_enough and registered and card_ok
+```text
+number = 27
 ```
 
-Hiện tại chương trình mới chỉ in ra kết quả kiểm tra. Ở bài tiếp theo, câu lệnh `if` sẽ dùng chính các kết quả `True/False` này để giúp chương trình ra quyết định: nếu đúng thì làm việc này, nếu sai thì làm việc khác.
+## Output
+
+```text
+Chia hết cho 3
+```
+
+## Ràng buộc
+
+* Phải dùng `%` và `if`.
+
+---
+
+# Bài tập 16: Điểm hợp lệ
+
+## Input
+
+```text
+score = 8
+```
+
+## Output
+
+```text
+Hợp lệ
+```
+
+## Ràng buộc
+
+* Phải dùng `and`, `if`.
+
+---
+
+# Bài tập 17: Ưu đãi mua hàng
+
+## Input
+
+```text
+total = 85000
+is_vip = True
+```
+
+## Output
+
+```text
+Có ưu đãi
+```
+
+## Ràng buộc
+
+* Phải dùng `or`, `if`.
+
+---
+
+# Bài tập 18: Trạng thái nộp bài
+
+## Input
+
+```text
+submitted = False
+```
+
+## Output
+
+```text
+Chưa hoàn thành
+```
+
+## Ràng buộc
+
+* Phải dùng `not`, `if`.
+
+---
+
+# Chuyển tiếp
+
+Ở phần này, bạn đã bắt đầu sử dụng `if` để đưa ra quyết định.
+
+Ở bài tiếp theo, bạn sẽ học sâu hơn về:
+
+* `if`, `elif`, `else`
+* Viết chương trình có nhiều nhánh xử lý khác nhau
