@@ -270,3 +270,345 @@ Da tim thay
 
 * Sử dụng vòng lặp `for...else`.
 * Sử dụng `break` để dừng vòng lặp khi tìm thấy tên.
+
+## Bài 9: Đếm ngược bằng for
+
+### Yêu cầu
+
+Viết chương trình in lần lượt các số nguyên từ `n` giảm dần đến `1`. Sau khi in hết các số, in thêm thông báo `Bat dau!`.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`1 <= n <= 100`).
+
+### Dữ liệu đầu ra
+
+* In các số từ `n` đến `1`, mỗi số trên một dòng.
+* Dòng cuối cùng in `Bat dau!`.
+
+Ví dụ:
+
+```text
+3
+```
+
+Kết quả:
+
+```text
+3
+2
+1
+Bat dau!
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` và hàm `range()` với bước nhảy âm.
+* Không sử dụng vòng lặp `while`.
+
+## Bài 10: Bình phương các số
+
+### Yêu cầu
+
+Viết chương trình in bình phương của từng số nguyên từ `1` đến `n`. Bình phương của số `i` được tính bằng `i * i`.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`1 <= n <= 100`).
+
+### Dữ liệu đầu ra
+
+In đúng `n` dòng. Dòng tương ứng với số `i` có định dạng `i: binh_phuong`.
+
+Ví dụ:
+
+```text
+4
+```
+
+Kết quả:
+
+```text
+1: 1
+2: 4
+3: 9
+4: 16
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` và hàm `range()`.
+* Không sử dụng toán tử `**` hoặc hàm `pow()`.
+
+## Bài 11: Tổng các số chẵn từ 1 đến n
+
+### Yêu cầu
+
+Viết chương trình tính tổng tất cả số chẵn từ `1` đến `n`, bao gồm `n` nếu `n` là số chẵn.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`1 <= n <= 10 000`).
+
+### Dữ liệu đầu ra
+
+In một số nguyên là tổng các số chẵn từ `1` đến `n`.
+
+Ví dụ:
+
+```text
+7
+```
+
+Kết quả:
+
+```text
+12
+```
+
+Giải thích ví dụ: Các số chẵn cần cộng là `2`, `4` và `6`, nên tổng bằng `12`.
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` với bước nhảy phù hợp.
+* Không sử dụng hàm `sum()`.
+
+## Bài 12: Tính giai thừa
+
+### Yêu cầu
+
+Viết chương trình tính giai thừa của số nguyên không âm `n`.
+
+* Nếu `n > 0`, giai thừa được tính bằng `n! = 1 * 2 * 3 * ... * n`.
+* Nếu `n = 0`, quy ước `0! = 1`.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`0 <= n <= 20`).
+
+### Dữ liệu đầu ra
+
+In một số nguyên là `n!`.
+
+Ví dụ:
+
+```text
+5
+```
+
+Kết quả:
+
+```text
+120
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` để thực hiện các phép nhân.
+* Không sử dụng hàm tính giai thừa có sẵn.
+
+## Bài 13: Đảo ngược một từ
+
+### Yêu cầu
+
+Viết chương trình tạo và in một chuỗi mới có thứ tự ký tự ngược lại so với từ đã nhập. Giữ nguyên chữ hoa và chữ thường của từng ký tự.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa một từ có từ `1` đến `100` ký tự và không chứa khoảng trắng.
+
+### Dữ liệu đầu ra
+
+In từ sau khi đã đảo ngược thứ tự các ký tự.
+
+Ví dụ:
+
+```text
+Python
+```
+
+Kết quả:
+
+```text
+nohtyP
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` để duyệt qua các vị trí trong chuỗi theo thứ tự giảm dần.
+* Không sử dụng cú pháp cắt chuỗi đảo ngược `[::-1]` và không sử dụng hàm `reversed()`.
+
+## Bài 14: Tìm số lớn nhất
+
+### Yêu cầu
+
+Viết chương trình tìm số nguyên lớn nhất trong một danh sách. Các số trong danh sách có thể là số âm, số `0` hoặc số dương.
+
+### Dữ liệu đầu vào
+
+* Dòng đầu tiên chứa số nguyên `n`, là số phần tử của danh sách (`1 <= n <= 100`).
+* Dòng thứ hai chứa đúng `n` số nguyên, các số cách nhau bởi một khoảng trắng. Mỗi số nằm trong đoạn từ `-10 000` đến `10 000`.
+
+### Dữ liệu đầu ra
+
+In một số nguyên là giá trị lớn nhất trong danh sách.
+
+Ví dụ:
+
+```text
+5
+-8 -2 -10 -3 -5
+```
+
+Kết quả:
+
+```text
+-2
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` và câu lệnh `if`.
+* Khởi tạo giá trị lớn nhất từ một phần tử của danh sách để xử lý đúng danh sách chỉ có số âm.
+* Không sử dụng hàm `max()` và không sắp xếp danh sách.
+
+## Bài 15: Đếm số lần xuất hiện
+
+### Yêu cầu
+
+Viết chương trình đếm số lần giá trị `x` xuất hiện trong danh sách số nguyên. Mỗi phần tử bằng `x` được tính là một lần xuất hiện.
+
+### Dữ liệu đầu vào
+
+* Dòng đầu tiên chứa số nguyên `n`, là số phần tử của danh sách (`1 <= n <= 100`).
+* Dòng thứ hai chứa đúng `n` số nguyên, các số cách nhau bởi một khoảng trắng.
+* Dòng thứ ba chứa số nguyên `x` cần đếm.
+* Mỗi số trong danh sách và `x` đều nằm trong đoạn từ `-1000` đến `1000`.
+
+### Dữ liệu đầu ra
+
+In một số nguyên là số lần `x` xuất hiện. Nếu `x` không xuất hiện, in `0`.
+
+Ví dụ:
+
+```text
+7
+2 5 2 8 2 3 5
+2
+```
+
+Kết quả:
+
+```text
+3
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` để kiểm tra từng phần tử.
+* Không sử dụng phương thức `count()`.
+
+## Bài 16: Các bội số của 3
+
+### Yêu cầu
+
+Viết chương trình in tất cả bội số dương của `3` không vượt quá `n`. Các số được in theo thứ tự tăng dần, bắt đầu từ `3`.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`1 <= n <= 10 000`).
+
+### Dữ liệu đầu ra
+
+* Nếu `n >= 3`, in các bội số dương của `3` không vượt quá `n` trên một dòng, mỗi số cách nhau bởi một khoảng trắng.
+* Nếu `n < 3`, in `Khong co boi so`.
+
+Ví dụ:
+
+```text
+11
+```
+
+Kết quả:
+
+```text
+3 6 9
+```
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng vòng lặp `for` với `range()` và bước nhảy bằng `3`.
+* Không cần duyệt qua các số không phải bội số của `3`.
+
+## Bài 17: Đếm số lớn hơn trung bình
+
+### Yêu cầu
+
+Viết chương trình tính trung bình cộng của danh sách số thực, sau đó đếm số phần tử lớn hơn giá trị trung bình đó. Phần tử bằng giá trị trung bình không được tính.
+
+Trung bình cộng được tính bằng tổng các phần tử chia cho số phần tử `n`.
+
+### Dữ liệu đầu vào
+
+* Dòng đầu tiên chứa số nguyên `n`, là số phần tử của danh sách (`1 <= n <= 100`).
+* Dòng thứ hai chứa đúng `n` số thực, các số cách nhau bởi một khoảng trắng. Mỗi số nằm trong đoạn từ `-10 000` đến `10 000`.
+
+### Dữ liệu đầu ra
+
+In một số nguyên là số phần tử lớn hơn trung bình cộng của danh sách.
+
+Ví dụ:
+
+```text
+5
+2 4 6 8 10
+```
+
+Kết quả:
+
+```text
+2
+```
+
+Giải thích ví dụ: Trung bình cộng bằng `6`. Hai phần tử lớn hơn `6` là `8` và `10`.
+
+### Yêu cầu kỹ thuật
+
+* Sử dụng một vòng lặp `for` để tính tổng.
+* Sử dụng một vòng lặp `for` khác để đếm các phần tử lớn hơn trung bình.
+* Không sử dụng hàm `sum()`.
+
+## Bài 18: Kiểm tra số nguyên tố
+
+### Yêu cầu
+
+Viết chương trình kiểm tra số nguyên `n` có phải là số nguyên tố hay không. Một số là số nguyên tố khi số đó lớn hơn `1` và chỉ chia hết cho `1` và chính nó.
+
+* Nếu `n` là số nguyên tố, in `La so nguyen to`.
+* Nếu `n` không phải là số nguyên tố, in `Khong phai so nguyen to`.
+
+### Dữ liệu đầu vào
+
+Một dòng chứa số nguyên `n` (`0 <= n <= 10 000`).
+
+### Dữ liệu đầu ra
+
+In đúng một trong hai thông báo: `La so nguyen to` hoặc `Khong phai so nguyen to`.
+
+Ví dụ:
+
+```text
+17
+```
+
+Kết quả:
+
+```text
+La so nguyen to
+```
+
+### Yêu cầu kỹ thuật
+
+* Với `n >= 2`, sử dụng vòng lặp `for...else` để thử các ước số từ `2` đến `n - 1`.
+* Sử dụng `break` ngay khi tìm thấy một ước số của `n`.
+* Xử lý riêng trường hợp `n < 2` vì các số này không phải là số nguyên tố.
