@@ -1,0 +1,596 @@
+# Biến cục bộ và biến toàn cục trong Python
+
+## 1. Mục tiêu bài học
+
+Sau bài học này, học sinh có thể:
+
+- Hiểu phạm vi hoạt động của một biến.
+- Phân biệt biến cục bộ và biến toàn cục.
+- Biết khi nào một biến chỉ được sử dụng bên trong hàm.
+- Biết khi nào một biến có thể được sử dụng ở nhiều vị trí trong chương trình.
+- Hiểu cách Python xử lý khi biến bên trong và bên ngoài hàm có cùng tên.
+- Biết tác dụng của từ khóa `global`.
+- Tránh một số lỗi thường gặp khi làm việc với biến trong hàm.
+
+---
+
+## 2. Ôn lại về biến
+
+Biến được dùng để lưu trữ dữ liệu trong chương trình.
+
+Ví dụ:
+
+```python
+name = "An"
+age = 12
+score = 8.5
+```
+
+Trong ví dụ trên:
+
+- `name` lưu tên học sinh.
+- `age` lưu tuổi.
+- `score` lưu điểm.
+
+Thông thường, chúng ta có thể sử dụng biến sau khi biến đã được tạo.
+
+```python
+name = "An"
+
+print(name)
+```
+
+Kết quả:
+
+```text
+An
+```
+
+Tuy nhiên, khi chương trình bắt đầu có **hàm**, một biến không phải lúc nào cũng có thể được sử dụng ở mọi nơi.
+
+Khái niệm này được gọi là **phạm vi của biến**.
+
+---
+
+## 3. Phạm vi của biến là gì?
+
+**Phạm vi của biến** cho biết những vị trí nào trong chương trình có thể sử dụng biến đó.
+
+Ví dụ:
+
+```python
+def say_hello():
+    message = "Xin chào"
+    print(message)
+
+say_hello()
+```
+
+Biến `message` được tạo bên trong hàm `say_hello()`.
+
+Vì vậy, biến này chỉ tồn tại trong phạm vi của hàm.
+
+Nếu viết:
+
+```python
+def say_hello():
+    message = "Xin chào"
+
+print(message)
+```
+
+Python sẽ báo lỗi vì `message` không tồn tại ở bên ngoài hàm.
+
+---
+
+## 4. Biến cục bộ là gì?
+
+**Biến cục bộ** hay **local variable** là biến được tạo bên trong một hàm.
+
+Biến cục bộ chỉ được sử dụng bên trong hàm đó.
+
+Ví dụ:
+
+```python
+def show_score():
+    score = 10
+    print(score)
+
+show_score()
+```
+
+Kết quả:
+
+```text
+10
+```
+
+Trong ví dụ này, `score` là một biến cục bộ vì nó được tạo bên trong hàm `show_score()`.
+
+---
+
+## 5. Không thể sử dụng biến cục bộ bên ngoài hàm
+
+```python
+def show_score():
+    score = 10
+
+show_score()
+
+print(score)
+```
+
+Chương trình sẽ báo lỗi.
+
+Nguyên nhân là biến `score` chỉ tồn tại bên trong hàm `show_score()`.
+
+Có thể hình dung như sau:
+
+```text
+Chương trình
+
+    show_score()
+    ┌─────────────────┐
+    │ score = 10      │
+    │                 │
+    │ dùng được score │
+    └─────────────────┘
+
+    bên ngoài hàm:
+    không dùng được score
+```
+
+---
+
+## 6. Hai hàm có thể có biến cục bộ cùng tên
+
+Mỗi hàm có phạm vi riêng.
+
+Vì vậy, hai hàm có thể tạo các biến có cùng tên mà không ảnh hưởng đến nhau.
+
+```python
+def student_one():
+    score = 8
+    print(score)
+
+def student_two():
+    score = 10
+    print(score)
+
+student_one()
+student_two()
+```
+
+Kết quả:
+
+```text
+8
+10
+```
+
+Mặc dù cả hai hàm đều có biến `score`, đây là hai biến khác nhau.
+
+---
+
+## 7. Tham số của hàm cũng là biến cục bộ
+
+```python
+def greet(name):
+    print("Xin chào", name)
+
+greet("An")
+```
+
+Biến `name` là tham số của hàm.
+
+`name` chỉ được sử dụng bên trong hàm `greet()`.
+
+Do đó, tham số của hàm cũng được xem là biến cục bộ.
+
+Ví dụ:
+
+```python
+def calculate_total(price, quantity):
+    total = price * quantity
+    print(total)
+```
+
+Trong hàm này:
+
+- `price` là biến cục bộ.
+- `quantity` là biến cục bộ.
+- `total` là biến cục bộ.
+
+---
+
+## 8. Biến toàn cục là gì?
+
+**Biến toàn cục** hay **global variable** là biến được khai báo bên ngoài các hàm.
+
+Ví dụ:
+
+```python
+school = "Python Academy"
+
+def show_school():
+    print(school)
+
+show_school()
+```
+
+Kết quả:
+
+```text
+Python Academy
+```
+
+Biến `school` được tạo bên ngoài hàm nên là biến toàn cục.
+
+---
+
+## 9. Biến toàn cục có thể được đọc bên trong hàm
+
+```python
+game_name = "Python Quiz"
+
+def show_game():
+    print(game_name)
+
+show_game()
+
+print(game_name)
+```
+
+Kết quả:
+
+```text
+Python Quiz
+Python Quiz
+```
+
+Biến `game_name` có thể được sử dụng:
+
+- bên ngoài hàm;
+- bên trong hàm `show_game()`.
+
+---
+
+## 10. Biến cục bộ và biến toàn cục cùng tên
+
+```python
+score = 100
+
+def play():
+    score = 20
+    print(score)
+
+play()
+
+print(score)
+```
+
+Kết quả:
+
+```text
+20
+100
+```
+
+Có hai biến khác nhau:
+
+```text
+Bên ngoài hàm:
+score = 100
+
+play()
+┌───────────────┐
+│ score = 20    │
+└───────────────┘
+```
+
+Biến `score = 20` bên trong hàm là biến cục bộ.
+
+Nó không làm thay đổi biến `score = 100` bên ngoài hàm.
+
+---
+
+## 11. Python ưu tiên biến cục bộ trong hàm
+
+```python
+name = "An"
+
+def show_name():
+    name = "Bình"
+    print(name)
+
+show_name()
+```
+
+Kết quả:
+
+```text
+Bình
+```
+
+Khi hàm có một biến cục bộ tên `name`, Python sử dụng biến cục bộ đó thay vì biến toàn cục cùng tên.
+
+Nếu tiếp tục:
+
+```python
+print(name)
+```
+
+Kết quả là:
+
+```text
+An
+```
+
+---
+
+## 12. Thay đổi biến toàn cục bên trong hàm
+
+Xem chương trình sau:
+
+```python
+score = 0
+
+def add_score():
+    score = score + 10
+
+add_score()
+```
+
+Chương trình sẽ báo lỗi.
+
+Nguyên nhân là khi Python nhìn thấy phép gán cho `score` bên trong hàm, Python xem `score` là biến cục bộ. Nhưng biến cục bộ này lại được sử dụng trước khi có giá trị.
+
+---
+
+## 13. Từ khóa `global`
+
+Nếu muốn thay đổi một biến toàn cục bên trong hàm, có thể sử dụng từ khóa `global`.
+
+```python
+score = 0
+
+def add_score():
+    global score
+    score = score + 10
+
+add_score()
+
+print(score)
+```
+
+Kết quả:
+
+```text
+10
+```
+
+Dòng:
+
+```python
+global score
+```
+
+cho Python biết rằng `score` trong hàm là biến toàn cục đã được khai báo ở bên ngoài.
+
+---
+
+## 14. Ví dụ với `global`
+
+```python
+coins = 5
+
+def collect_coin():
+    global coins
+    coins = coins + 1
+
+collect_coin()
+collect_coin()
+
+print(coins)
+```
+
+Kết quả:
+
+```text
+7
+```
+
+Ban đầu:
+
+```text
+coins = 5
+```
+
+Sau lần gọi thứ nhất:
+
+```text
+coins = 6
+```
+
+Sau lần gọi thứ hai:
+
+```text
+coins = 7
+```
+
+---
+
+## 15. Có nên dùng `global` thường xuyên không?
+
+`global` có thể sử dụng trong Python, nhưng không nên lạm dụng.
+
+Khi nhiều hàm cùng thay đổi một biến toàn cục, chương trình sẽ khó theo dõi và khó tìm lỗi.
+
+Ví dụ:
+
+```text
+score
+ ↑
+ ├── function_a() thay đổi
+ ├── function_b() thay đổi
+ └── function_c() thay đổi
+```
+
+Trong nhiều trường hợp nên:
+
+- truyền dữ liệu vào hàm bằng tham số;
+- xử lý dữ liệu bên trong hàm;
+- dùng `return` để trả kết quả ra ngoài.
+
+---
+
+## 16. Cách tốt hơn: sử dụng `return`
+
+Thay vì:
+
+```python
+score = 10
+
+def add_score():
+    global score
+    score = score + 5
+```
+
+có thể viết:
+
+```python
+def add_score(score):
+    score = score + 5
+    return score
+
+score = 10
+score = add_score(score)
+
+print(score)
+```
+
+Kết quả:
+
+```text
+15
+```
+
+Luồng dữ liệu:
+
+```text
+score = 10
+    ↓
+add_score(10)
+    ↓
+return 15
+    ↓
+score = 15
+```
+
+Hàm nhận dữ liệu bằng tham số và trả kết quả bằng `return`.
+
+---
+
+## 17. Chỉ đọc biến toàn cục thì không cần `global`
+
+```python
+tax = 0.1
+
+def calculate_tax(price):
+    return price * tax
+
+print(calculate_tax(100))
+```
+
+Kết quả:
+
+```text
+10.0
+```
+
+Ở đây hàm chỉ đọc giá trị của `tax`, không thay đổi `tax`.
+
+Vì vậy, không cần dùng `global tax`.
+
+---
+
+## 18. Thay đổi biến toàn cục thì cần `global`
+
+```python
+count = 0
+
+def increase():
+    global count
+    count = count + 1
+```
+
+Ở đây hàm thay đổi giá trị của `count`, nên cần khai báo:
+
+```python
+global count
+```
+
+---
+
+## 19. Biến cục bộ chỉ được tạo khi hàm chạy
+
+```python
+def create_message():
+    message = "Hello"
+```
+
+Biến `message` chỉ được tạo khi hàm `create_message()` được gọi.
+
+Sau khi hàm kết thúc, biến cục bộ đó không thể được truy cập từ bên ngoài.
+
+---
+
+## 20. Bảng so sánh
+
+| Đặc điểm | Biến cục bộ | Biến toàn cục |
+| --- | --- | --- |
+| Nơi khai báo | Bên trong hàm | Bên ngoài hàm |
+| Dùng trong hàm tạo ra nó | Có | Có |
+| Dùng bên ngoài hàm | Không | Có |
+| Hàm có thể đọc | Có | Có |
+| Hàm có thể thay đổi trực tiếp | Có | Cần `global` |
+| Tên tiếng Anh | Local variable | Global variable |
+
+---
+
+## 21. Ghi nhớ
+
+```text
+Khai báo trong hàm
+        ↓
+   Local variable
+        ↓
+Chỉ dùng trong hàm
+```
+
+```text
+Khai báo ngoài hàm
+        ↓
+   Global variable
+        ↓
+Có thể đọc trong hàm
+```
+
+Nếu muốn thay đổi biến toàn cục trực tiếp trong hàm:
+
+```python
+global ten_bien
+```
+
+Khi có thể, nên ưu tiên:
+
+```text
+tham số → xử lý → return
+```
+
+Ví dụ:
+
+```python
+def increase(number):
+    return number + 1
+```
