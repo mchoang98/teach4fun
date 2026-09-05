@@ -1,241 +1,143 @@
-#  Buổi 2: Template, Static và Layout
+# Buổi 2: REST API và Frontend gọi API
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
-
-- Biết dùng thư mục `templates`.
-- Biết dùng `render_template`.
-- Biết tạo file HTML cho Flask.
-- Biết dùng thư mục `static`.
-- Biết gắn CSS vào Flask.
-- Biết tạo layout chung cho website.
+- Hiểu tài nguyên, endpoint, path parameter và query parameter.
+- Tạo frontend độc lập với Flask.
+- Dùng `fetch()`, `async/await` và DOM để hiển thị JSON.
+- Hiểu CORS ở mức cơ bản.
 
 ## 2. Kiến thức chính
 
-Flask thường dùng cấu trúc:
+| Request | Ý nghĩa |
+|---|---|
+| `GET /api/products` | Lấy danh sách |
+| `GET /api/products/2` | Lấy sản phẩm id 2 |
+| `GET /api/products?keyword=áo` | Tìm theo tên |
+
+Frontend ở cổng `5500` và API ở cổng `5000` là hai origin khác nhau. Cài `Flask-Cors` để cho phép frontend học tập gọi API.
+
+## 3. Backend mẫu
 
 ```text
-flask-shop
-├── app.py
-├── templates
-│   ├── layout.html
-│   ├── index.html
-│   ├── products.html
-│   └── contact.html
-└── static
-    └── style.css
+pip install Flask-Cors
 ```
-
-Render template:
 
 ```python
-from flask import render_template
-
-return render_template("index.html")
-```
-
-Gắn CSS trong Flask:
-
-```html
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-```
-
-## 3. Giải thích dễ hiểu
-
-Ở buổi 1, route chỉ trả về text. Nhưng website thật cần HTML và CSS. Vì vậy Flask dùng thư mục `templates` để chứa file HTML.
-
-Thư mục `static` chứa các file tĩnh như CSS, JavaScript, hình ảnh.
-
-Layout giúp website có một khung chung. Ví dụ tất cả trang đều có header và menu giống nhau.
-
-## 4. Hình minh họa nên chèn
-
-- Từ khóa Google:  
-`Flask project folder structure`
-
-- Vị trí chèn:  
-Sau phần giới thiệu `templates` và `static`.
-
-- Chú thích:  
-Project Flask thường chia HTML vào templates và CSS, ảnh, JS vào static.
-
-## 5. Ví dụ code
-
-File `app.py`:
-
-```python
-from flask import Flask, render_template
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+products = [
+    {"id": 1, "name": "Bút máy", "price": 45000},
+    {"id": 2, "name": "Sổ tay", "price": 60000},
+]
 
-@app.route("/products")
-def products():
-    return render_template("products.html")
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+@app.get("/api/products")
+def get_products():
+    keyword = request.args.get("keyword", "").strip().lower()
+    result = [p for p in products if keyword in p["name"].lower()]
+    return jsonify(result), 200
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+@app.get("/api/products/<int:product_id>")
+def get_product(product_id):
+    product = next((p for p in products if p["id"] == product_id), None)
+    if product is None:
+        return jsonify({"error": "Không tìm thấy sản phẩm"}), 404
+    return jsonify(product), 200
 ```
 
-File `templates/layout.html`:
+## 4. Frontend mẫu
+
+`frontend/index.html` là HTML thuần, không nằm trong `templates`:
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Flask Shop</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+<!doctype html>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>Sản phẩm</title></head>
 <body>
-    <header class="header">
-        <h1>Flask Shop</h1>
-        <nav>
-            <a href="/">Trang chủ</a>
-            <a href="/products">Sản phẩm</a>
-            <a href="/contact">Liên hệ</a>
-        </nav>
-    </header>
-
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+  <h1>Sản phẩm</h1>
+  <p id="status">Đang tải...</p>
+  <ul id="product-list"></ul>
+  <script src="js/products.js"></script>
 </body>
 </html>
 ```
 
-File `templates/index.html`:
+`frontend/js/products.js`:
 
-```html
-{% extends "layout.html" %}
+```javascript
+const API_URL = "http://127.0.0.1:5000/api";
+const statusElement = document.querySelector("#status");
+const listElement = document.querySelector("#product-list");
 
-{% block content %}
-<section class="card">
-    <h2>Chào mừng đến với Flask Shop</h2>
-    <p>Đây là website bán hàng đơn giản được xây dựng bằng Flask.</p>
-</section>
-{% endblock %}
-```
-
-File `static/style.css`:
-
-```css
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fb;
-    color: #1f2937;
+async function loadProducts() {
+  try {
+    const response = await fetch(`${API_URL}/products`);
+    if (!response.ok) throw new Error("Không tải được sản phẩm");
+    const products = await response.json();
+    listElement.innerHTML = products
+      .map((p) => `<li>${p.name} - ${p.price} đồng</li>`).join("");
+    statusElement.textContent = products.length ? "" : "Chưa có sản phẩm";
+  } catch (error) {
+    statusElement.textContent = error.message;
+  }
 }
 
-.header {
-    background-color: #2563eb;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.header a {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.card {
-    background-color: white;
-    padding: 24px;
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
-}
+loadProducts();
 ```
 
-## 6. Thực hành trên lớp
+Mở `frontend` bằng Live Server, không dùng `file://`.
 
-- Tạo thư mục `templates`.
-- Tạo thư mục `static`.
-- Tạo `layout.html`.
-- Tạo `index.html`, `products.html`, `contact.html`.
-- Gắn CSS bằng `url_for`.
-- Dùng `{% extends "layout.html" %}` cho các trang con.
+## 5. Thực hành trên lớp
 
-## 7. Lỗi thường gặp
+### Yêu cầu
 
-### Lỗi 1: Sai tên thư mục templates
+Thêm ô tìm kiếm. Khi gửi, gọi `GET /api/products?keyword=...` và vẽ lại danh sách.
 
-Flask mặc định tìm thư mục:
+### Dữ liệu đầu vào
 
-```text
-templates
-```
+Một chuỗi có thể rỗng. Chuỗi rỗng trả mọi sản phẩm; so sánh không phân biệt hoa thường.
 
-Không viết thành:
+### Kết quả mong đợi
 
-```text
-template
-```
+Hiển thị sản phẩm có tên chứa từ khóa; nếu rỗng, in `Không tìm thấy sản phẩm`.
 
-### Lỗi 2: Sai tên thư mục static
+### Yêu cầu kỹ thuật
 
-Phải là:
+Dùng `URLSearchParams`, `request.args.get` và không tải lại trang.
 
-```text
-static
-```
+## 6. Lỗi thường gặp
 
-### Lỗi 3: Quên import `render_template`
+- CORS: kiểm tra `CORS(app)` và đúng cổng API.
+- `Failed to fetch`: kiểm tra backend đang chạy.
+- Quên gọi hàm: dùng `await response.json()`.
+- DOM không đổi: kiểm tra selector và Console.
 
-```python
-from flask import render_template
-```
+## 7. Bài tập về nhà
 
-### Lỗi 4: Gắn CSS sai cách
+### Yêu cầu
 
-Nên dùng:
+Tạo trang đọc `id` từ URL `product.html?id=2`, gọi API chi tiết và hiển thị kết quả.
 
-```html
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-```
+### Dữ liệu đầu vào
 
-## 8. Bài tập về nhà
+`id` là số nguyên dương.
 
-Tạo website Flask có 4 trang:
+### Kết quả mong đợi
 
-- Trang chủ
-- Sản phẩm
-- Giới thiệu
-- Liên hệ
+Hiển thị tên, giá khi status `200`; hiển thị lỗi API khi status `404`.
 
-Yêu cầu:
+### Yêu cầu kỹ thuật
 
-- Có `layout.html`.
-- Có menu chung.
-- Có file `style.css`.
-- Giao diện có màu nền, card và header.
+Dùng `URLSearchParams`, `fetch`, `textContent`; xử lý loading và lỗi.
 
-## 9. Checklist cuối buổi
+## 8. Checklist
 
-- [ ] Biết dùng thư mục `templates`.
-- [ ] Biết dùng `render_template`.
-- [ ] Biết tạo `layout.html`.
-- [ ] Biết dùng `{% extends %}`.
-- [ ] Biết dùng `{% block content %}`.
-- [ ] Biết dùng thư mục `static`.
-- [ ] Gắn được CSS vào Flask.
-- [ ] Tạo được nhiều trang HTML trong Flask.
-
-## 10. Kết quả cần đạt
-
-Kết thúc buổi này, học viên có website Flask nhiều trang, có layout chung và có CSS.
+- [ ] Thiết kế được URL theo tài nguyên.
+- [ ] Gọi được API bằng `fetch()`.
+- [ ] Xử lý được loading, dữ liệu rỗng và lỗi.

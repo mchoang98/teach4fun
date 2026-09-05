@@ -1,208 +1,176 @@
-#  Buổi 7: Giỏ hàng và đặt hàng
+# Buổi 7: Giỏ hàng Client-side và API đặt hàng
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
+- Lưu giỏ hàng ở `localStorage`.
+- Thêm, cập nhật, xóa sản phẩm và tính tổng ở client.
+- Không tin giá tiền do client gửi.
+- Tạo đơn hàng trong một transaction.
 
-- Hiểu session là gì.
-- Biết lưu giỏ hàng trong session.
-- Biết thêm sản phẩm vào giỏ hàng.
-- Biết xem giỏ hàng.
-- Biết xóa sản phẩm khỏi giỏ hàng.
-- Biết tính tổng tiền.
-- Biết tạo form đặt hàng cơ bản.
+## 2. Thiết kế dữ liệu
 
-## 2. Kiến thức chính
+Client chỉ lưu id và số lượng:
 
-Session là nơi lưu dữ liệu tạm theo từng người dùng.
+```json
+[{"product_id": 1, "quantity": 2}]
+```
 
-Khi dùng session trong Flask, cần có:
+Request:
+
+```json
+{
+  "customer_name": "Nguyễn An",
+  "customer_phone": "0901234567",
+  "items": [{"product_id": 1, "quantity": 2}]
+}
+```
+
+Backend lấy giá từ database và tự tính tổng, không nhận giá do client quyết định.
+
+## 3. Giỏ hàng phía client
+
+```javascript
+const CART_KEY = "flask_shop_cart";
+
+function getCart() {
+  try {
+    const cart = JSON.parse(localStorage.getItem(CART_KEY)) ?? [];
+    return Array.isArray(cart) ? cart : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+export function addToCart(productId) {
+  const cart = getCart();
+  const item = cart.find((entry) => entry.product_id === productId);
+  if (item) item.quantity += 1;
+  else cart.push({ product_id: productId, quantity: 1 });
+  saveCart(cart);
+}
+```
+
+`localStorage` thuộc trình duyệt và origin frontend, không phải session Flask.
+
+## 4. API đặt hàng
+
+Model tối thiểu gồm `Order(id, customer_name, customer_phone, total)` và `OrderItem(id, order_id, product_id, quantity, unit_price)`. `unit_price` lưu giá tại lúc đặt.
 
 ```python
-app.secret_key = "your-secret-key"
+@app.post("/api/orders")
+def create_order():
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({"error": "Body phải là một object JSON"}), 400
+    name, phone, items = data.get("customer_name"), data.get("customer_phone"), data.get("items")
+    if not isinstance(name, str) or not name.strip():
+        return jsonify({"error": "Tên khách hàng không được để trống"}), 400
+    if not isinstance(phone, str) or not phone.strip():
+        return jsonify({"error": "Số điện thoại không được để trống"}), 400
+    if not isinstance(items, list) or not items:
+        return jsonify({"error": "Giỏ hàng không được để trống"}), 400
+
+    normalized = {}
+    for item in items:
+        if not isinstance(item, dict):
+            return jsonify({"error": "Phần tử giỏ hàng không hợp lệ"}), 400
+        product_id, quantity = item.get("product_id"), item.get("quantity")
+        if type(product_id) is not int or type(quantity) is not int or quantity <= 0:
+            return jsonify({"error": "Mã sản phẩm hoặc số lượng không hợp lệ"}), 400
+        normalized[product_id] = normalized.get(product_id, 0) + quantity
+
+    try:
+        order = Order(customer_name=name.strip(), customer_phone=phone.strip(), total=0)
+        db.session.add(order)
+        total = 0
+        for product_id, quantity in normalized.items():
+            product = db.session.get(Product, product_id)
+            if product is None:
+                db.session.rollback()
+                return jsonify({"error": f"Không tìm thấy sản phẩm {product_id}"}), 400
+            total += product.price * quantity
+            order.items.append(OrderItem(
+                product_id=product.id, quantity=quantity, unit_price=product.price
+            ))
+        order.total = total
+        db.session.commit()
+        return jsonify({"id": order.id, "total": order.total}), 201
+    except Exception:
+        db.session.rollback()
+        app.logger.exception("Không thể tạo đơn hàng")
+        return jsonify({"error": "Không thể tạo đơn hàng"}), 500
 ```
 
-Các route giỏ hàng:
+## 5. Gửi đơn hàng
 
-```text
-/cart
-/cart/add/<id>
-/cart/remove/<id>
-/checkout
+```javascript
+const response = await fetch("http://127.0.0.1:5000/api/orders", {
+  method: "POST",
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify({
+    customer_name: nameInput.value.trim(),
+    customer_phone: phoneInput.value.trim(),
+    items: getCart(),
+  }),
+});
+const data = await response.json();
+if (!response.ok) throw new Error(data.error);
+localStorage.removeItem(CART_KEY);
+message.textContent = `Đặt hàng thành công. Mã đơn: ${data.id}`;
 ```
 
-## 3. Giải thích dễ hiểu
-
-Giỏ hàng là nơi lưu các sản phẩm khách muốn mua.
-
-Ví dụ:
-
-```text
-Khách bấm thêm Áo thun
-→ Flask lưu sản phẩm vào session
-→ Khách mở giỏ hàng
-→ Flask đọc session và hiển thị sản phẩm
-```
-
-Session phù hợp để lưu dữ liệu tạm như giỏ hàng.
-
-## 4. Hình minh họa nên chèn
-
-- Từ khóa Google:  
-`shopping cart session workflow diagram`
-
-- Vị trí chèn:  
-Sau phần giải thích giỏ hàng và session.
-
-- Chú thích:  
-Session giúp lưu giỏ hàng riêng cho từng người dùng.
-
-## 5. Ví dụ code
-
-### Bật secret key
-
-```python
-app.secret_key = "flask-shop-secret-key"
-```
-
-### Route thêm vào giỏ hàng
-
-```python
-from flask import session, redirect
-
-@app.route("/cart/add/<int:id>")
-def add_to_cart(id):
-    product = Product.query.get_or_404(id)
-
-    cart = session.get("cart", [])
-    cart.append({
-        "id": product.id,
-        "name": product.name,
-        "price": product.price,
-        "quantity": 1
-    })
-
-    session["cart"] = cart
-    return redirect("/cart")
-```
-
-### Route xem giỏ hàng
-
-```python
-@app.route("/cart")
-def cart():
-    cart = session.get("cart", [])
-    total = 0
-
-    for item in cart:
-        total += item["price"] * item["quantity"]
-
-    return render_template("cart.html", cart=cart, total=total)
-```
-
-### Route xóa khỏi giỏ hàng
-
-```python
-@app.route("/cart/remove/<int:id>")
-def remove_from_cart(id):
-    cart = session.get("cart", [])
-    new_cart = []
-
-    for item in cart:
-        if item["id"] != id:
-            new_cart.append(item)
-
-    session["cart"] = new_cart
-    return redirect("/cart")
-```
-
-File `templates/cart.html`:
-
-```html
-{% extends "layout.html" %}
-
-{% block content %}
-<h2>Giỏ hàng</h2>
-
-{% if cart %}
-    {% for item in cart %}
-    <div class="card">
-        <h3>{{ item.name }}</h3>
-        <p>Giá: {{ item.price }} VND</p>
-        <p>Số lượng: {{ item.quantity }}</p>
-        <a href="/cart/remove/{{ item.id }}" class="btn">Xóa</a>
-    </div>
-    {% endfor %}
-
-    <h3>Tổng tiền: {{ total }} VND</h3>
-    <a href="/checkout" class="btn">Đặt hàng</a>
-{% else %}
-    <p>Giỏ hàng đang trống.</p>
-{% endif %}
-{% endblock %}
-```
+Chỉ xóa giỏ sau khi API thành công.
 
 ## 6. Thực hành trên lớp
 
-- Thêm `secret_key`.
-- Tạo route `/cart/add/<id>`.
-- Tạo route `/cart`.
-- Tạo route `/cart/remove/<id>`.
-- Tạo template `cart.html`.
-- Tính tổng tiền trong giỏ hàng.
-- Tạo nút đặt hàng.
+### Yêu cầu
+
+Cho phép đổi số lượng. Số lượng 0 nghĩa là xóa sản phẩm.
+
+### Dữ liệu đầu vào
+
+`product_id` là số nguyên dương; `quantity` là số nguyên từ 0.
+
+### Kết quả mong đợi
+
+Lưu giỏ, vẽ lại và tính tổng theo giá API. Giỏ rỗng in `Giỏ hàng đang trống`.
+
+### Yêu cầu kỹ thuật
+
+Không lưu tổng tiền trong `localStorage`; luôn tính lại.
 
 ## 7. Lỗi thường gặp
 
-### Lỗi 1: Quên `secret_key`
-
-Cần có:
-
-```python
-app.secret_key = "your-secret-key"
-```
-
-### Lỗi 2: Session không lưu được dữ liệu phức tạp
-
-Chỉ nên lưu dữ liệu đơn giản như string, number, list, dictionary.
-
-### Lỗi 3: Giỏ hàng bị lỗi khi chưa có dữ liệu
-
-Nên dùng:
-
-```python
-cart = session.get("cart", [])
-```
-
-### Lỗi 4: Tổng tiền sai
-
-Cần nhân giá với số lượng:
-
-```python
-total += item["price"] * item["quantity"]
-```
+- JSON hỏng: bọc `JSON.parse` trong `try/catch`.
+- Tin giá client: backend phải đọc database.
+- Tạo nửa đơn: rollback khi lỗi.
+- Xóa giỏ trước thành công: người dùng có thể mất dữ liệu.
 
 ## 8. Bài tập về nhà
 
-Hoàn thiện giỏ hàng:
+### Yêu cầu
 
-- Thêm sản phẩm vào giỏ.
-- Xem giỏ hàng.
-- Xóa sản phẩm khỏi giỏ.
-- Tính tổng tiền.
-- Tạo nút checkout.
+Tạo `GET /api/orders/<id>` trả đơn và các dòng hàng.
 
-## 9. Checklist cuối buổi
+### Dữ liệu đầu vào
 
-- [ ] Hiểu session là gì.
-- [ ] Biết dùng `app.secret_key`.
-- [ ] Thêm được sản phẩm vào giỏ.
-- [ ] Xem được giỏ hàng.
-- [ ] Xóa được sản phẩm khỏi giỏ.
-- [ ] Tính được tổng tiền.
-- [ ] Biết dùng `session.get`.
-- [ ] Tạo được trang cart.
+`id` là số nguyên dương.
 
-## 10. Kết quả cần đạt
+### Dữ liệu đầu ra
 
-Kết thúc buổi này, học viên có giỏ hàng hoạt động cơ bản bằng Flask session.
+Có dữ liệu: thông tin khách, `total`, array `items` và `200`. Không có: object `error` và `404`.
+
+### Yêu cầu kỹ thuật
+
+Mỗi dòng có `product_id`, `quantity`, `unit_price`; không dùng Jinja.
+
+## 9. Checklist
+
+- [ ] Giỏ lưu ở client.
+- [ ] Backend tự tính giá và tổng.
+- [ ] Đơn hàng lưu theo transaction.
+- [ ] Chỉ xóa giỏ sau khi thành công.

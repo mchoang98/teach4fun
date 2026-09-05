@@ -1,172 +1,139 @@
-#  Buổi 6: Trang bán hàng và chi tiết sản phẩm
+# Buổi 6: Giao diện danh sách và chi tiết gọi API
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
+- Tách logic gọi API khỏi logic giao diện.
+- Hiển thị danh sách và chi tiết từ JSON.
+- Đọc id từ query string.
+- Tạo DOM an toàn và xử lý loading, rỗng, lỗi mạng, 404.
 
-- Biết tạo trang danh sách sản phẩm cho khách hàng.
-- Biết hiển thị sản phẩm từ database ra HTML.
-- Biết tạo card sản phẩm.
-- Biết tạo trang chi tiết sản phẩm.
-- Biết phân biệt trang admin và trang khách hàng.
+## 2. Module gọi API
 
-## 2. Kiến thức chính
+`frontend/js/api.js`:
 
-Trang admin dành cho người quản lý sản phẩm.
+```javascript
+const API_BASE_URL = "http://127.0.0.1:5000/api";
 
-Trang bán hàng dành cho khách hàng xem và mua sản phẩm.
-
-Các route chính:
-
-```text
-/products
-/products/<id>
+export async function getJson(path, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${path}`, options);
+  const data = response.status === 204 ? null : await response.json();
+  if (!response.ok) throw new Error(data?.error || "Yêu cầu thất bại");
+  return data;
+}
 ```
 
-Lấy danh sách sản phẩm:
+## 3. Trang danh sách
 
-```python
-products = Product.query.all()
+```javascript
+import { getJson } from "./api.js";
+
+const container = document.querySelector("#products");
+const status = document.querySelector("#status");
+const formatMoney = new Intl.NumberFormat("vi-VN");
+
+function createProductCard(product) {
+  const article = document.createElement("article");
+  const title = document.createElement("h2");
+  const price = document.createElement("p");
+  const link = document.createElement("a");
+  title.textContent = product.name;
+  price.textContent = `${formatMoney.format(product.price)} đồng`;
+  link.href = `product.html?id=${product.id}`;
+  link.textContent = "Xem chi tiết";
+  article.append(title, price, link);
+  return article;
+}
+
+async function loadProducts() {
+  try {
+    const products = await getJson("/products");
+    status.textContent = products.length ? "" : "Chưa có sản phẩm";
+    products.forEach((product) => container.append(createProductCard(product)));
+  } catch (error) {
+    status.textContent = error.message;
+  }
+}
+
+loadProducts();
 ```
 
-Lấy chi tiết sản phẩm:
+Dùng `textContent` cho dữ liệu từ API để không diễn giải dữ liệu như HTML.
 
-```python
-product = Product.query.get_or_404(id)
+## 4. Trang chi tiết
+
+```javascript
+import { getJson } from "./api.js";
+
+const id = Number(new URLSearchParams(location.search).get("id"));
+const status = document.querySelector("#status");
+
+async function loadProduct() {
+  if (!Number.isInteger(id) || id <= 0) {
+    status.textContent = "Mã sản phẩm không hợp lệ";
+    return;
+  }
+  try {
+    const product = await getJson(`/products/${id}`);
+    document.querySelector("#name").textContent = product.name;
+    document.querySelector("#description").textContent =
+      product.description || "Chưa có mô tả";
+    status.textContent = "";
+  } catch (error) {
+    status.textContent = error.message;
+  }
+}
+
+loadProduct();
 ```
 
-## 3. Giải thích dễ hiểu
+Nạp module bằng `<script type="module" src="js/products.js"></script>`.
 
-Ở buổi 5, học viên đã tạo trang quản lý sản phẩm. Buổi này, ta dùng dữ liệu đó để hiển thị cho khách hàng.
+## 5. Thực hành trên lớp
 
-Khách hàng không cần thấy nút sửa hoặc xóa. Khách hàng chỉ cần thấy:
+### Yêu cầu
 
-- Hình sản phẩm
-- Tên sản phẩm
-- Giá
-- Mô tả ngắn
-- Nút xem chi tiết
-- Nút thêm vào giỏ hàng
+Hiển thị ảnh; khi `image_url` rỗng hoặc tải lỗi, dùng `images/placeholder.png`.
 
-## 4. Hình minh họa nên chèn
+### Dữ liệu đầu vào
 
-- Từ khóa Google:  
-`product card ecommerce layout`
+`image_url` là URL dạng chuỗi hoặc chuỗi rỗng.
 
-- Vị trí chèn:  
-Sau phần giải thích trang bán hàng cho khách hàng.
+### Kết quả mong đợi
 
-- Chú thích:  
-Card sản phẩm giúp hiển thị sản phẩm rõ ràng và dễ mua hơn.
+Mỗi thẻ có ảnh, tên, giá, liên kết; ảnh lỗi không phá bố cục.
 
-## 5. Ví dụ code
+### Yêu cầu kỹ thuật
 
-### Route danh sách sản phẩm
+Tạo `img` bằng DOM, đặt `alt` và xử lý `error`; không ghép dữ liệu vào `innerHTML`.
 
-```python
-@app.route("/products")
-def products():
-    products = Product.query.all()
-    return render_template("products.html", products=products)
-```
+## 6. Lỗi thường gặp
 
-### Route chi tiết sản phẩm
+- Import lỗi: dùng `type="module"` và Live Server.
+- Id là `null` hoặc `NaN`: kiểm tra trước khi gọi API.
+- Danh sách nhân đôi: xóa container trước khi render lại.
+- Giá sai: API phải trả số; định dạng bằng `Intl.NumberFormat`.
 
-```python
-@app.route("/products/<int:id>")
-def product_detail(id):
-    product = Product.query.get_or_404(id)
-    return render_template("product_detail.html", product=product)
-```
+## 7. Bài tập về nhà
 
-File `templates/products.html`:
+### Yêu cầu
 
-```html
-{% extends "layout.html" %}
+Thêm lọc từ khóa và khoảng giá trên trang danh sách.
 
-{% block content %}
-<h2>Danh sách sản phẩm</h2>
+### Dữ liệu đầu vào
 
-<div class="product-grid">
-    {% for product in products %}
-    <div class="product-card">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.price }} VND</p>
-        <a href="/products/{{ product.id }}" class="btn">Xem chi tiết</a>
-        <a href="/cart/add/{{ product.id }}" class="btn">Thêm vào giỏ</a>
-    </div>
-    {% endfor %}
-</div>
-{% endblock %}
-```
+Từ khóa có thể rỗng; giá có thể bỏ trống, nếu nhập phải là số nguyên không âm và min không lớn hơn max.
 
-File `templates/product_detail.html`:
+### Kết quả mong đợi
 
-```html
-{% extends "layout.html" %}
+Frontend tạo query string, gọi API và hiển thị kết quả hoặc empty state.
 
-{% block content %}
-<section class="card">
-    <img src="{{ product.image_url }}" alt="{{ product.name }}">
-    <h2>{{ product.name }}</h2>
-    <p>Giá: {{ product.price }} VND</p>
-    <p>{{ product.description }}</p>
-    <a href="/cart/add/{{ product.id }}" class="btn">Thêm vào giỏ hàng</a>
-</section>
-{% endblock %}
-```
+### Yêu cầu kỹ thuật
 
-## 6. Thực hành trên lớp
+Dùng `URLSearchParams`; không tự lọc bản sao dữ liệu cũ ở client.
 
-- Tạo route `/products`.
-- Tạo route `/products/<id>`.
-- Tạo template `products.html`.
-- Tạo template `product_detail.html`.
-- Hiển thị dữ liệu từ PostgreSQL ra card.
-- Thêm nút xem chi tiết.
-- Thêm nút thêm vào giỏ hàng.
+## 8. Checklist
 
-## 7. Lỗi thường gặp
-
-### Lỗi 1: Không truyền products vào template
-
-```python
-return render_template("products.html", products=products)
-```
-
-### Lỗi 2: Sai tên biến trong template
-
-Python truyền `products`, template cũng phải dùng `products`.
-
-### Lỗi 3: Ảnh không hiển thị
-
-Kiểm tra `image_url` có đúng link ảnh không.
-
-### Lỗi 4: Lỗi 404 khi xem chi tiết
-
-Kiểm tra sản phẩm có tồn tại trong database không.
-
-## 8. Bài tập về nhà
-
-Hoàn thiện trang sản phẩm cho khách hàng:
-
-- Có grid sản phẩm.
-- Có card sản phẩm.
-- Có nút xem chi tiết.
-- Có trang chi tiết sản phẩm.
-- Có nút thêm vào giỏ hàng.
-
-## 9. Checklist cuối buổi
-
-- [ ] Tạo được route `/products`.
-- [ ] Tạo được route `/products/<id>`.
-- [ ] Hiển thị được danh sách sản phẩm.
-- [ ] Hiển thị được chi tiết sản phẩm.
-- [ ] Biết dùng vòng lặp `{% for %}` trong Jinja.
-- [ ] Tạo được card sản phẩm.
-- [ ] Phân biệt được trang admin và trang khách hàng.
-
-## 10. Kết quả cần đạt
-
-Kết thúc buổi này, học viên có trang bán hàng hiển thị sản phẩm từ database.
+- [ ] Frontend không chứa Jinja.
+- [ ] Danh sách và chi tiết đều lấy từ API.
+- [ ] Có loading, empty state và lỗi.
+- [ ] Không chèn dữ liệu không tin cậy bằng `innerHTML`.

@@ -1,183 +1,139 @@
-#  Buổi 5: CRUD sản phẩm
+# Buổi 5: Xây dựng REST API CRUD sản phẩm
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
+- Ánh xạ CRUD sang HTTP method.
+- Hoàn thiện endpoint tạo, sửa và xóa.
+- Dùng validation chung và status code phù hợp.
+- Kiểm thử API độc lập với frontend.
 
-- Hiểu CRUD là gì.
-- Biết thêm sản phẩm vào database.
-- Biết hiển thị danh sách sản phẩm.
-- Biết sửa sản phẩm.
-- Biết xóa sản phẩm.
-- Tạo được trang quản lý sản phẩm đơn giản.
+## 2. Thiết kế endpoint
 
-## 2. Kiến thức chính
+| Chức năng | Method | URL | Thành công |
+|---|---|---|---|
+| Danh sách | GET | `/api/products` | `200` |
+| Chi tiết | GET | `/api/products/<id>` | `200` |
+| Tạo | POST | `/api/products` | `201` |
+| Sửa toàn bộ | PUT | `/api/products/<id>` | `200` |
+| Xóa | DELETE | `/api/products/<id>` | `204` |
 
-CRUD là 4 thao tác cơ bản với dữ liệu:
-
-```text
-Create : Thêm mới
-Read   : Xem dữ liệu
-Update : Cập nhật
-Delete : Xóa
-```
-
-Thêm dữ liệu:
+## 3. Validation dùng chung
 
 ```python
-product = Product(name=name, price=price)
-db.session.add(product)
-db.session.commit()
+def validate_product(data):
+    if not isinstance(data, dict):
+        return "Body phải là một object JSON"
+    name = data.get("name")
+    price = data.get("price")
+    description = data.get("description", "")
+    image_url = data.get("image_url", "")
+
+    if not isinstance(name, str) or not name.strip() or len(name.strip()) > 100:
+        return "Tên phải có từ 1 đến 100 ký tự"
+    if type(price) is not int or price < 0:
+        return "Giá phải là số nguyên không âm"
+    if not isinstance(description, str) or len(description) > 500:
+        return "Mô tả phải là chuỗi tối đa 500 ký tự"
+    if not isinstance(image_url, str) or len(image_url) > 500:
+        return "URL ảnh phải là chuỗi tối đa 500 ký tự"
+    return None
 ```
 
-Lấy danh sách:
+## 4. Các endpoint ghi dữ liệu
 
 ```python
-products = Product.query.all()
-```
-
-Lấy một sản phẩm:
-
-```python
-product = Product.query.get(id)
-```
-
-Xóa:
-
-```python
-db.session.delete(product)
-db.session.commit()
-```
-
-## 3. Giải thích dễ hiểu
-
-Trang quản lý sản phẩm giúp chủ shop thêm, sửa, xóa sản phẩm.
-
-Luồng hoạt động:
-
-```text
-Admin nhập thông tin sản phẩm
-→ Flask nhận dữ liệu form
-→ Flask lưu vào PostgreSQL
-→ Trang quản lý hiển thị sản phẩm mới
-```
-
-## 4. Hình minh họa nên chèn
-
-- Từ khóa Google:  
-`CRUD create read update delete diagram`
-
-- Vị trí chèn:  
-Sau phần giải thích CRUD.
-
-- Chú thích:  
-CRUD là 4 thao tác cơ bản khi làm việc với dữ liệu.
-
-## 5. Ví dụ code
-
-### Route danh sách sản phẩm admin
-
-```python
-@app.route("/admin/products")
-def admin_products():
-    products = Product.query.all()
-    return render_template("admin_products.html", products=products)
-```
-
-### Route thêm sản phẩm
-
-```python
-@app.route("/admin/products/create", methods=["GET", "POST"])
+@app.post("/api/products")
 def create_product():
-    if request.method == "POST":
-        name = request.form.get("name")
-        price = int(request.form.get("price"))
-        description = request.form.get("description")
-        image_url = request.form.get("image_url")
+    data = request.get_json(silent=True)
+    error = validate_product(data)
+    if error:
+        return jsonify({"error": error}), 400
+    product = Product(
+        name=data["name"].strip(),
+        price=data["price"],
+        description=data.get("description", "").strip(),
+        image_url=data.get("image_url", "").strip(),
+    )
+    db.session.add(product)
+    db.session.commit()
+    return jsonify(product.to_dict()), 201
 
-        product = Product(
-            name=name,
-            price=price,
-            description=description,
-            image_url=image_url
-        )
 
-        db.session.add(product)
-        db.session.commit()
+@app.put("/api/products/<int:product_id>")
+def update_product(product_id):
+    product = db.session.get(Product, product_id)
+    if product is None:
+        return jsonify({"error": "Không tìm thấy sản phẩm"}), 404
+    data = request.get_json(silent=True)
+    error = validate_product(data)
+    if error:
+        return jsonify({"error": error}), 400
+    product.name = data["name"].strip()
+    product.price = data["price"]
+    product.description = data.get("description", "").strip()
+    product.image_url = data.get("image_url", "").strip()
+    db.session.commit()
+    return jsonify(product.to_dict()), 200
 
-        return redirect("/admin/products")
 
-    return render_template("admin_product_form.html")
-```
-
-### Route xóa sản phẩm
-
-```python
-@app.route("/admin/products/<int:id>/delete")
-def delete_product(id):
-    product = Product.query.get_or_404(id)
+@app.delete("/api/products/<int:product_id>")
+def delete_product(product_id):
+    product = db.session.get(Product, product_id)
+    if product is None:
+        return jsonify({"error": "Không tìm thấy sản phẩm"}), 404
     db.session.delete(product)
     db.session.commit()
-    return redirect("/admin/products")
+    return "", 204
 ```
 
-## 6. Thực hành trên lớp
+Response `204` không có JSON body.
 
-- Tạo trang `/admin/products`.
-- Tạo form thêm sản phẩm.
-- Lưu sản phẩm vào database.
-- Hiển thị danh sách sản phẩm.
-- Tạo nút sửa sản phẩm.
-- Tạo nút xóa sản phẩm.
+## 5. Thực hành trên lớp
 
-## 7. Lỗi thường gặp
+### Yêu cầu
 
-### Lỗi 1: Quên `db.session.commit()`
+Thêm `stock` vào API tạo và sửa.
 
-Nếu không commit, dữ liệu chưa được lưu thật vào database.
+### Dữ liệu đầu vào
 
-### Lỗi 2: Giá sản phẩm là chuỗi
+`stock` là trường bắt buộc, kiểu số nguyên và từ 0 trở lên. Boolean và chuỗi số không hợp lệ.
 
-Dữ liệu từ form là chuỗi. Cần đổi:
+### Dữ liệu đầu ra
 
-```python
-price = int(request.form.get("price"))
-```
+Hợp lệ trả sản phẩm có `stock`; sai trả object `error` và `400`.
 
-### Lỗi 3: Quên import redirect
+### Yêu cầu kỹ thuật
 
-```python
-from flask import redirect
-```
+Bổ sung validation chung, không lặp quy tắc ở từng endpoint.
 
-### Lỗi 4: Không tìm thấy sản phẩm
+## 6. Lỗi thường gặp
 
-Nên dùng:
+- Quên `commit()`: thay đổi chưa được lưu.
+- Sửa/xóa id không có: kiểm tra `None`.
+- DELETE trả JSON với `204`: phải trả body rỗng.
+- Ép kiểu trước validation: có thể vô tình chấp nhận dữ liệu sai.
 
-```python
-Product.query.get_or_404(id)
-```
+## 7. Bài tập về nhà
 
-## 8. Bài tập về nhà
+### Yêu cầu
 
-Hoàn thiện trang quản lý sản phẩm có:
+Thêm lọc `GET /api/products?min_price=...&max_price=...`.
 
-- Danh sách sản phẩm.
-- Form thêm sản phẩm.
-- Form sửa sản phẩm.
-- Chức năng xóa sản phẩm.
+### Dữ liệu đầu vào
 
-## 9. Checklist cuối buổi
+Hai tham số tùy chọn, phải là số nguyên không âm; nếu cùng có thì min không lớn hơn max.
 
-- [ ] Hiểu CRUD là gì.
-- [ ] Thêm được sản phẩm.
-- [ ] Xem được danh sách sản phẩm.
-- [ ] Sửa được sản phẩm.
-- [ ] Xóa được sản phẩm.
-- [ ] Biết dùng `db.session.add`.
-- [ ] Biết dùng `db.session.commit`.
-- [ ] Biết dùng `Product.query.all`.
+### Dữ liệu đầu ra
 
-## 10. Kết quả cần đạt
+Hợp lệ trả danh sách và `200`; sai trả object `error` và `400`.
 
-Kết thúc buổi này, học viên có trang admin quản lý sản phẩm cơ bản.
+### Yêu cầu kỹ thuật
+
+Lọc trong query database, không tải toàn bộ rồi lọc bằng Python.
+
+## 8. Checklist
+
+- [ ] Có đủ năm endpoint CRUD.
+- [ ] Validation rõ ràng và dùng chung.
+- [ ] Dùng đúng `200`, `201`, `204`, `400`, `404`.
+- [ ] Kiểm thử cả đường đi thành công và thất bại.

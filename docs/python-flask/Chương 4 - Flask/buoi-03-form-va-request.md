@@ -1,206 +1,128 @@
-#  Buổi 3: Form và Request trong Flask
+# Buổi 3: JSON Request, Validation và Xử lý lỗi
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
-
-- Hiểu form dùng để gửi dữ liệu lên backend.
-- Biết phân biệt GET và POST.
-- Biết tạo form HTML.
-- Biết nhận dữ liệu form trong Flask.
-- Biết dùng `request.form`.
-- Biết kiểm tra dữ liệu rỗng cơ bản.
+- Gửi JSON bằng `fetch()` với POST.
+- Đọc JSON bằng `request.get_json()`.
+- Kiểm tra trường bắt buộc, kiểu và miền giá trị.
+- Trả lỗi JSON cùng status code phù hợp.
 
 ## 2. Kiến thức chính
 
-Import `request`:
-
-```python
-from flask import request
+```text
+POST /api/products
+Content-Type: application/json
+Body: {"name": "Bút máy", "price": 45000}
 ```
 
-Route nhận cả GET và POST:
+Không tin dữ liệu từ client. Validation HTML hỗ trợ trải nghiệm; validation backend bảo vệ dữ liệu.
+
+## 3. Backend mẫu
 
 ```python
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    pass
+@app.post("/api/products")
+def create_product():
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({"error": "Body phải là một object JSON"}), 400
+
+    name = data.get("name")
+    price = data.get("price")
+    if not isinstance(name, str) or not name.strip():
+        return jsonify({"error": "Tên sản phẩm không được để trống"}), 400
+    if type(price) is not int or price < 0:
+        return jsonify({"error": "Giá phải là số nguyên không âm"}), 400
+
+    product = {"id": len(products) + 1, "name": name.strip(), "price": price}
+    products.append(product)
+    return jsonify(product), 201
 ```
 
-Lấy dữ liệu từ form:
+`type(price) is int` loại boolean, vì `bool` là lớp con của `int` trong Python.
 
-```python
-name = request.form.get("name")
-```
-
-HTML form:
+## 4. Frontend mẫu
 
 ```html
-<form method="POST">
-    <input type="text" name="name">
-    <button type="submit">Gửi</button>
+<form id="product-form">
+  <label>Tên <input id="name" required></label>
+  <label>Giá <input id="price" type="number" min="0" step="1" required></label>
+  <button>Thêm sản phẩm</button>
 </form>
+<p id="message"></p>
 ```
 
-## 3. Giải thích dễ hiểu
+```javascript
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const payload = {
+    name: document.querySelector("#name").value.trim(),
+    price: Number(document.querySelector("#price").value),
+  };
 
-Form là cách người dùng gửi dữ liệu cho website.
-
-Ví dụ trong website bán hàng:
-
-- Người dùng nhập tên.
-- Người dùng nhập số điện thoại.
-- Người dùng nhập địa chỉ.
-- Người dùng bấm đặt hàng.
-
-Flask nhận dữ liệu và xử lý.
-
-GET thường dùng để lấy dữ liệu. POST thường dùng để gửi dữ liệu.
-
-## 4. Hình minh họa nên chèn
-
-- Từ khóa Google:  
-`HTTP GET POST form diagram`
-
-- Vị trí chèn:  
-Sau phần giải thích GET và POST.
-
-- Chú thích:  
-GET thường dùng để lấy dữ liệu, POST thường dùng để gửi dữ liệu lên server.
-
-## 5. Ví dụ code
-
-File `app.py`:
-
-```python
-from flask import Flask, render_template, request
-
-app = Flask(__name__)
-
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    message = ""
-
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        content = request.form.get("content")
-
-        if name == "" or email == "" or content == "":
-            message = "Vui lòng nhập đầy đủ thông tin."
-        else:
-            message = "Gửi liên hệ thành công!"
-
-    return render_template("contact.html", message=message)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+  const response = await fetch("http://127.0.0.1:5000/api/products", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload),
+  });
+  const data = await response.json();
+  message.textContent = response.ok ? `Đã tạo ${data.name}` : data.error;
+});
 ```
 
-File `templates/contact.html`:
+## 5. Thực hành trên lớp
 
-```html
-{% extends "layout.html" %}
+### Yêu cầu
 
-{% block content %}
-<section class="card">
-    <h2>Liên hệ</h2>
+Nhận thêm `description`. Tên dài tối đa 100 ký tự; mô tả có thể rỗng nhưng tối đa 500 ký tự.
 
-    <form method="POST">
-        <label>Họ tên</label>
-        <input type="text" name="name">
+### Dữ liệu đầu vào
 
-        <label>Email</label>
-        <input type="email" name="email">
+Object JSON có `name`, `price`, `description`. Tên là chuỗi không rỗng; giá là số nguyên từ 0; mô tả là chuỗi.
 
-        <label>Nội dung</label>
-        <textarea name="content"></textarea>
+### Dữ liệu đầu ra
 
-        <button type="submit">Gửi liên hệ</button>
-    </form>
+- Hợp lệ: sản phẩm đã tạo, status `201`.
+- Không hợp lệ: `{"error": "..."}`, status `400`.
 
-    {% if message %}
-        <p class="message">{{ message }}</p>
-    {% endif %}
-</section>
-{% endblock %}
+### Yêu cầu kỹ thuật
+
+Dùng `request.get_json(silent=True)`, không dùng `request.form`.
+
+## 6. Kiểm thử
+
+```text
+curl -X POST http://127.0.0.1:5000/api/products -H "Content-Type: application/json" -d "{\"name\":\"Bút máy\",\"price\":45000,\"description\":\"Ngòi êm\"}"
 ```
 
-## 6. Thực hành trên lớp
-
-- Tạo form liên hệ gồm họ tên, email, nội dung.
-- Thêm `method="POST"`.
-- Nhận dữ liệu bằng `request.form.get`.
-- Kiểm tra dữ liệu rỗng.
-- Hiển thị thông báo ra template.
+Kiểm thử thêm: thiếu tên, tên trắng, giá âm, giá chuỗi, body rỗng và JSON sai.
 
 ## 7. Lỗi thường gặp
 
-### Lỗi 1: Quên `methods=["GET", "POST"]`
-
-```python
-@app.route("/contact", methods=["GET", "POST"])
-```
-
-### Lỗi 2: Quên import request
-
-```python
-from flask import request
-```
-
-### Lỗi 3: Input thiếu name
-
-Sai:
-
-```html
-<input type="text">
-```
-
-Đúng:
-
-```html
-<input type="text" name="name">
-```
-
-### Lỗi 4: Tên name trong HTML và Flask không khớp
-
-HTML:
-
-```html
-<input name="email">
-```
-
-Python:
-
-```python
-email = request.form.get("email")
-```
+- Nhận `None`: kiểm tra header và JSON hợp lệ.
+- Giá là chuỗi: chuyển ở client nhưng vẫn kiểm tra ở server.
+- Trang tải lại: gọi `event.preventDefault()`.
+- Luôn báo thành công: kiểm tra `response.ok`.
 
 ## 8. Bài tập về nhà
 
-Tạo form thêm sản phẩm giả lập gồm:
+### Yêu cầu
 
-- Tên sản phẩm
-- Giá sản phẩm
-- Mô tả
+Tạo `POST /api/contacts` nhận họ tên, email và nội dung.
 
-Khi gửi form, Flask hiển thị thông báo:
+### Dữ liệu đầu vào
 
-```text
-Đã nhận sản phẩm: ...
-```
+Ba trường là chuỗi không rỗng; email chứa `@`; nội dung tối đa 1000 ký tự.
 
-## 9. Checklist cuối buổi
+### Dữ liệu đầu ra
 
-- [ ] Hiểu form dùng để làm gì.
-- [ ] Phân biệt được GET và POST.
-- [ ] Tạo được form HTML.
-- [ ] Biết dùng `method="POST"`.
-- [ ] Biết dùng `request.form.get`.
-- [ ] Biết kiểm tra dữ liệu rỗng.
-- [ ] Hiển thị được thông báo ra template.
-- [ ] Sửa được lỗi thiếu `name` trong input.
+Hợp lệ trả `{"message": "Đã nhận liên hệ"}`, status `201`; sai trả object `error`, status `400`.
 
-## 10. Kết quả cần đạt
+### Yêu cầu kỹ thuật
 
-Kết thúc buổi này, học viên tạo được form gửi dữ liệu từ HTML lên Flask.
+Form client-side gửi JSON bằng `fetch`; không dùng Jinja.
+
+## 9. Checklist
+
+- [ ] Gửi và nhận được JSON.
+- [ ] Validation được ở backend.
+- [ ] Dùng đúng status `201` và `400`.

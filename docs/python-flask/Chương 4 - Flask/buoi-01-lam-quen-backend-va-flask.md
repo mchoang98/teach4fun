@@ -1,227 +1,146 @@
-#  Buổi 1: Làm quen Backend và Flask
+# Buổi 1: Làm quen Backend, HTTP và Flask API
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
-
-- Hiểu backend là gì.
-- Hiểu Flask là gì.
-- Biết tạo môi trường ảo Python.
-- Biết cài Flask.
-- Biết tạo file `app.py`.
-- Biết tạo route đầu tiên.
-- Chạy được website Flask trên máy tính.
+- Hiểu frontend, backend, API, request và response.
+- Tạo môi trường Python và chạy Flask.
+- Tạo endpoint trả JSON bằng `jsonify`.
+- Nhận biết các status code thông dụng.
 
 ## 2. Kiến thức chính
 
-Backend là phần xử lý phía sau của website. Backend nhận yêu cầu từ trình duyệt, xử lý dữ liệu và trả kết quả về cho người dùng.
+Frontend gửi HTTP request. Backend xử lý và trả HTTP response. Trong chương này, frontend và backend trao đổi dữ liệu JSON.
 
-Flask là một framework Python dùng để xây dựng web backend đơn giản, nhẹ và dễ học.
+| Mã | Ý nghĩa |
+|---|---|
+| `200` | Thành công |
+| `201` | Đã tạo dữ liệu |
+| `204` | Thành công, không có body |
+| `400` | Dữ liệu không hợp lệ |
+| `404` | Không tìm thấy |
+| `500` | Lỗi server |
 
-Các khái niệm chính:
-
-```text
-Frontend  : phần người dùng nhìn thấy
-Backend   : phần xử lý phía server
-Database  : nơi lưu dữ liệu
-Route     : đường dẫn xử lý request
-Request   : yêu cầu từ trình duyệt gửi lên server
-Response  : kết quả server trả về
-```
-
-## 3. Giải thích dễ hiểu
-
-Khi người dùng mở một website bán hàng, trình duyệt gửi yêu cầu đến server.
-
-Ví dụ:
+## 3. Chuẩn bị
 
 ```text
-Người dùng mở /products
-→ Flask nhận yêu cầu
-→ Flask xử lý yêu cầu
-→ Flask trả về trang danh sách sản phẩm
-→ Trình duyệt hiển thị kết quả
-```
-
-Ở các chương trước, học viên đã học frontend bằng HTML, CSS và JavaScript. Từ chương này, học viên bắt đầu học phần backend để website có thể xử lý dữ liệu thật.
-
-## 4. Hình minh họa nên chèn
-
-- Từ khóa Google:  
-`frontend backend database diagram`
-
-- Vị trí chèn:  
-Sau phần giải thích Frontend, Backend và Database.
-
-- Chú thích:  
-Frontend hiển thị giao diện, backend xử lý logic, database lưu dữ liệu.
-
-## 5. Ví dụ code
-
-### Tạo thư mục project
-
-```text
-flask-buoi-1
-├── app.py
-└── requirements.txt
-```
-
-### Tạo môi trường ảo
-
-Windows:
-
-```bash
+mkdir flask-shop
+cd flask-shop
+mkdir backend
+cd backend
 python -m venv venv
 venv\Scripts\activate
+pip install Flask
 ```
 
-macOS/Linux:
+Trên macOS/Linux, kích hoạt bằng `source venv/bin/activate`.
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+## 4. Ví dụ code
 
-### Cài Flask
-
-```bash
-pip install flask
-```
-
-### File `app.py`
+`backend/app.py`:
 
 ```python
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "Xin chào Flask!"
 
-@app.route("/about")
-def about():
-    return "Đây là trang giới thiệu."
+@app.get("/api/hello")
+def hello():
+    return jsonify({
+        "message": "Xin chào từ Flask API",
+        "course": "Python Flask"
+    }), 200
 
-@app.route("/products")
-def products():
-    return "Đây là trang sản phẩm."
+
+@app.get("/api/health")
+def health():
+    return jsonify({"status": "ok"}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True)
 ```
 
-### Chạy project
-
-```bash
-python app.py
-```
-
-Mở trình duyệt:
+Chạy `python app.py`, rồi mở `http://127.0.0.1:5000/api/hello` hoặc dùng:
 
 ```text
-http://127.0.0.1:5000
+curl http://127.0.0.1:5000/api/hello
 ```
 
-## 6. Thực hành trên lớp
+## 5. Thực hành trên lớp
 
-### Bài 1: Tạo project Flask
+### Bài 1: API khóa học
 
-Tạo thư mục:
+#### Yêu cầu
 
-```text
-flask-buoi-1
-```
+Tạo `GET /api/course` trả thông tin khóa học.
 
-Tạo file:
-
-```text
-app.py
-```
-
-### Bài 2: Tạo route trang chủ
+#### Dữ liệu cho trước
 
 ```python
-@app.route("/")
-def home():
-    return "Trang chủ website bán hàng"
+course_name = "Python Flask"
+total_lessons = 8
 ```
 
-### Bài 3: Tạo các route phụ
+Giữ nguyên tên biến và không dùng `input()`.
 
-Tạo thêm:
+#### Kết quả mong đợi
 
-```text
-/about
-/products
-/contact
-```
+Response mã `200`, gồm hai trường `name` và `total_lessons`.
 
-Mỗi route trả về một đoạn text khác nhau.
+#### Yêu cầu kỹ thuật
 
-## 7. Lỗi thường gặp
+Dùng `@app.get`, `jsonify` và tuple `(response, status_code)`.
 
-### Lỗi 1: Chưa cài Flask
+### Bài 2: API hồ sơ
 
-```text
-ModuleNotFoundError: No module named 'flask'
-```
+#### Yêu cầu
 
-Cách sửa:
+Tạo `GET /api/profile` trả họ tên, tuổi và trạng thái đang học.
 
-```bash
-pip install flask
-```
-
-### Lỗi 2: Chưa bật môi trường ảo
-
-Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-### Lỗi 3: Quên chạy đúng file
-
-Nếu file tên là `app.py`, chạy:
-
-```bash
-python app.py
-```
-
-### Lỗi 4: Quên `app.run`
-
-Cần có:
+#### Dữ liệu cho trước
 
 ```python
-if __name__ == "__main__":
-    app.run(debug=True)
+full_name = "Nguyễn An"
+age = 16
+is_learning = True
 ```
 
-## 8. Bài tập về nhà
+#### Kết quả mong đợi
 
-Tạo project Flask có các route:
+JSON giữ đúng kiểu chuỗi, số nguyên và boolean; response mã `200`.
 
-```text
-/
-/about
-/products
-/contact
-```
+#### Yêu cầu kỹ thuật
 
-Mỗi route trả về một nội dung khác nhau liên quan đến website bán hàng.
+Không chuyển mọi giá trị thành chuỗi.
 
-## 9. Checklist cuối buổi
+## 6. Lỗi thường gặp
 
-- [ ] Hiểu backend là gì.
-- [ ] Hiểu Flask dùng để làm gì.
-- [ ] Tạo được môi trường ảo Python.
-- [ ] Cài được Flask.
-- [ ] Tạo được file `app.py`.
-- [ ] Tạo được route `/`.
+- `ModuleNotFoundError`: kích hoạt môi trường ảo và cài Flask.
+- Không kết nối: bảo đảm terminal vẫn chạy `python app.py`.
+- `404`: kiểm tra chính xác URL và tiền tố `/api`.
+- Trả chuỗi giống JSON: dùng `jsonify`, không tự ghép chuỗi.
+
+## 7. Bài tập về nhà
+
+### Yêu cầu
+
+Tạo `GET /api/book` trả một cuốn sách.
+
+### Dữ liệu cho trước
+
+Tự khai báo `title`, `author`, `price`; giá là số nguyên không âm, đơn vị đồng.
+
+### Kết quả mong đợi
+
+Object JSON có đúng ba trường trên và status `200`.
+
+### Yêu cầu kỹ thuật
+
+Không dùng HTML hoặc Jinja.
+
+## 8. Checklist
+
+- [ ] Phân biệt được request, response, JSON và HTML.
 - [ ] Chạy được Flask server.
-- [ ] Mở được website trên trình duyệt.
-
-## 10. Kết quả cần đạt
-
-Kết thúc buổi này, học viên có một Flask app chạy được và có nhiều route cơ bản.
+- [ ] Tạo được endpoint GET trả JSON và status code.

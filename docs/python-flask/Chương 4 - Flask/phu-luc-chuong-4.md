@@ -1,189 +1,158 @@
-# Phụ lục Chương 4: Flask và PostgreSQL
+# Phụ lục Chương 4: Flask REST API và Frontend Client-side
 
 ## 1. Lệnh thường dùng
 
-### Tạo môi trường ảo
-
-Windows:
-
-```bash
+```text
 python -m venv venv
 venv\Scripts\activate
-```
-
-macOS/Linux:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Cài Flask
-
-```bash
-pip install flask
-```
-
-### Cài SQLAlchemy và PostgreSQL driver
-
-```bash
-pip install flask_sqlalchemy psycopg2-binary
-```
-
-### Lưu thư viện vào requirements.txt
-
-```bash
+pip install Flask Flask-Cors Flask-SQLAlchemy psycopg2-binary python-dotenv
 pip freeze > requirements.txt
-```
-
-### Cài lại thư viện từ requirements.txt
-
-```bash
 pip install -r requirements.txt
-```
-
-### Chạy Flask app
-
-```bash
 python app.py
 ```
 
-## 2. Bảng thuật ngữ nhanh
+Trên macOS/Linux dùng `source venv/bin/activate`.
+
+## 2. HTTP và CRUD
+
+| CRUD | Method | Status thành công thường dùng |
+|---|---|---|
+| Create | POST | `201 Created` |
+| Read | GET | `200 OK` |
+| Update | PUT | `200 OK` |
+| Delete | DELETE | `204 No Content` |
+
+| Status | Khi dùng |
+|---|---|
+| `400` | JSON hoặc giá trị đầu vào không hợp lệ |
+| `404` | Tài nguyên/endpoint không tồn tại |
+| `405` | Method không được endpoint hỗ trợ |
+| `500` | Lỗi ngoài dự kiến ở server |
+
+## 3. Mẫu response
+
+Thành công:
+
+```json
+{"id": 1, "name": "Bút máy", "price": 45000}
+```
+
+Thất bại:
+
+```json
+{"error": "Không tìm thấy sản phẩm"}
+```
+
+## 4. Mẫu fetch
+
+GET:
+
+```javascript
+const response = await fetch("http://127.0.0.1:5000/api/products");
+const data = await response.json();
+if (!response.ok) throw new Error(data.error || "Yêu cầu thất bại");
+```
+
+POST/PUT:
+
+```javascript
+const response = await fetch(url, {
+  method: "POST",
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify(payload),
+});
+```
+
+DELETE `204`:
+
+```javascript
+const response = await fetch(url, {method: "DELETE"});
+if (!response.ok) {
+  const data = await response.json();
+  throw new Error(data.error);
+}
+```
+
+Không gọi `response.json()` với response `204`.
+
+## 5. Checklist validation backend
+
+- Body có phải object JSON không?
+- Trường bắt buộc có tồn tại không?
+- Chuỗi sau `strip()` có rỗng hoặc quá dài không?
+- Số có đúng kiểu, đúng miền và không phải boolean không?
+- Id liên quan có tồn tại trong database không?
+- Client có đang gửi trường mà server không nên tin, như giá hoặc tổng tiền, không?
+
+## 6. Lỗi thường gặp
+
+### Không gọi được API
+
+Kiểm tra Flask đang chạy, URL/cổng chính xác, DevTools Network và cấu hình CORS.
+
+### API nhận `None`
+
+Request phải có `Content-Type: application/json`, body phải qua `JSON.stringify` và là JSON hợp lệ.
+
+### Lỗi CORS
+
+```python
+from flask_cors import CORS
+CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5500"}})
+```
+
+Origin gồm giao thức, host và port. `localhost` khác `127.0.0.1`.
+
+### Model không chuyển thành JSON
+
+Tạo `to_dict()` và chỉ đưa các trường được phép công khai vào dictionary.
+
+### Database không kết nối
+
+Kiểm tra PostgreSQL đang chạy, database tồn tại, `DATABASE_URL` đúng và `load_dotenv()` đã được gọi.
+
+### Thay đổi không được lưu
+
+Sau add, update, delete phải `db.session.commit()`. Khi transaction lỗi, gọi `db.session.rollback()`.
+
+### Module JavaScript không chạy
+
+Dùng `<script type="module">` và mở frontend bằng HTTP server/Live Server, không dùng `file://`.
+
+### Giỏ hàng bị hỏng
+
+Bọc `JSON.parse` bằng `try/catch` và kiểm tra kết quả là array. Không lưu giá hoặc tổng làm nguồn dữ liệu đáng tin cậy.
+
+## 7. Kiểm thử bằng curl
+
+```text
+curl http://127.0.0.1:5000/api/products
+curl http://127.0.0.1:5000/api/products/1
+curl -X POST http://127.0.0.1:5000/api/products -H "Content-Type: application/json" -d "{\"name\":\"Bút máy\",\"price\":45000}"
+curl -X DELETE http://127.0.0.1:5000/api/products/1
+```
+
+Trên PowerShell, `curl` có thể là alias tùy phiên bản. Có thể dùng `curl.exe` hoặc Postman.
+
+## 8. Thuật ngữ
 
 | Thuật ngữ | Ý nghĩa |
-| --- | --- |
-| Backend | Phần xử lý phía server |
-| Frontend | Phần giao diện người dùng nhìn thấy |
-| Database | Nơi lưu dữ liệu |
-| PostgreSQL | Hệ quản trị cơ sở dữ liệu |
-| Flask | Framework Python để tạo web backend |
-| Route | Đường dẫn xử lý request |
-| Template | File HTML được Flask render |
-| Static | File tĩnh như CSS, JS, hình ảnh |
-| Request | Yêu cầu gửi từ trình duyệt lên server |
-| Response | Kết quả server trả về |
-| GET | Phương thức lấy dữ liệu |
-| POST | Phương thức gửi dữ liệu |
-| ORM | Công cụ thao tác database bằng code |
-| SQLAlchemy | ORM phổ biến trong Python |
-| Model | Class đại diện cho bảng dữ liệu |
-| CRUD | Thêm, xem, sửa, xóa dữ liệu |
-| Session | Nơi lưu dữ liệu tạm theo người dùng |
-| Cart | Giỏ hàng |
-| Checkout | Đặt hàng |
+|---|---|
+| API | Giao diện để các chương trình trao đổi dữ liệu |
+| Endpoint | Một URL API kèm HTTP method |
+| JSON | Định dạng dữ liệu văn bản |
+| REST | Cách tổ chức API quanh tài nguyên |
+| CORS | Quy tắc trình duyệt cho request khác origin |
+| ORM | Ánh xạ class/object với bảng/bản ghi |
+| Transaction | Nhóm thao tác cùng thành công hoặc cùng hủy |
+| Serialization | Chuyển dữ liệu thành dạng truyền được như JSON |
+| `localStorage` | Kho dữ liệu theo origin trong trình duyệt |
 
-## 3. Lỗi thường gặp
+## 9. Hướng phát triển
 
-### Lỗi 1: Không cài Flask
-
-```text
-ModuleNotFoundError: No module named 'flask'
-```
-
-Cách sửa:
-
-```bash
-pip install flask
-```
-
-### Lỗi 2: Sai tên thư mục templates
-
-Flask mặc định tìm thư mục:
-
-```text
-templates
-```
-
-Không đặt sai thành:
-
-```text
-template
-```
-
-### Lỗi 3: Sai tên thư mục static
-
-Thư mục file tĩnh phải là:
-
-```text
-static
-```
-
-### Lỗi 4: Không kết nối được PostgreSQL
-
-Cần kiểm tra:
-
-- PostgreSQL đã chạy chưa.
-- Tên database đúng chưa.
-- Username đúng chưa.
-- Password đúng chưa.
-- Port có phải `5432` không.
-
-### Lỗi 5: Quên tạo database
-
-```sql
-CREATE DATABASE flask_shop;
-```
-
-### Lỗi 6: Quên `db.create_all()`
-
-```python
-with app.app_context():
-    db.create_all()
-```
-
-### Lỗi 7: Input form thiếu `name`
-
-Sai:
-
-```html
-<input type="text">
-```
-
-Đúng:
-
-```html
-<input type="text" name="name">
-```
-
-### Lỗi 8: Form POST nhưng route không nhận POST
-
-Sai:
-
-```python
-@app.route("/contact")
-```
-
-Đúng:
-
-```python
-@app.route("/contact", methods=["GET", "POST"])
-```
-
-### Lỗi 9: Quên `secret_key` khi dùng session
-
-```python
-app.secret_key = "your-secret-key"
-```
-
-### Lỗi 10: Dữ liệu giá bị lỗi kiểu
-
-Dữ liệu từ form thường là chuỗi. Khi lưu giá, cần đổi sang số:
-
-```python
-price = int(request.form.get("price"))
-```
-
-## 4. Hướng phát triển sau Chương 4
-
-Sau khi hoàn thành chương này, học viên có thể học tiếp:
-
-1. Đăng ký, đăng nhập người dùng.
-2. Phân quyền admin và khách hàng.
-3. Upload ảnh sản phẩm.
-4. Tìm kiếm và lọc sản phẩm.
-5. REST API với Flask.
-6. Kết nối frontend JavaScript với Flask API.
-7. Deploy Flask lên Render.
-8. Dùng PostgreSQL online.
-9. Bảo mật form và dữ liệu người dùng.
-10. Làm website bán hàng hoàn chỉnh hơn.
+- Flask-Migrate/Alembic cho migration.
+- Blueprint và application factory để chia module.
+- Authentication và phân quyền quản trị.
+- Pagination, sorting và tài liệu OpenAPI.
+- Test tự động bằng `pytest`.
+- Deploy frontend và backend, giới hạn CORS theo domain thật.

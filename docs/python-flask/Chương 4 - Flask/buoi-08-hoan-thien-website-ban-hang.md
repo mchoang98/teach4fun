@@ -1,177 +1,157 @@
-#  Buổi 8: Hoàn thiện website bán hàng
+# Buổi 8: Hoàn thiện ứng dụng Flask REST API
 
 ## 1. Mục tiêu
 
-Sau buổi học này, học viên cần:
+- Ghép frontend, API và PostgreSQL thành một hệ thống.
+- Chuẩn hóa cấu trúc source, cấu hình và lỗi JSON.
+- Tạo giao diện quản lý gọi CRUD API.
+- Kiểm thử luồng chính và các trường hợp thất bại.
+- Phân biệt cấu hình học tập với yêu cầu production.
 
-- Ôn lại toàn bộ kiến thức Flask đã học.
-- Hoàn thiện website bán hàng.
-- Kiểm tra route.
-- Kiểm tra database.
-- Kiểm tra CRUD.
-- Kiểm tra giỏ hàng.
-- Kiểm tra form đặt hàng.
-- Chuẩn bị trình bày dự án.
-
-## 2. Kiến thức chính
-
-Các kiến thức cần dùng lại:
-
-- Flask route.
-- Template.
-- Static file.
-- Form.
-- Request.
-- SQLAlchemy.
-- PostgreSQL.
-- CRUD.
-- Session.
-- Jinja template.
-- HTML/CSS.
-
-## 3. Giải thích dễ hiểu
-
-Buổi này là buổi tổng hợp. Học viên sẽ ghép các phần đã học thành một website bán hàng hoàn chỉnh.
-
-Website cần có:
-
-- Trang chủ.
-- Trang danh sách sản phẩm.
-- Trang chi tiết sản phẩm.
-- Trang quản lý sản phẩm.
-- Giỏ hàng.
-- Form đặt hàng.
-- Database lưu sản phẩm.
-
-Quy trình kiểm tra:
+## 2. Cấu trúc hoàn chỉnh
 
 ```text
-Chạy Flask app
-→ Mở trang chủ
-→ Kiểm tra sản phẩm
-→ Thêm/sửa/xóa sản phẩm
-→ Xem trang bán hàng
-→ Thêm vào giỏ
-→ Xem giỏ hàng
-→ Đặt hàng
-→ Kiểm tra lỗi
+flask-shop/
+├── backend/
+│   ├── app.py
+│   ├── models.py
+│   ├── .env
+│   ├── .env.example
+│   └── requirements.txt
+└── frontend/
+    ├── index.html
+    ├── product.html
+    ├── cart.html
+    ├── admin.html
+    ├── css/style.css
+    └── js/
+        ├── api.js
+        ├── products.js
+        ├── product-detail.js
+        ├── cart.js
+        └── admin.js
 ```
 
-## 4. Hình minh họa nên chèn
+Không có thư mục `templates`. Frontend chỉ biết API URL; backend không biết bố cục HTML.
 
-- Từ khóa Google:  
-`ecommerce website workflow diagram`
+## 3. Chuẩn hóa lỗi API
 
-- Vị trí chèn:  
-Sau phần giải thích quy trình website bán hàng.
+```python
+@app.errorhandler(404)
+def handle_not_found(error):
+    return jsonify({"error": "Endpoint không tồn tại"}), 404
 
-- Chú thích:  
-Website bán hàng gồm luồng quản lý sản phẩm, xem sản phẩm, giỏ hàng và đặt hàng.
 
-## 5. Ví dụ code
+@app.errorhandler(405)
+def handle_method_not_allowed(error):
+    return jsonify({"error": "HTTP method không được hỗ trợ"}), 405
 
-Cấu trúc project cuối chương:
 
-```text
-flask-shop
-├── app.py
-├── config.py
-├── requirements.txt
-├── templates
-│   ├── layout.html
-│   ├── index.html
-│   ├── products.html
-│   ├── product_detail.html
-│   ├── cart.html
-│   ├── checkout.html
-│   ├── admin_products.html
-│   ├── admin_product_form.html
-│   └── order_success.html
-└── static
-    ├── style.css
-    └── images
+@app.errorhandler(500)
+def handle_server_error(error):
+    db.session.rollback()
+    return jsonify({"error": "Server gặp lỗi ngoài dự kiến"}), 500
 ```
 
-Các route nên có:
+Không gửi stack trace, mật khẩu hoặc chi tiết database cho client. Log chi tiết ở server.
 
-```text
-/
-/products
-/products/<id>
-/cart
-/cart/add/<id>
-/cart/remove/<id>
-/checkout
-/admin/products
-/admin/products/create
-/admin/products/<id>/edit
-/admin/products/<id>/delete
+## 4. Giao diện quản lý
+
+`admin.html` cần có bảng danh sách, form tạo/sửa, nút sửa, nút xóa và vùng thông báo. JavaScript quyết định method:
+
+```javascript
+const editingId = form.dataset.editingId;
+const method = editingId ? "PUT" : "POST";
+const path = editingId ? `/products/${editingId}` : "/products";
+
+await getJson(path, {
+  method,
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify(readFormData()),
+});
+form.reset();
+delete form.dataset.editingId;
+await loadProducts();
 ```
 
-## 6. Thực hành trên lớp
+Trước khi xóa, hỏi xác nhận. Sau tạo/sửa/xóa thành công, tải lại danh sách từ API để giao diện phản ánh trạng thái database.
 
-- Kiểm tra toàn bộ route.
-- Kiểm tra giao diện.
-- Kiểm tra CRUD sản phẩm.
-- Kiểm tra giỏ hàng.
-- Kiểm tra checkout.
-- Làm đẹp CSS.
-- Kiểm tra lỗi terminal.
-- Chuẩn bị trình bày sản phẩm.
+## 5. CORS và cấu hình
 
-## 7. Lỗi thường gặp
+Trong môi trường học tập có thể dùng `CORS(app)`. Khi hoàn thiện, chỉ cho phép origin frontend:
 
-### Lỗi 1: Không chạy được Flask app
+```python
+CORS(app, resources={
+    r"/api/*": {"origins": ["http://127.0.0.1:5500", "http://localhost:5500"]}
+})
+```
 
-Kiểm tra môi trường ảo, thư viện và file `app.py`.
+`.env.example` chỉ chứa tên biến và giá trị minh họa, không chứa mật khẩu thật.
 
-### Lỗi 2: Không kết nối được database
+## 6. Kịch bản kiểm thử cuối chương
 
-Kiểm tra PostgreSQL đã chạy chưa, tên database, username, password.
+| Nhóm | Kịch bản | Kết quả |
+|---|---|---|
+| Product | Lấy danh sách rỗng | `200` và `[]` |
+| Product | Tạo hợp lệ | `201` và object mới |
+| Product | Giá âm | `400` và `error` |
+| Product | Xem id không có | `404` |
+| Product | Sửa rồi tải lại | Dữ liệu mới được giữ |
+| Product | Xóa | `204`, biến mất khỏi danh sách |
+| Cart | Tăng, giảm, xóa | Tổng cập nhật đúng |
+| Order | Giỏ rỗng | `400` |
+| Order | Sản phẩm không có | `400`, không tạo nửa đơn |
+| Order | Dữ liệu hợp lệ | `201`, tổng do server tính |
+| UI | API dừng | Hiển thị lỗi, không treo loading |
 
-### Lỗi 3: Template không tìm thấy
+## 7. Thực hành trên lớp
 
-Kiểm tra file có nằm trong thư mục `templates` không.
+### Yêu cầu
 
-### Lỗi 4: CSS không chạy
+Hoàn thiện trang quản lý để tạo, sửa, xóa sản phẩm qua API.
 
-Kiểm tra file `style.css` có nằm trong thư mục `static` không.
+### Dữ liệu đầu vào
 
-### Lỗi 5: Giỏ hàng không lưu
+Tên 1–100 ký tự; giá là số nguyên không âm; mô tả và URL ảnh tối đa 500 ký tự.
 
-Kiểm tra đã có `app.secret_key` chưa.
+### Kết quả mong đợi
 
-## 8. Bài tập về nhà
+Thành công hiển thị thông báo và danh sách mới. Lỗi hiển thị nội dung `error`; form không bị reset khi request thất bại.
 
-Hoàn thiện dự án website bán hàng.
+### Yêu cầu kỹ thuật
 
-Yêu cầu:
+Dùng module `api.js`, `fetch`, POST/PUT/DELETE; không dùng submit HTML truyền thống hoặc Jinja.
 
-- Có đủ file và thư mục.
-- Có trang chủ.
-- Có trang sản phẩm.
-- Có trang chi tiết sản phẩm.
-- Có quản lý sản phẩm.
-- Có giỏ hàng.
-- Có đặt hàng cơ bản.
-- Giao diện dễ nhìn.
-- Không có lỗi nghiêm trọng.
+## 8. Lỗi thường gặp
 
-## 9. Checklist cuối buổi
+- URL API lặp ở nhiều file: gom vào `api.js`.
+- CORS quá rộng: giới hạn origin khi hoàn thiện.
+- `debug=True` ở production: chỉ bật lúc phát triển.
+- Nuốt lỗi: hiển thị thông báo cho người dùng và log ở server.
+- Frontend hiện dữ liệu cũ: gọi lại API sau mutation.
 
-- [ ] Chạy được `python app.py`.
-- [ ] Mở được trang chủ.
-- [ ] Có trang danh sách sản phẩm.
-- [ ] Có trang chi tiết sản phẩm.
-- [ ] Thêm được sản phẩm.
-- [ ] Sửa được sản phẩm.
-- [ ] Xóa được sản phẩm.
-- [ ] Thêm được sản phẩm vào giỏ hàng.
-- [ ] Xem được giỏ hàng.
-- [ ] Đặt hàng cơ bản được.
-- [ ] Giao diện dễ nhìn.
-- [ ] Trình bày được sản phẩm.
+## 9. Bài tập về nhà
 
-## 10. Kết quả cần đạt
+### Yêu cầu
 
-Kết thúc buổi này, học viên hoàn thành website bán hàng bằng Flask và PostgreSQL.
+Chạy toàn bộ checklist kiểm thử và viết báo cáo ngắn cho từng trường hợp chưa đạt.
+
+### Dữ liệu đầu vào
+
+Dùng các trường hợp trong bảng kiểm thử và ít nhất hai trường hợp biên tự bổ sung.
+
+### Kết quả mong đợi
+
+Báo cáo ghi request, kết quả thực tế, kết quả mong đợi và trạng thái đạt/chưa đạt.
+
+### Yêu cầu kỹ thuật
+
+Sửa mọi lỗi chức năng trước khi nộp; không đưa `.env` hoặc mật khẩu vào source.
+
+## 10. Checklist
+
+- [ ] Frontend và backend chạy độc lập.
+- [ ] Mọi dữ liệu động đến từ REST API.
+- [ ] CRUD và đặt hàng hoạt động.
+- [ ] Có xử lý lỗi, empty state và loading.
+- [ ] Không còn Jinja/server-side rendering.
