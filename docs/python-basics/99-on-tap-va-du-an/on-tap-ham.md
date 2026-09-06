@@ -1,115 +1,90 @@
-# Đề luyện tổng hợp: Hàm
+# Bài 1 – Điều phối đội hình sự kiện
 
-## Quy định chung
+## Yêu cầu
 
-* Mỗi bài phải viết hàm theo tên đề bài gợi ý.
-* Chương trình chính chỉ nhập dữ liệu, gọi hàm và in kết quả.
+Ban tổ chức một sự kiện đang lưu thứ tự đăng ký của các đội tham gia:
 
----
-
-## Bài 1: `calc_progress(done, total)`
-
-### Mô tả
-
-Hàm trả về phần trăm hoàn thành nhiệm vụ. Nếu `total = 0`, trả về 0.
-
-### Input
-
-* Dòng 1: số nhiệm vụ đã xong.
-* Dòng 2: tổng số nhiệm vụ.
-
-### Output
-
-Phần trăm hoàn thành, làm tròn 2 chữ số.
-
-### Ràng buộc
-
-* `0 <= done <= total <= 1000`
-
-### Ví dụ
-
-Input:
-
-```text
-7
-10
+```python
+doi_hinh = [
+    "Trống hội",
+    "Thiếu nhi",
+    "Văn nghệ",
+    "Thanh niên",
+    "Thiếu nhi",
+    "Hậu cần"
+]
 ```
 
-Output:
+Trước khi chương trình bắt đầu, danh sách cần được xử lý theo các quy tắc sau:
+
+* `"Hậu cần"` chỉ hỗ trợ phía sau sân khấu nên không xuất hiện trong đội hình biểu diễn.
+* Do nhập dữ liệu hai lần, `"Thiếu nhi"` đang bị trùng. Trong danh sách cuối cùng chỉ được giữ lại một lần xuất hiện.
+* `"Cờ Tổ quốc"` phải đứng ở vị trí đầu tiên.
+* `"Trống hội"` phải đứng ngay sau `"Cờ Tổ quốc"`.
+* Các đội còn lại giữ nguyên thứ tự tương đối như trong danh sách ban đầu.
+* Sau khi xử lý, cần tạo một chuỗi dùng cho bảng điện tử. Tên các đội được nối bằng:
 
 ```text
-70.00
+ -> 
 ```
 
----
+Ngoài ra, chương trình phải cho biết tổng số đội thực sự tham gia biểu diễn.
 
-## Bài 2: `make_slug(title)`
+## Dữ liệu cho trước
 
-### Mô tả
+```python
+doi_hinh = [
+    "Trống hội",
+    "Thiếu nhi",
+    "Văn nghệ",
+    "Thanh niên",
+    "Thiếu nhi",
+    "Hậu cần"
+]
+```
 
-Hàm nhận tiêu đề không dấu, chuyển thành chữ thường và thay khoảng trắng bằng dấu `-`.
+Không sử dụng `input()`.
 
-### Input
+## Kết quả mong đợi
 
-* Một dòng tiêu đề.
-
-### Output
-
-Slug sau xử lý.
-
-### Ràng buộc
-
-* Tiêu đề dài từ 1 đến 100 ký tự.
-
-### Ví dụ
-
-Input:
+Danh sách sau khi xử lý:
 
 ```text
-Python Basic Project
+['Cờ Tổ quốc', 'Trống hội', 'Thiếu nhi', 'Văn nghệ', 'Thanh niên']
 ```
 
-Output:
-
-```text
-python-basic-project
-```
-
----
-
-## Bài 3: `count_pass(scores, threshold)`
-
-### Mô tả
-
-Hàm đếm số điểm lớn hơn hoặc bằng ngưỡng đạt.
-
-### Input
-
-* Dòng 1: số điểm `n`.
-* Dòng 2: `n` điểm.
-* Dòng 3: ngưỡng đạt.
-
-### Output
-
-Số lượng điểm đạt.
-
-### Ràng buộc
-
-* `1 <= n <= 200`
-* `0 <= diem, threshold <= 10`
-
-### Ví dụ
-
-Input:
+Tổng số đội:
 
 ```text
 5
-6 8 4 9 7
-7
 ```
 
-Output:
+Chuỗi hiển thị trên bảng điện tử:
 
 ```text
-3
+Cờ Tổ quốc -> Trống hội -> Thiếu nhi -> Văn nghệ -> Thanh niên
+```
+
+## Yêu cầu kỹ thuật
+
+* Chương trình phải có một hàm nhận danh sách ban đầu và trả về danh sách đội hình sau khi xử lý.
+* Chương trình phải xử lý được phần tử bị trùng, không được chỉ viết lại danh sách kết quả bằng tay.
+* Chương trình phải có một hàm riêng để tạo nội dung cho bảng điện tử.
+* Danh sách ban đầu không được chứa `"Hậu cần"` trong kết quả cuối cùng.
+* Trong kết quả cuối cùng, mỗi đội chỉ xuất hiện một lần.
+* Không sử dụng `input()`.
+* Người học tự lựa chọn cách thêm, xóa, kiểm tra và sắp xếp vị trí các phần tử.
+
+## Ví dụ Input
+
+```text
+["Trống hội", "Thiếu nhi", "Văn nghệ", "Thanh niên", "Thiếu nhi", "Hậu cần"]
+```
+
+## Ví dụ Output
+
+```text
+['Cờ Tổ quốc', 'Trống hội', 'Thiếu nhi', 'Văn nghệ', 'Thanh niên']
+5
+Cờ Tổ quốc -> Trống hội -> Thiếu nhi -> Văn nghệ -> Thanh niên
 ```
