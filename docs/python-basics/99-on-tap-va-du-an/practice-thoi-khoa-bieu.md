@@ -2,54 +2,51 @@
 
 ## Đề tài: Thời khóa biểu thông minh
 
-### 1. Mô tả bài toán
+### Mô tả bài toán
 
 Viết chương trình Python chạy trên **Console** giúp học sinh quản lý thời khóa biểu trong tuần.
 
-Chương trình cần sử dụng các kiến thức cơ bản:
+Bài tập tập trung áp dụng các kiến thức:
 
 * Biến và kiểu dữ liệu
 * `if / elif / else`
 * Vòng lặp `for`, `while`
 * Danh sách `list`
 * Hàm `function`
-* Xử lý chuỗi
-* Nhập dữ liệu bằng `input()`
+* `input()` và `print()`
 
 ---
 
-## 2. Giao diện menu
-
-Khi chạy chương trình, hiển thị menu:
+## Giao diện chương trình
 
 ```text
 ==================================
       THỜI KHÓA BIỂU THÔNG MINH
 ==================================
 
-1. Xem thời khóa biểu
+1. Xem thời khóa biểu theo ngày
 2. Thêm môn học
 3. Xóa môn học
 4. Tìm kiếm môn học
-5. Thống kê
+5. Hiển thị toàn bộ thời khóa biểu
 0. Thoát
 
 ----------------------------------
 Nhập lựa chọn của bạn:
 ```
 
-Chương trình sử dụng vòng lặp `while` để menu tiếp tục hiển thị cho đến khi người dùng chọn `0`.
+Menu phải tiếp tục hiển thị cho đến khi người dùng chọn `0. Thoát`.
 
 ---
 
-## 3. Yêu cầu 1: Xem thời khóa biểu
+## Yêu cầu 1: Xem thời khóa biểu theo ngày
 
-Cho phép người dùng xem thời khóa biểu của một ngày.
+Cho phép người dùng chọn một ngày để xem danh sách môn học.
 
 Ví dụ:
 
 ```text
-Chọn ngày:
+===== XEM THỜI KHÓA BIỂU =====
 
 1. Thứ 2
 2. Thứ 3
@@ -57,14 +54,9 @@ Chọn ngày:
 4. Thứ 5
 5. Thứ 6
 
-Nhập lựa chọn: 1
-```
+Chọn ngày: 1
 
-Kết quả:
-
-```text
 ===== THỨ 2 =====
-
 1. Toán
 2. Ngữ Văn
 3. Tiếng Anh
@@ -73,9 +65,9 @@ Kết quả:
 
 ---
 
-## 4. Yêu cầu 2: Thêm môn học
+## Yêu cầu 2: Thêm môn học
 
-Người dùng chọn ngày và nhập tên môn học muốn thêm.
+Cho phép người dùng chọn ngày và nhập tên môn học cần thêm.
 
 Ví dụ:
 
@@ -88,18 +80,20 @@ Nhập tên môn học: Hóa
 Đã thêm môn Hóa vào Thứ 3.
 ```
 
-Sau khi thêm, môn học phải được lưu vào danh sách của ngày tương ứng.
+Môn học mới phải được thêm vào danh sách của ngày tương ứng.
 
 ---
 
-## 5. Yêu cầu 3: Xóa môn học
+## Yêu cầu 3: Xóa môn học
 
-Người dùng chọn ngày.
+Cho phép người dùng chọn ngày và chọn môn học cần xóa.
 
-Chương trình hiển thị danh sách môn học:
+Ví dụ:
 
 ```text
-===== THỨ 2 =====
+===== XÓA MÔN HỌC =====
+
+Chọn ngày: 1
 
 1. Toán
 2. Ngữ Văn
@@ -107,29 +101,19 @@ Chương trình hiển thị danh sách môn học:
 4. Tin học
 
 Nhập số thứ tự môn muốn xóa: 2
-```
 
-Kết quả:
-
-```text
 Đã xóa môn Ngữ Văn.
 ```
 
-Danh sách mới:
-
-```text
-1. Toán
-2. Tiếng Anh
-3. Tin học
-```
+Danh sách môn học phải được cập nhật sau khi xóa.
 
 ---
 
-## 6. Yêu cầu 4: Tìm kiếm môn học
+## Yêu cầu 4: Tìm kiếm môn học
 
 Cho phép người dùng nhập tên một môn học.
 
-Chương trình sử dụng vòng lặp để tìm xem môn học đó xuất hiện vào những ngày nào.
+Chương trình sử dụng vòng lặp để tìm môn học đó trong toàn bộ thời khóa biểu.
 
 Ví dụ:
 
@@ -137,12 +121,8 @@ Ví dụ:
 ===== TÌM KIẾM MÔN HỌC =====
 
 Nhập tên môn học: Toán
-```
 
 Kết quả:
-
-```text
-Tìm thấy môn Toán:
 
 - Thứ 2 - Tiết 1
 - Thứ 3 - Tiết 3
@@ -152,56 +132,60 @@ Tìm thấy môn Toán:
 Nếu không tìm thấy:
 
 ```text
-Không tìm thấy môn học này trong thời khóa biểu.
+Không tìm thấy môn học này.
 ```
 
 ---
 
-## 7. Yêu cầu 5: Thống kê thời khóa biểu
+## Yêu cầu 5: Hiển thị toàn bộ thời khóa biểu
 
-Chương trình thống kê thông tin từ danh sách môn học.
+Chương trình hiển thị tất cả môn học từ **Thứ 2 đến Thứ 6**.
+
+Phải sử dụng vòng lặp để duyệt qua các ngày và các môn học.
 
 Ví dụ:
 
 ```text
-===== THỐNG KÊ =====
+========== THỜI KHÓA BIỂU ==========
 
-Thứ 2: 4 tiết
-Thứ 3: 5 tiết
-Thứ 4: 3 tiết
-Thứ 5: 6 tiết
-Thứ 6: 4 tiết
+--- THỨ 2 ---
+1. Toán
+2. Ngữ Văn
+3. Tiếng Anh
 
-Tổng số tiết trong tuần: 22
+--- THỨ 3 ---
+1. Vật Lý
+2. Hóa Học
+3. Toán
 
-Ngày học nhiều nhất:
-Thứ 5 - 6 tiết
+--- THỨ 4 ---
+1. Tin học
+2. Toán
+3. Tiếng Anh
+
+--- THỨ 5 ---
+1. Ngữ Văn
+2. Vật Lý
+
+--- THỨ 6 ---
+1. Toán
+2. Tin học
+
+=====================================
 ```
 
-Khuyến khích bổ sung:
+Nếu một ngày chưa có môn học:
 
 ```text
-Môn xuất hiện nhiều nhất:
-Toán - 5 tiết
+--- THỨ 6 ---
+Chưa có môn học.
 ```
 
 ---
 
-## 8. Dữ liệu gợi ý
+## Dữ liệu gợi ý
 
-Có thể sử dụng danh sách lồng nhau:
-
-```python
-schedule = [
-    ["Toán", "Văn", "Anh"],
-    ["Lý", "Hóa", "Toán"],
-    ["Tin", "Toán", "Anh"],
-    ["Văn", "Lý"],
-    ["Toán", "Tin"]
-]
-```
-
-Danh sách tên các ngày:
+Sử dụng danh sách lồng nhau:
 
 ```python
 days = [
@@ -210,6 +194,14 @@ days = [
     "Thứ 4",
     "Thứ 5",
     "Thứ 6"
+]
+
+schedule = [
+    ["Toán", "Văn", "Anh"],
+    ["Lý", "Hóa", "Toán"],
+    ["Tin", "Toán", "Anh"],
+    ["Văn", "Lý"],
+    ["Toán", "Tin"]
 ]
 ```
 
@@ -229,59 +221,35 @@ Thứ 2
 
 ---
 
-## 9. Yêu cầu kỹ thuật
+## Yêu cầu kỹ thuật
 
-Chương trình bắt buộc có:
+Chương trình bắt buộc:
 
-* Menu Console.
-* Vòng lặp `while` để điều khiển menu.
-* Vòng lặp `for` để duyệt danh sách.
-* `if / elif / else` để xử lý lựa chọn.
-* Sử dụng `list` để lưu dữ liệu.
+* Sử dụng `list` để lưu thời khóa biểu.
+* Sử dụng `while` để xây dựng menu.
+* Sử dụng `for` để duyệt danh sách.
+* Sử dụng `if / elif / else` để xử lý lựa chọn.
 * Sử dụng `append()` để thêm môn học.
 * Sử dụng `pop()` hoặc `remove()` để xóa môn học.
 * Có ít nhất 3 hàm tự viết.
-
-Ví dụ:
-
-```python
-def show_schedule():
-    pass
-
-def add_subject():
-    pass
-
-def delete_subject():
-    pass
-
-def search_subject():
-    pass
-
-def show_statistics():
-    pass
-```
+* Kiểm tra lựa chọn không hợp lệ của người dùng.
 
 
----
 
-## Kết quả cần đạt
-
-Sau khi hoàn thành, chương trình phải cho phép người dùng thực hiện quy trình:
+### Kết quả cần đạt
 
 ```text
-Menu
-  |
-  +--> Xem thời khóa biểu
-  |
-  +--> Thêm môn học
-  |
-  +--> Xóa môn học
-  |
-  +--> Tìm môn học
-  |
-  +--> Thống kê
-  |
-  +--> Thoát
+THỜI KHÓA BIỂU THÔNG MINH
+          |
+          +--- Xem theo ngày
+          |
+          +--- Thêm môn học
+          |
+          +--- Xóa môn học
+          |
+          +--- Tìm kiếm
+          |
+          +--- Hiển thị toàn bộ
+          |
+          +--- Thoát
 ```
-
-Mục tiêu chính của bài tập là giúp sinh viên biết cách kết hợp **vòng lặp, danh sách, điều kiện và hàm** để xây dựng một chương trình Console hoàn chỉnh.
